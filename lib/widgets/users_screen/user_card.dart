@@ -14,7 +14,7 @@ class UserCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(
           vertical: kDefaultMargin / 2, horizontal: kDefaultMargin / 2),
-      height: 200,
+      height: 300,
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(kDefaultMargin)),
         child: Stack(
@@ -57,7 +57,7 @@ class UserCard extends StatelessWidget {
                                 ),
                                 Text(
                                   user.tagline,
-                                  maxLines: 2,
+                                  maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: Theme.of(context)
                                       .textTheme

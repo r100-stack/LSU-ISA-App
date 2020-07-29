@@ -9,6 +9,10 @@ class UsersStreamBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    int crossAxisCount = (width/500).floor();
+    crossAxisCount < 1 ? crossAxisCount = 1 : null;
+
     return StreamBuilder(
       stream: _firestore.collection('users_isa').snapshots(),
       builder: (context, snapshot) {
@@ -30,8 +34,34 @@ class UsersStreamBuilder extends StatelessWidget {
               facebookLink: user['links']['facebook'],
               instagramLink: user['links']['instagram'],
               websiteLink: user['links']['website']));
+          users.add(User(
+              name: user['name'],
+              tagline: user['tagline'],
+              description: user['description'],
+              profileImageUrl: user['images']['profile'],
+              bannerImageUrl: user['images']['banner'],
+              email: user['contact']['email'],
+              phoneNumber: user['contact']['phone_number'],
+              facebookLink: user['links']['facebook'],
+              instagramLink: user['links']['instagram'],
+              websiteLink: user['links']['website']));
+          users.add(User(
+              name: user['name'],
+              tagline: user['tagline'],
+              description: user['description'],
+              profileImageUrl: user['images']['profile'],
+              bannerImageUrl: user['images']['banner'],
+              email: user['contact']['email'],
+              phoneNumber: user['contact']['phone_number'],
+              facebookLink: user['links']['facebook'],
+              instagramLink: user['links']['instagram'],
+              websiteLink: user['links']['website']));
         }
-        return ListView.builder(
+        return GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            childAspectRatio: 820/312,
+            crossAxisCount: crossAxisCount
+          ),
           itemBuilder: (context, index) {
             return UserCard(users[index]);
           },
