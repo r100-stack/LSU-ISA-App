@@ -8,8 +8,6 @@ import 'package:isa_app/widgets/offers_screen/offers_stream_builder.dart';
 class OffersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Firestore _firestore = Firestore.instance;
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Offers'),
