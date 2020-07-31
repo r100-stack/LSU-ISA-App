@@ -10,8 +10,9 @@ class ApartmentsStreamBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Map<String, Apartment> apartmentsMap =
-        Provider.of<ApartmentBloc>(context).getApartmentsMap();
+        Provider.of<ApartmentBloc>(context).apartmentsMap;
     List<Apartment> apartments = apartmentsMap.values.toList();
+    print(apartments);
 
     return ListView.builder(
       itemBuilder: (context, index) {

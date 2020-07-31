@@ -1,4 +1,5 @@
 class Offer {
+  String apartmentId;
   AvailabilityType availability;
   double deposit;
   String description;
@@ -9,8 +10,14 @@ class Offer {
   bool petsAllowed;
   Sqft sqft;
 
-  Offer({this.availability, this.deposit, this.description, this.furnished,
+  Offer({this.apartmentId, this.availability, this.deposit, this.description, this.furnished,
       this.numBeds, this.numBaths, this.options, this.petsAllowed, this.sqft});
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return apartmentId;
+  }
 }
 
 class Option {

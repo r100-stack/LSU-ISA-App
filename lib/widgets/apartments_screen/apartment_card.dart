@@ -23,7 +23,7 @@ class ApartmentCard extends StatelessWidget {
                       Icons.bathtub_outlined,
                       color: Colors.blueGrey,
                     ),
-                    Text('1 - 5'),
+                    Text('${(apartment.minBeds ?? 0)} - ${(apartment.minBeds ?? 0)}'),
                     SizedBox(
                       width: kDefaultMargin / 2,
                     ),
@@ -31,7 +31,7 @@ class ApartmentCard extends StatelessWidget {
                       Icons.bathtub_outlined,
                       color: Colors.blueGrey,
                     ),
-                    Text('1 - 5')
+                    Text('${apartment.minBaths} - ${apartment.maxBaths}')
                   ],
                 ),
                 Container(

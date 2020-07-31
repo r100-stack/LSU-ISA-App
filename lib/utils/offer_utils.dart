@@ -1,3 +1,4 @@
+import 'package:isa_app/models/apartment.dart';
 import 'package:isa_app/models/offer.dart';
 
 class OfferUtils {
@@ -56,6 +57,7 @@ class OfferUtils {
       SqftType sqftType = OfferUtils.getSqftType(offerFirebase['sqft'][0]);
 
       Offer offer = Offer(
+          apartmentId: offerFirebase['apartmentId'],
           availability:
               OfferUtils.getAvailabilityType(offerFirebase['availability']),
           deposit: offerFirebase['deposit'].toDouble(),
@@ -91,5 +93,25 @@ class OfferUtils {
     }
 
     return offers;
+  }
+
+  static void setApartmentOfferParameters(Offer offer, Apartment apartment) {
+    apartment.minBeds =
+        (apartment.minBeds == null || offer.numBeds < apartment.minBeds)
+            ? offer.numBeds
+            : apartment.minBeds;
+    apartment.maxBeds =
+        (apartment.maxBeds == null || offer.numBeds > apartment.maxBeds)
+            ? offer.numBeds
+            : apartment.maxBeds;
+
+    apartment.minBaths =
+        (apartment.minBaths == null || offer.numBaths < apartment.minBaths)
+            ? offer.numBaths
+            : apartment.minBaths;
+    apartment.maxBaths =
+        (apartment.maxBaths == null || offer.numBaths > apartment.maxBaths)
+            ? offer.numBaths
+            : apartment.maxBaths;
   }
 }

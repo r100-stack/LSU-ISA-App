@@ -5,7 +5,7 @@ import 'package:isa_app/widgets/apartments_screen/apartments_stream_builder.dart
 class ApartmentsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Networking.downloadApartments(context);
+    Networking.downloadApartmentsAndOffersOnce(context);
 
     return Scaffold(
       appBar: AppBar(
