@@ -6,6 +6,7 @@ class ApartmentsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Networking.downloadApartmentsAndOffersOnce(context);
+//    Networking.downloadApartments(context);
 
     return Scaffold(
       appBar: AppBar(

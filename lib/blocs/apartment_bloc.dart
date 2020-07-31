@@ -5,6 +5,7 @@ import 'package:isa_app/models/offer.dart';
 class ApartmentBloc extends ChangeNotifier {
   Map<String, Apartment> _apartmentsMap = {};
   List<Offer> _offers = [];
+  bool isDownloadedOnce = false;
 
   Map<String, Apartment> get apartmentsMap => _apartmentsMap;
   List<Offer> get offers => _offers;
@@ -17,5 +18,9 @@ class ApartmentBloc extends ChangeNotifier {
   void swapOffers(List<Offer> offers) {
     _offers = offers;
     notifyListeners();
+  }
+
+  void downloadedOnce() {
+    isDownloadedOnce = true;
   }
 }

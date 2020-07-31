@@ -23,7 +23,7 @@ class ApartmentCard extends StatelessWidget {
                       Icons.bathtub_outlined,
                       color: Colors.blueGrey,
                     ),
-                    Text('${(apartment.minBeds ?? 0)} - ${(apartment.minBeds ?? 0)}'),
+                    Text('${(apartment.minBeds)} - ${(apartment.minBeds)}'),
                     SizedBox(
                       width: kDefaultMargin / 2,
                     ),

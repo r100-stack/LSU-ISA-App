@@ -8,17 +8,24 @@ import 'package:provider/provider.dart';
 
 class Networking {
   static Firestore _firestore = Firestore.instance;
-  static bool isDownloadedOnce = false;
 
-  static void downloadApartmentsAndOffersOnce(BuildContext context) async {
+  static void downloadApartmentsAndOffersOnce(BuildContext context) async{
+    bool isDownloadedOnce = Provider.of<ApartmentBloc>(context).isDownloadedOnce;
+
     if (!isDownloadedOnce) {
-      isDownloadedOnce = true;
+      Provider.of<ApartmentBloc>(context, listen: false).downloadedOnce();
       await downloadApartments(context);
       await _downloadOffers(context);
     }
   }
 
   static Future<void> downloadApartments(BuildContext context) async {
+//    if (isDownloadedOnce) {
+//      return ;
+//    }
+//
+//    isDownloadedOnce = true;
+
     QuerySnapshot snapshot =
         await _firestore.collection('apartments').getDocuments();
 
@@ -35,7 +42,7 @@ class Networking {
     Provider.of<ApartmentBloc>(context, listen: false)
         .swapApartments(apartmentsMap);
 
-    print('!!!' + Provider.of<ApartmentBloc>(context, listen: false).apartmentsMap.toString());
+//    _downloadOffers(context);
   }
 
   static Future<void> _downloadOffers(BuildContext context) async {
@@ -45,7 +52,6 @@ class Networking {
 
     Map<String, Apartment> apartmentsMap =
         Provider.of<ApartmentBloc>(context, listen: false).apartmentsMap;
-    print(offers);
     for (Offer offer in offers) {
       Apartment apartment = apartmentsMap[offer.apartmentId];
       if (apartment != null) {
@@ -56,9 +62,7 @@ class Networking {
     }
 
     Provider.of<ApartmentBloc>(context, listen: false).swapOffers(offers);
-    Provider.of<ApartmentBloc>(context, listen: false)
-        .swapApartments(apartmentsMap);
-
-    print('!!!' + Provider.of<ApartmentBloc>(context, listen: false).apartmentsMap.toString());
+//    Provider.of<ApartmentBloc>(context, listen: false)
+//        .swapApartments(apartmentsMap);
   }
 }

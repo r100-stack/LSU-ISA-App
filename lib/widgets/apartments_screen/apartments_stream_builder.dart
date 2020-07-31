@@ -12,7 +12,6 @@ class ApartmentsStreamBuilder extends StatelessWidget {
     Map<String, Apartment> apartmentsMap =
         Provider.of<ApartmentBloc>(context).apartmentsMap;
     List<Apartment> apartments = apartmentsMap.values.toList();
-    print(apartments);
 
     return ListView.builder(
       itemBuilder: (context, index) {
