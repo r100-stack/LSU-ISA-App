@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:isa_app/screens/offers_screen.dart';
 import 'package:isa_app/screens/users_screen.dart';
 
 void main() {
@@ -27,8 +28,10 @@ class MyApp extends StatelessWidget {
         // the app on. For desktop platforms, the controls will be smaller and
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        primaryColor: Color(0xFF461D7C),
+        accentColor: Color(0xFFFDD023)
       ),
-      home: UsersScreen(),
+      home: OffersScreen(),
     );
   }
 }

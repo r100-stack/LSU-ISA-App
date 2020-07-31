@@ -10,7 +10,7 @@ class UsersStreamBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    int crossAxisCount = (width/500).floor();
+    int crossAxisCount = (width/410).floor();
     crossAxisCount < 1 ? crossAxisCount = 1 : null;
 
     return StreamBuilder(
