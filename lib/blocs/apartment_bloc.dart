@@ -12,9 +12,4 @@ class ApartmentBloc extends ChangeNotifier {
     _apartmentsMap = apartmentsMap;
     notifyListeners();
   }
-
-  void addApartment(Apartment apartment) {
-    _apartmentsMap[apartment.id] = apartment;
-    notifyListeners();
-  }
 }

@@ -7,18 +7,19 @@ import 'package:isa_app/widgets/custom_progress_indicator.dart';
 import 'package:provider/provider.dart';
 
 class ApartmentsStreamBuilder extends StatelessWidget {
-  final Firestore _firestore = Firestore.instance;
-
   @override
   Widget build(BuildContext context) {
-    Map<String, Apartment> apartmentsMap = Provider.of<ApartmentBloc>(context).getApartmentsMap();
-    List<Apartment> apartments = apartmentsMap.values;
+    Map<String, Apartment> apartmentsMap =
+        Provider.of<ApartmentBloc>(context).getApartmentsMap();
+    List<Apartment> apartments = apartmentsMap.values.toList();
 
-    return ListView.builder(itemBuilder: (context, index) {
-      return ApartmentCard(apartments[index]);
-    });
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return ApartmentCard(apartments[index]);
+      },
+      itemCount: apartments.length,
+    );
   }
-
 
 //  @override
 //  Widget build(BuildContext context) {
