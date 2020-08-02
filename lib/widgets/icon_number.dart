@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:isa_app/constants.dart';
 
 class IconNumber extends StatelessWidget {
   final IconData icon;
@@ -16,16 +17,13 @@ class IconNumber extends StatelessWidget {
           icon,
           color: Colors.blueGrey,
         ),
-        Text(text),
+        SizedBox(width: kDefaultMargin/8,),
+        Text(text, style: Theme.of(context).textTheme.subtitle1,),
       ],
     );
   }
 
   String _getText(double number) {
-    if (number == null) {
-      return '';
-    } else {
-      return number.floor().toString();
-    }
+    return number != null ? number.floor().toString() : '';
   }
 }

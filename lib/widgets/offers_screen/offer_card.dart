@@ -4,6 +4,7 @@ import 'package:isa_app/models/offer.dart';
 import 'package:isa_app/widgets/bed_bath.dart';
 import 'package:isa_app/widgets/icon_number.dart';
 import 'package:isa_app/widgets/offers_screen/option_card.dart';
+import 'package:isa_app/widgets/offers_screen/wrap_row.dart';
 import 'package:isa_app/widgets/text_bubble.dart';
 
 class OfferCard extends StatelessWidget {
@@ -21,44 +22,55 @@ class OfferCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               BedBathRow(offer: offer),
-              TextBubble(text: 'AVAILABLE',)
+              TextBubble(text: 'AVAILABLE', availabilityType: AvailabilityType.AVAILABLE_NOW,)
             ],
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Wrap(
-                alignment: WrapAlignment.center,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  OptionCard(),
-                  OptionCard(),
-                  OptionCard(),
-                  OptionCard(),
-                  OptionCard(),
-                  OptionCard(),
-                ],
-              ),
-            ],
+          WrapRow(
+            children: _getOptionCards(offer.options),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Wrap(
-                alignment: WrapAlignment.center,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  TextBubble(text: '1400 sqft.'),
-                  TextBubble(text: 'Pets allowed'),
-                  TextBubble(text: 'Furnished'),
-                  TextBubble(text: '\$400 deopsit'),
-                ],
-              ),
-            ],
+          WrapRow(
+            children: _getTextBubbles(offer),
           )
         ],
       ),
     );
+  }
+
+  List<OptionCard> _getOptionCards(List<Option> options) {
+    List<OptionCard> optionCards = [];
+    for (Option option in options) {
+      optionCards.add(OptionCard(option));
+    }
+    return optionCards;
+  }
+
+  List<TextBubble> _getTextBubbles(Offer offer) {
+    List<TextBubble> textBubbles = [];
+
+    if (offer.deposit != null) {
+      textBubbles.add(TextBubble(text: '\$${offer.deposit.floor()} deposit'));
+    }
+    if (offer.furnished != null) {
+      String text = offer.furnished ? 'Furnished' : 'Not furnished';
+      textBubbles.add(TextBubble(text: text,));
+    }
+    if (offer.petsAllowed != null) {
+      String text = offer.petsAllowed ? 'Pets allowed' : 'Pets now allowed';
+      textBubbles.add(TextBubble(text: text,));
+    }
+    if (offer.sqft != null) {
+      String text;
+      switch(offer.sqft.type) {
+        case SqftType.EXACT:
+          text = '${offer.sqft.sqft.floor()} sqft.';
+          break;
+        case SqftType.RANGE:
+          text = '${offer.sqft.sqft.floor()} - ${offer.sqft.sqftMax.floor()} sqft.';
+      }
+      textBubbles.add(TextBubble(text: text));
+
+      return textBubbles;
+    }
   }
 }
 
