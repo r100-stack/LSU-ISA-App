@@ -1,3 +1,5 @@
+import 'package:isa_app/models/offer.dart';
+
 class Apartment {
   String id;
   String name;
@@ -17,6 +19,8 @@ class Apartment {
   double maxCost;
   double minSqft;
   double maxSqft;
+
+  List<Offer> offers = [];
 
   Apartment({this.id, this.name, this.email, this.phoneNumber, this.website, this.imageUrl});
 }

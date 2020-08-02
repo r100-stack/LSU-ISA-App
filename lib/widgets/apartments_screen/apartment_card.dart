@@ -14,7 +14,7 @@ class ApartmentCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, OffersScreen.routeName, arguments: apartment.imageUrl);
+        Navigator.pushNamed(context, OffersScreen.routeName, arguments: apartment);
       },
       child: Card(
         child: Container(
