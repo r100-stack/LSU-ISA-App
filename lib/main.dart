@@ -36,7 +36,15 @@ class MyApp extends StatelessWidget {
           primaryColor: Color(0xFF461D7C),
           accentColor: Color(0xFFFDD023)
         ),
-        home: ApartmentsScreen(),
+        onGenerateRoute: (RouteSettings settings) {
+          var routes = <String, WidgetBuilder>{
+            ApartmentsScreen.routeName: (context) => ApartmentsScreen(),
+            OffersScreen.routeName: (context) => OffersScreen(settings.arguments)
+          };
+
+          WidgetBuilder builder = routes[settings.name];
+          return MaterialPageRoute(builder: (ctx) => builder(ctx));
+        },
       ),
     );
   }

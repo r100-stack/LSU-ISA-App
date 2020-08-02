@@ -1,8 +1,10 @@
 class Apartment {
+  String id;
   String name;
   String email;
   String phoneNumber;
   String website;
+  String imageUrl;
 
   double minBeds;
   double maxBeds;
@@ -16,5 +18,5 @@ class Apartment {
   double minSqft;
   double maxSqft;
 
-  Apartment({this.name, this.email, this.phoneNumber, this.website});
+  Apartment({this.id, this.name, this.email, this.phoneNumber, this.website, this.imageUrl});
 }

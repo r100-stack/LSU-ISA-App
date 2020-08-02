@@ -20,29 +20,23 @@ class Networking {
   }
 
   static Future<void> downloadApartments(BuildContext context) async {
-//    if (isDownloadedOnce) {
-//      return ;
-//    }
-//
-//    isDownloadedOnce = true;
-
     QuerySnapshot snapshot =
         await _firestore.collection('apartments').getDocuments();
 
     Map<String, Apartment> apartmentsMap = {};
     for (var apartmentFirebase in snapshot.documents) {
       apartmentsMap[apartmentFirebase.documentID] = Apartment(
+        id: apartmentFirebase.documentID,
         name: apartmentFirebase['name'],
         email: apartmentFirebase['email'],
         phoneNumber: apartmentFirebase['phoneNumber'],
         website: apartmentFirebase['website'],
+        imageUrl: apartmentFirebase['imageUrl']
       );
     }
 
     Provider.of<ApartmentBloc>(context, listen: false)
         .swapApartments(apartmentsMap);
-
-//    _downloadOffers(context);
   }
 
   static Future<void> _downloadOffers(BuildContext context) async {
@@ -62,7 +56,5 @@ class Networking {
     }
 
     Provider.of<ApartmentBloc>(context, listen: false).swapOffers(offers);
-//    Provider.of<ApartmentBloc>(context, listen: false)
-//        .swapApartments(apartmentsMap);
   }
 }
