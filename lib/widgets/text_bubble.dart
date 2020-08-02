@@ -18,17 +18,19 @@ class TextBubble extends StatelessWidget {
     };
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: kDefaultMargin/4, vertical: kDefaultMargin/4),
+      margin: EdgeInsets.symmetric(
+          horizontal: kDefaultMargin / 4, vertical: kDefaultMargin / 4),
       padding: EdgeInsets.symmetric(
           horizontal: kDefaultMargin / 2, vertical: kDefaultMargin / 4),
       child: Text(
         text,
-        style: TextStyle(color: availabilityType == null ? Colors.black87 : Colors.white),
+        style: TextStyle(
+            color: availabilityType == null ? Colors.black87 : Colors.white),
       ),
       decoration: BoxDecoration(
           color: backgroundColorMap[availabilityType],
-          borderRadius:
-              BorderRadius.all(Radius.circular(kDefaultBorderRadius))),
+          borderRadius: BorderRadius.all(Radius.circular(kDefaultBorderRadius)),
+          boxShadow: kSecondaryBoxShadow),
     );
   }
 }

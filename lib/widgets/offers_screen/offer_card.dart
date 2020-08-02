@@ -14,7 +14,15 @@ class OfferCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Container(
+      margin: EdgeInsets.symmetric(
+          vertical: kDefaultMargin / 2, horizontal: kDefaultMargin),
+      padding: EdgeInsets.all(kDefaultMargin / 2),
+      decoration: BoxDecoration(
+        boxShadow: kPrimaryBoxShadow,
+        borderRadius: BorderRadius.all(Radius.circular(kDefaultBorderRadius)),
+        color: Colors.white
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -22,7 +30,10 @@ class OfferCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               BedBathRow(offer: offer),
-              TextBubble(text: 'AVAILABLE', availabilityType: AvailabilityType.AVAILABLE_NOW,)
+              TextBubble(
+                text: 'AVAILABLE',
+                availabilityType: AvailabilityType.AVAILABLE_NOW,
+              )
             ],
           ),
           WrapRow(
@@ -52,20 +63,25 @@ class OfferCard extends StatelessWidget {
     }
     if (offer.furnished != null) {
       String text = offer.furnished ? 'Furnished' : 'Not furnished';
-      textBubbles.add(TextBubble(text: text,));
+      textBubbles.add(TextBubble(
+        text: text,
+      ));
     }
     if (offer.petsAllowed != null) {
       String text = offer.petsAllowed ? 'Pets allowed' : 'Pets now allowed';
-      textBubbles.add(TextBubble(text: text,));
+      textBubbles.add(TextBubble(
+        text: text,
+      ));
     }
     if (offer.sqft != null) {
       String text;
-      switch(offer.sqft.type) {
+      switch (offer.sqft.type) {
         case SqftType.EXACT:
           text = '${offer.sqft.sqft.floor()} sqft.';
           break;
         case SqftType.RANGE:
-          text = '${offer.sqft.sqft.floor()} - ${offer.sqft.sqftMax.floor()} sqft.';
+          text =
+              '${offer.sqft.sqft.floor()} - ${offer.sqft.sqftMax.floor()} sqft.';
       }
       textBubbles.add(TextBubble(text: text));
 
@@ -73,5 +89,3 @@ class OfferCard extends StatelessWidget {
     }
   }
 }
-
-
