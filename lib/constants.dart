@@ -14,7 +14,12 @@ final List<BoxShadow> kPrimaryBoxShadow = [
 
 final List<BoxShadow> kSecondaryBoxShadow = [
   BoxShadow(
-      offset: Offset(3, 7),
+      offset: Offset(0, 0),
       color: Color(0xFF3D3D3D).withOpacity(.5),
       blurRadius: 20)
 ];
+
+const EdgeInsets kCardMargin = EdgeInsets.symmetric(
+    vertical: kDefaultMargin / 2, horizontal: kDefaultMargin);
+    
+const EdgeInsets kCardPadding = EdgeInsets.all(kDefaultMargin / 2);

@@ -15,9 +15,8 @@ class OfferCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(
-          vertical: kDefaultMargin / 2, horizontal: kDefaultMargin),
-      padding: EdgeInsets.all(kDefaultMargin / 2),
+      margin: kCardMargin,
+      padding: kCardPadding,
       decoration: BoxDecoration(
         boxShadow: kPrimaryBoxShadow,
         borderRadius: BorderRadius.all(Radius.circular(kDefaultBorderRadius)),
