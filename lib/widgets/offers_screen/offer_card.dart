@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:isa_app/constants.dart';
 import 'package:isa_app/models/offer.dart';
+import 'package:isa_app/widgets/bed_bath.dart';
+import 'package:isa_app/widgets/icon_number.dart';
+import 'package:isa_app/widgets/offers_screen/option_card.dart';
+import 'package:isa_app/widgets/text_bubble.dart';
 
 class OfferCard extends StatelessWidget {
   final Offer offer;
@@ -11,47 +15,51 @@ class OfferCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  Icon(
-                    Icons.bathtub_outlined,
-                    color: Colors.blueGrey,
-                  ),
-                  Text('1 - 5'),
-                  SizedBox(
-                    width: kDefaultMargin / 2,
-                  ),
-                  Icon(
-                    Icons.bathtub_outlined,
-                    color: Colors.blueGrey,
-                  ),
-                  Text('1 - 5')
-                ],
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: kDefaultMargin/2, vertical: kDefaultMargin/4),
-                child: Text('AVAILABLE', style: TextStyle(color: Colors.white),),
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.all(Radius.circular(kDefaultBorderRadius))
-                ),
-              )
+              BedBathRow(offer: offer),
+              TextBubble(text: 'AVAILABLE',)
             ],
           ),
-          Text('LARK BATON ROUGE'),
-          Container(
-            width: 20,
-            height: 5,
-            color: Theme.of(context).accentColor,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Wrap(
+                alignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  OptionCard(),
+                  OptionCard(),
+                  OptionCard(),
+                  OptionCard(),
+                  OptionCard(),
+                  OptionCard(),
+                ],
+              ),
+            ],
           ),
-          Text('\$400 - \$645'),
-          Text('1200 sqft - 1400 sqft')
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Wrap(
+                alignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  TextBubble(text: '1400 sqft.'),
+                  TextBubble(text: 'Pets allowed'),
+                  TextBubble(text: 'Furnished'),
+                  TextBubble(text: '\$400 deopsit'),
+                ],
+              ),
+            ],
+          )
         ],
       ),
     );
   }
 }
+
+
