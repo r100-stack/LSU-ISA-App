@@ -27,54 +27,73 @@ class ApartmentCard extends StatelessWidget {
             borderRadius:
                 BorderRadius.all(Radius.circular(kDefaultBorderRadius)),
             color: Colors.white),
-        child: Column(
+        child: Row(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Icon(
-                      Icons.bathtub_outlined,
-                      color: Colors.blueGrey,
-                    ),
-                    Text('${(apartment.minBeds)} - ${(apartment.minBeds)}'),
-                    SizedBox(
-                      width: kDefaultMargin / 2,
-                    ),
-                    Icon(
-                      Icons.bathtub_outlined,
-                      color: Colors.blueGrey,
-                    ),
-                    Text('${apartment.minBaths} - ${apartment.maxBaths}')
-                  ],
-                ),
-                TextBubble(text: 'AVAILABLE', availabilityType: AvailabilityType.AVAILABLE_NOW,)
-              ],
+            ClipRRect(
+              child: Image(
+                image: NetworkImage(apartment.imageUrl),
+                width: 100,
+                fit: BoxFit.cover,
+              ),
+              borderRadius:
+                  BorderRadius.all(Radius.circular(kDefaultBorderRadius)),
             ),
             SizedBox(
-              height: kDefaultMargin,
+              width: kDefaultMargin / 2,
             ),
-            Text(
-              apartment.name.toUpperCase(),
-              style: Theme.of(context).textTheme.headline5,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: kDefaultMargin / 2),
-              child: Container(
-                width: 20,
-                height: 5,
-                color: Theme.of(context).accentColor,
+            Expanded(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.bathtub_outlined,
+                        color: Colors.blueGrey,
+                      ),
+                      Text('${(apartment.minBeds)} - ${(apartment.minBeds)}'),
+                      SizedBox(
+                        width: kDefaultMargin / 2,
+                      ),
+                      Icon(
+                        Icons.bathtub_outlined,
+                        color: Colors.blueGrey,
+                      ),
+                      Text('${apartment.minBaths} - ${apartment.maxBaths}')
+                    ],
+                  ),
+                  SizedBox(
+                    height: kDefaultMargin,
+                  ),
+                  Text(
+                    apartment.name.toUpperCase(),
+                    style: Theme.of(context).textTheme.headline5,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: kDefaultMargin / 2),
+                    child: Container(
+                      width: 20,
+                      height: 5,
+                      color: Theme.of(context).accentColor,
+                    ),
+                  ),
+                  Text(
+                    '\$400 - \$645',
+                    style: Theme.of(context).textTheme.subtitle1,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    '1200 sqft - 1400 sqft',
+                    style: Theme.of(context).textTheme.subtitle1,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  )
+                ],
               ),
             ),
-            Text(
-              '\$400 - \$645',
-              style: Theme.of(context).textTheme.subtitle1,
-            ),
-            Text(
-              '1200 sqft - 1400 sqft',
-              style: Theme.of(context).textTheme.subtitle1,
-            )
           ],
         ),
       ),
