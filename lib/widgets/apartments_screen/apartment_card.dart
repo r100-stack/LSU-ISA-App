@@ -5,6 +5,7 @@ import 'package:isa_app/constants.dart';
 import 'package:isa_app/models/apartment.dart';
 import 'package:isa_app/models/offer.dart';
 import 'package:isa_app/screens/offers_screen.dart';
+import 'package:isa_app/widgets/bed_bath.dart';
 import 'package:isa_app/widgets/text_bubble.dart';
 
 class ApartmentCard extends StatelessWidget {
@@ -44,24 +45,10 @@ class ApartmentCard extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.bathtub_outlined,
-                        color: Colors.blueGrey,
-                      ),
-                      Text('${(apartment.minBeds)} - ${(apartment.minBeds)}'),
-                      SizedBox(
-                        width: kDefaultMargin / 2,
-                      ),
-                      Icon(
-                        Icons.bathtub_outlined,
-                        color: Colors.blueGrey,
-                      ),
-                      Text('${apartment.minBaths} - ${apartment.maxBaths}')
-                    ],
-                  ),
+                  BedBathRow(
+                      numBeds: [apartment.minBeds, apartment.maxBeds],
+                      numBaths: [apartment.minBaths, apartment.maxBaths],
+                    ),
                   SizedBox(
                     height: kDefaultMargin,
                   ),

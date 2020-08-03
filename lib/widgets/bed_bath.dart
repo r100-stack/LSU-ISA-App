@@ -4,24 +4,26 @@ import 'package:isa_app/models/offer.dart';
 import 'package:isa_app/widgets/icon_number.dart';
 
 class BedBathRow extends StatelessWidget {
-  final Offer offer;
+  final List<double> numBeds;
+  final List<double> numBaths;
 
-  BedBathRow({this.offer});
+  BedBathRow({this.numBeds, this.numBaths});
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         IconNumber(
           icon: Icons.king_bed_outlined,
-          number: offer.numBeds,
+          numbers: numBeds,
         ),
         SizedBox(
           width: kDefaultMargin / 2,
         ),
         IconNumber(
           icon: Icons.bathtub_outlined,
-          number: offer.numBaths,
+          numbers: numBaths,
         )
       ],
     );

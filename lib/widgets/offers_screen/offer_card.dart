@@ -28,7 +28,7 @@ class OfferCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              BedBathRow(offer: offer),
+              BedBathRow(numBeds: [offer.numBeds], numBaths: [offer.numBaths],),
               TextBubble(
                 text: 'AVAILABLE',
                 availabilityType: AvailabilityType.AVAILABLE_NOW,
