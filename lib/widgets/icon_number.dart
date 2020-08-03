@@ -24,6 +24,18 @@ class IconNumber extends StatelessWidget {
   }
 
   String _getText(double number) {
-    return number != null ? number.floor().toString() : '';
+    if (number == null) {
+      return '';
+    }
+
+    String text = number.floor().toString();
+    double remainder = number.remainder(1);
+    if (remainder == .5){
+      text += '½';
+    } else if (remainder != 0){
+      text += number.remainder(1).toString();
+    }
+
+    return text;
   }
 }
