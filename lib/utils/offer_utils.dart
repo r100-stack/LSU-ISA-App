@@ -60,11 +60,11 @@ class OfferUtils {
           apartmentId: offerFirebase['apartmentId'],
           availability:
               OfferUtils.getAvailabilityType(offerFirebase['availability']),
-          deposit: offerFirebase['deposit'].toDouble(),
+          deposit: offerFirebase['deposit'] != null ? offerFirebase['deposit'].toDouble() : null,
           description: offerFirebase['description'],
           furnished: offerFirebase['furnished'],
-          numBeds: offerFirebase['numBeds'].toDouble(),
-          numBaths: offerFirebase['numBaths'].toDouble(),
+          numBeds: offerFirebase['numBeds'] != null ? offerFirebase['numBeds'].toDouble() : null,
+          numBaths: offerFirebase['numBaths'] != null ? offerFirebase['numBaths'].toDouble() : null,
           petsAllowed: offerFirebase['petsAllowed'],
           sqft: Sqft(
             type: sqftType,

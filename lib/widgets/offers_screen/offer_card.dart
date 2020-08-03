@@ -47,6 +47,7 @@ class OfferCard extends StatelessWidget {
   }
 
   List<OptionCard> _getOptionCards(List<Option> options) {
+    print('!!!${options[0].type}');
     List<OptionCard> optionCards = [];
     for (Option option in options) {
       optionCards.add(OptionCard(option));

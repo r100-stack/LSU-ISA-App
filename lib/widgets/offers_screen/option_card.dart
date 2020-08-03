@@ -19,7 +19,7 @@ class OptionCard extends StatelessWidget {
         padding: EdgeInsets.all(kDefaultMargin/2),
         child: Column(
           children: [
-            Text(name, style: Theme.of(context).textTheme.subtitle1,),
+            Visibility(child: Text(name, style: Theme.of(context).textTheme.subtitle1,), visible: name != ' ',),
             SizedBox(height: kDefaultMargin/4,),
             Text(cost, style: Theme.of(context).textTheme.headline5,),
           ],
@@ -29,7 +29,7 @@ class OptionCard extends StatelessWidget {
   }
 
   String _getName(String name) {
-    return (name ?? '').inCaps;
+    return (name ?? ' ').inCaps;
   }
 
   String _getCost(Cost cost) {

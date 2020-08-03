@@ -31,7 +31,7 @@ class ApartmentCard extends StatelessWidget {
           children: [
             ClipRRect(
               child: Image(
-                image: NetworkImage(apartment.imageUrl),
+                image: NetworkImage(apartment.imageUrl ?? ''),
                 width: 100,
                 fit: BoxFit.cover,
               ),
