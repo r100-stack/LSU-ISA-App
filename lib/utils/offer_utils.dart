@@ -54,25 +54,35 @@ class OfferUtils {
     List<Offer> offers = [];
 
     for (var offerFirebase in offersFirebase) {
-      SqftType sqftType = OfferUtils.getSqftType(offerFirebase['sqft'][0]);
+      SqftType sqftType = offerFirebase['sqft'] != null
+          ? OfferUtils.getSqftType(offerFirebase['sqft'][0])
+          : null;
 
       Offer offer = Offer(
           apartmentId: offerFirebase['apartmentId'],
           availability:
               OfferUtils.getAvailabilityType(offerFirebase['availability']),
-          deposit: offerFirebase['deposit'] != null ? offerFirebase['deposit'].toDouble() : null,
+          deposit: offerFirebase['deposit'] != null
+              ? offerFirebase['deposit'].toDouble()
+              : null,
           description: offerFirebase['description'],
           furnished: offerFirebase['furnished'],
-          numBeds: offerFirebase['numBeds'] != null ? offerFirebase['numBeds'].toDouble() : null,
-          numBaths: offerFirebase['numBaths'] != null ? offerFirebase['numBaths'].toDouble() : null,
+          numBeds: offerFirebase['numBeds'] != null
+              ? offerFirebase['numBeds'].toDouble()
+              : null,
+          numBaths: offerFirebase['numBaths'] != null
+              ? offerFirebase['numBaths'].toDouble()
+              : null,
           petsAllowed: offerFirebase['petsAllowed'],
-          sqft: Sqft(
-            type: sqftType,
-            sqft: offerFirebase['sqft'][1].toDouble(),
-            sqftMax: sqftType == SqftType.RANGE
-                ? offerFirebase['sqft'][2].toDouble()
-                : null,
-          ),
+          sqft: sqftType == null
+              ? null
+              : Sqft(
+                  type: sqftType,
+                  sqft: offerFirebase['sqft'][1].toDouble(),
+                  sqftMax: sqftType == SqftType.RANGE
+                      ? offerFirebase['sqft'][2].toDouble()
+                      : null,
+                ),
           options: []);
 
       for (var optionFirebase in offerFirebase['options']) {
