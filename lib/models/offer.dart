@@ -45,6 +45,6 @@ class Sqft {
 }
 
 enum AvailabilityType {AVAILABLE_NOW, NOT_AVAILABLE, AVAILABLE_SOON}
-enum CostType {EXACT, FROM, RANGE}
+enum CostType {EXACT, FROM, RANGE, PLEASE_CALL}
 enum OptionType {BASE, ADDON}
 enum SqftType {EXACT, RANGE}

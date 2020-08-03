@@ -43,6 +43,8 @@ class OptionCard extends StatelessWidget {
       case CostType.RANGE:
         return '\$${cost.cost.floor()} - \$${cost.costMax.floor()}';
         break;
+        case CostType.PLEASE_CALL:
+        return 'Call';
     }
     return cost.cost.toString();
   }

@@ -10,6 +10,8 @@ class OfferUtils {
         return CostType.FROM;
       case 'range':
         return CostType.RANGE;
+      case 'pleaseCall':
+        return CostType.PLEASE_CALL;
     }
 
     return null;
