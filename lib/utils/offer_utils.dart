@@ -126,6 +126,29 @@ class OfferUtils {
             ? offer.numBaths
             : apartment.maxBaths;
 
+    if (offer.sqft != null) {
+      apartment.minSqft =
+          (apartment.minSqft == null || offer.sqft.sqft < apartment.minSqft)
+              ? offer.sqft.sqft
+              : apartment.minSqft;
+
+      double maxSqft =
+          offer.sqft.sqftMax == null ? offer.sqft.sqft : offer.sqft.sqftMax;
+      apartment.maxSqft =
+          (apartment.maxSqft == null || maxSqft > apartment.maxSqft)
+              ? maxSqft
+              : apartment.maxSqft;
+    }
+
+    // double maxSqft = offer.sqft.sqftMax;
+    // if (maxSqft == null) {
+    //   maxSqft = offer.sqft.sqft;
+    // }
+    // apartment.maxBaths =
+    //     (apartment.maxBaths == null || (offer.sqft.sqftMax != null && offer.sqft.sqftMax > apartment.maxBaths))
+    //         ? offer.numBaths
+    //         : apartment.maxBaths;
+
     double minCost = offer.options[0].cost.cost;
     double maxCost = minCost;
 

@@ -86,7 +86,7 @@ class ApartmentCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      '1200 sqft - 1400 sqft',
+                      '${apartment.minSqft} sqft. - ${apartment.maxSqft} sqft.',
                       style: Theme.of(context).textTheme.subtitle1,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
