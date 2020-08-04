@@ -28,6 +28,7 @@ class OffersScreen extends StatelessWidget {
               size: size,
               imageUrl: apartment.imageUrl,
               title: apartment.name,
+              heroId: apartment.id,
             )
           ],
         ),

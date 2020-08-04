@@ -34,18 +34,21 @@ class ApartmentCard extends StatelessWidget {
             children: [
               Expanded(
                 flex: 45,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(kDefaultBorderRadius),
+                child: Hero(
+                  tag: 'apartment_image${apartment.id}',
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(kDefaultBorderRadius),
+                      ),
+                      color: Color(0xFFFEF1BD),
+                      // color: Theme.of(context).accentColor,
                     ),
-                    color: Color(0xFFFEF1BD),
-                    // color: Theme.of(context).accentColor,
-                  ),
-                  child: ClipRRect(
-                    child: CustomImage(apartment.imageUrl),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(kDefaultBorderRadius),
+                    child: ClipRRect(
+                      child: CustomImage(apartment.imageUrl),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(kDefaultBorderRadius),
+                      ),
                     ),
                   ),
                 ),

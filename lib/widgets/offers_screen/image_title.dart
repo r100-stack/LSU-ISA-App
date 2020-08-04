@@ -5,9 +5,10 @@ class ImageAndTitle extends StatelessWidget {
   final Size size;
   final String imageUrl;
   final String title;
+  final String heroId;
 
   const ImageAndTitle(
-      {@required this.size, @required this.imageUrl, @required this.title});
+      {@required this.size, @required this.imageUrl, @required this.title, @required this.heroId});
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +21,13 @@ class ImageAndTitle extends StatelessWidget {
       child: Stack(
         overflow: Overflow.visible,
         children: [
-          Container(
-            height: size.height * .4 - 35,
-            decoration: BoxDecoration(
-                image: DecorationImage(fit: BoxFit.cover, image: image)),
+          Hero(
+            tag: 'apartment_image$heroId',
+            child: Container(
+              height: size.height * .4 - 35,
+              decoration: BoxDecoration(
+                  image: DecorationImage(fit: BoxFit.cover, image: image)),
+            ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
