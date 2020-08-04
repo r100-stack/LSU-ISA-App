@@ -16,6 +16,8 @@ class OffersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('here: ${apartment.offers.length}');
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Offers'),

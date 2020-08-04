@@ -125,5 +125,40 @@ class OfferUtils {
         (apartment.maxBaths == null || offer.numBaths > apartment.maxBaths)
             ? offer.numBaths
             : apartment.maxBaths;
+
+    double minCost = offer.options[0].cost.cost;
+    double maxCost = minCost;
+
+    if (apartment.id == '1NlNYt61bi1FBqXJQHBq') {
+      int a = 5;
+      print('!@#!@#:${apartment.offers.length}');
+    }
+
+    if (offer.options.length > 0) {
+      if (minCost >= 0) {
+        apartment.minCost =
+            apartment.minCost == null ? minCost : apartment.minCost;
+      }
+      if (maxCost >= 0) {
+        apartment.maxCost =
+            apartment.maxCost == null ? minCost : apartment.maxCost;
+      }
+    }
+
+    for (Option option in offer.options) {
+      minCost = option.cost.cost;
+      if (minCost >= 0) {
+        apartment.minCost =
+            minCost < apartment.minCost ? minCost : apartment.minCost;
+      }
+
+      maxCost = option.cost.costMax;
+      maxCost = maxCost == null ? minCost : maxCost;
+
+      if (maxCost >= 0) {
+        apartment.maxCost =
+            maxCost > apartment.maxCost ? maxCost : apartment.maxCost;
+      }
+    }
   }
 }

@@ -80,7 +80,7 @@ class ApartmentCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '\$400 - \$645',
+                      '\$${apartment.minCost} - \$${apartment.maxCost}',
                       style: Theme.of(context).textTheme.subtitle1,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,

@@ -42,9 +42,10 @@ class OfferCard extends StatelessWidget {
           ),
           Visibility(
             visible: offer.description != null,
-                      child: Column(
+            child: Column(
               children: [
-                Text(offer.description ?? '', style: Theme.of(context).textTheme.headline6),
+                Text(offer.description ?? '',
+                    style: Theme.of(context).textTheme.headline6),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: kDefaultMargin / 2),
                   child: Container(

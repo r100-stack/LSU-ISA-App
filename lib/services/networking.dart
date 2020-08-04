@@ -49,8 +49,8 @@ class Networking {
     for (Offer offer in offers) {
       Apartment apartment = apartmentsMap[offer.apartmentId];
       if (apartment != null) {
-        OfferUtils.setApartmentOfferParameters(offer, apartment);
         apartment.offers.add(offer);
+        OfferUtils.setApartmentOfferParameters(offer, apartment);
       } else {
         print('APARTMENT IS NULL! ID = ${offer.apartmentId}');
       }
