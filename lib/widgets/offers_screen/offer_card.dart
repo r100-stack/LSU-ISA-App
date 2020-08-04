@@ -19,22 +19,51 @@ class OfferCard extends StatelessWidget {
       margin: kCardMargin,
       padding: kCardPadding,
       decoration: BoxDecoration(
-        boxShadow: kPrimaryBoxShadow,
-        borderRadius: BorderRadius.all(Radius.circular(kDefaultBorderRadius)),
-        color: Colors.white
-      ),
+          boxShadow: kPrimaryBoxShadow,
+          borderRadius: BorderRadius.all(Radius.circular(kDefaultBorderRadius)),
+          color: Colors.white),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              BedBathRow(numBeds: [offer.numBeds], numBaths: [offer.numBaths],),
-              AvailabilityTextBubble(availabilityType: offer.availability,)
+              BedBathRow(
+                numBeds: [offer.numBeds],
+                numBaths: [offer.numBaths],
+              ),
+              AvailabilityTextBubble(
+                availabilityType: offer.availability,
+              )
             ],
+          ),
+          SizedBox(
+            height: kDefaultMargin / 2,
+          ),
+          Visibility(
+            visible: offer.description != null,
+                      child: Column(
+              children: [
+                Text(offer.description ?? '', style: Theme.of(context).textTheme.headline6),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: kDefaultMargin / 2),
+                  child: Container(
+                    width: 20,
+                    height: 5,
+                    color: Theme.of(context).accentColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: kDefaultMargin / 2,
           ),
           WrapRow(
             children: _getOptionCards(offer.options),
+          ),
+          SizedBox(
+            height: kDefaultMargin / 2,
           ),
           WrapRow(
             children: _getTextBubbles(offer),
