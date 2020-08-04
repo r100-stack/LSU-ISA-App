@@ -4,19 +4,13 @@ import 'package:isa_app/models/offer.dart';
 
 class TextBubble extends StatelessWidget {
   final String text;
-  final AvailabilityType availabilityType;
+  final Color color;
+  final Color textColor;
 
-  TextBubble({this.text, this.availabilityType});
+  TextBubble({this.text, this.color, this.textColor});
 
   @override
   Widget build(BuildContext context) {
-    Map<AvailabilityType, Color> backgroundColorMap = {
-      null: Theme.of(context).accentColor,
-      AvailabilityType.AVAILABLE_NOW: Colors.green,
-      AvailabilityType.AVAILABLE_SOON: Colors.lightBlue,
-      AvailabilityType.NOT_AVAILABLE: Colors.grey
-    };
-
     return Container(
       margin: EdgeInsets.symmetric(
           horizontal: kDefaultMargin / 4, vertical: kDefaultMargin / 4),
@@ -24,11 +18,10 @@ class TextBubble extends StatelessWidget {
           horizontal: kDefaultMargin / 2, vertical: kDefaultMargin / 4),
       child: Text(
         text,
-        style: TextStyle(
-            color: availabilityType == null ? Colors.black87 : Colors.white),
+        style: TextStyle(color: textColor ?? Colors.black),
       ),
       decoration: BoxDecoration(
-          color: backgroundColorMap[availabilityType],
+          color: color ?? Theme.of(context).accentColor,
           borderRadius: BorderRadius.all(Radius.circular(kDefaultBorderRadius)),
           boxShadow: kSecondaryBoxShadow),
     );

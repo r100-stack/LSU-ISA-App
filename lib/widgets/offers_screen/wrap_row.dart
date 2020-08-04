@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:isa_app/widgets/text_bubble.dart';
+import 'package:isa_app/widgets/offers_screen/text_bubble.dart';
 
 class WrapRow extends StatelessWidget {
   final List<Widget> children;

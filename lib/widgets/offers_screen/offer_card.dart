@@ -3,9 +3,10 @@ import 'package:isa_app/constants.dart';
 import 'package:isa_app/models/offer.dart';
 import 'package:isa_app/widgets/bed_bath.dart';
 import 'package:isa_app/widgets/icon_number.dart';
+import 'package:isa_app/widgets/offers_screen/availability_text_bubble.dart';
 import 'package:isa_app/widgets/offers_screen/option_card.dart';
 import 'package:isa_app/widgets/offers_screen/wrap_row.dart';
-import 'package:isa_app/widgets/text_bubble.dart';
+import 'package:isa_app/widgets/offers_screen/text_bubble.dart';
 
 class OfferCard extends StatelessWidget {
   final Offer offer;
@@ -29,10 +30,7 @@ class OfferCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               BedBathRow(numBeds: [offer.numBeds], numBaths: [offer.numBaths],),
-              TextBubble(
-                text: 'AVAILABLE',
-                availabilityType: AvailabilityType.AVAILABLE_NOW,
-              )
+              AvailabilityTextBubble(availabilityType: offer.availability,)
             ],
           ),
           WrapRow(
@@ -86,8 +84,8 @@ class OfferCard extends StatelessWidget {
               '${offer.sqft.sqft.floor()} - ${offer.sqft.sqftMax.floor()} sqft.';
       }
       textBubbles.add(TextBubble(text: text));
-
-      return textBubbles;
     }
+
+    return textBubbles;
   }
 }
