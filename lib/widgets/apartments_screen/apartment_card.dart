@@ -16,8 +16,6 @@ class ApartmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, OffersScreen.routeName,
@@ -31,55 +29,73 @@ class ApartmentCard extends StatelessWidget {
             borderRadius:
                 BorderRadius.all(Radius.circular(kDefaultBorderRadius)),
             color: Colors.white),
-        child: Row(
-          children: [
-            Expanded(
-                flex: 4,
-                child: CustomImage(apartment.imageUrl)),
-            SizedBox(
-              width: kDefaultMargin / 2,
-            ),
-            Expanded(
-              flex: 6,
-              child: Column(
-                children: [
-                  BedBathRow(
-                    numBeds: [apartment.minBeds, apartment.maxBeds],
-                    numBaths: [apartment.minBaths, apartment.maxBaths],
+        child: IntrinsicHeight(
+          child: Row(
+            children: [
+              Expanded(
+                flex: 45,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(kDefaultBorderRadius),
+                    ),
+                    color: Color(0xFFFEF1BD),
                   ),
-                  SizedBox(
-                    height: kDefaultMargin,
-                  ),
-                  Text(
-                    apartment.name.toUpperCase(),
-                    style: Theme.of(context).textTheme.headline5,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: kDefaultMargin / 2),
-                    child: Container(
-                      width: 20,
-                      height: 5,
-                      color: Theme.of(context).accentColor,
+                  child: ClipRRect(
+                    child: CustomImage(apartment.imageUrl),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(kDefaultBorderRadius),
                     ),
                   ),
-                  Text(
-                    '\$400 - \$645',
-                    style: Theme.of(context).textTheme.subtitle1,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Text(
-                    '1200 sqft - 1400 sqft',
-                    style: Theme.of(context).textTheme.subtitle1,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  )
-                ],
+                ),
               ),
-            ),
-          ],
+              SizedBox(
+                width: kDefaultMargin / 4,
+              ),
+              Expanded(
+                flex: 55,
+                child: Column(
+                  children: [
+                    BedBathRow(
+                      numBeds: [apartment.minBeds, apartment.maxBeds],
+                      numBaths: [apartment.minBaths, apartment.maxBaths],
+                    ),
+                    SizedBox(
+                      height: kDefaultMargin,
+                    ),
+                    Text(
+                      apartment.name.toUpperCase(),
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headline5,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: kDefaultMargin / 2),
+                      child: Container(
+                        width: 20,
+                        height: 5,
+                        color: Theme.of(context).accentColor,
+                      ),
+                    ),
+                    Text(
+                      '\$400 - \$645',
+                      style: Theme.of(context).textTheme.subtitle1,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      '1200 sqft - 1400 sqft',
+                      style: Theme.of(context).textTheme.subtitle1,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

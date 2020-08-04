@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:isa_app/constants.dart';
 import 'package:isa_app/widgets/custom_progress_indicator.dart';
 
 import 'dart:io' show Platform;
@@ -12,25 +13,24 @@ class CustomImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isMobile = false;
-    try {
-      isMobile = Platform.isAndroid || Platform.isIOS;
-    } catch (e) {
-      print(e);
-    }
-
-    return Stack(
-      children: [
-        Center(
-          child: CustomProgressIndicator(),
-        ),
-        FadeInImage.memoryNetwork(
-          fit: BoxFit.cover,
-          placeholder: kTransparentImage,
-          image: imageUrl,
-        ),
-      ],
-    );
+    return imageUrl == null
+        ? Image(
+            image: AssetImage('assets/images/placeholder_apartment.png'),
+          )
+        : Stack(
+            children: [
+              Center(
+                child: CustomProgressIndicator(),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: FadeInImage.memoryNetwork(
+                  placeholder: kTransparentImage,
+                  image: imageUrl,
+                ),
+              ),
+            ],
+          );
 
     //   return isMobile
     //       ? CachedNetworkImage(
