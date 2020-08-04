@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:isa_app/models/apartment.dart';
 import 'package:isa_app/models/offer.dart';
+import 'package:isa_app/widgets/bed_bath.dart';
 import 'package:isa_app/widgets/custom_image.dart';
 import 'package:isa_app/widgets/custom_progress_indicator.dart';
 import 'package:isa_app/utils/offer_utils.dart';
@@ -21,17 +22,62 @@ class OffersScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ImageAndTitle(
-              size: size,
-              imageUrl: apartment.imageUrl,
-              title: apartment.name,
-              heroId: apartment.id,
-            )
-          ],
+      body: Stack(
+              children: [SingleChildScrollView(
+          child: Column(
+            children: [
+              ImageAndTitle(
+                size: size,
+                imageUrl: apartment.imageUrl,
+                title: apartment.name,
+                heroId: apartment.id,
+              ),
+              Hero(
+                tag: 'bed_bath_row${apartment.id}',
+                child: BedBathRow(
+                  numBeds: [apartment.minBeds, apartment.maxBeds],
+                  numBaths: [apartment.minBaths, apartment.maxBaths],
+                ),
+              ),
+              Hero(
+                tag: 'cost_range${apartment.id}',
+                child: Text(
+                  '\$${apartment.minCost} - \$${apartment.maxCost}',
+                  style: Theme.of(context).textTheme.subtitle1,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Hero(
+                tag: 'sqft_range${apartment.id}',
+                child: Text(
+                  '${apartment.minSqft} sqft. - ${apartment.maxSqft} sqft.',
+                  style: Theme.of(context).textTheme.subtitle1,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return OfferCard(apartment.offers[index]);
+                },
+                itemCount: apartment.offers.length,
+              )
+            ],
+          ),
         ),
+        SafeArea(
+            child: Container(
+                decoration: BoxDecoration(boxShadow: [
+                  BoxShadow(
+                      offset: Offset(0, 0),
+                      color: Color(0xFF3D3D3D).withOpacity(.2),
+                      blurRadius: 10)
+                ]),
+                child: BackButton(color: Theme.of(context).accentColor)),
+          )],
       ),
     );
 
