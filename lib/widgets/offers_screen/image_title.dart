@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:isa_app/constants.dart';
+import 'package:isa_app/utils/image_utils.dart';
 
 class ImageAndTitle extends StatelessWidget {
   final Size size;
@@ -12,10 +13,6 @@ class ImageAndTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ImageProvider image = imageUrl != null
-        ? NetworkImage(imageUrl)
-        : AssetImage('assets/images/placeholder_apartment.png');
-
     return Container(
       height: size.height * .4,
       child: Stack(
@@ -26,7 +23,7 @@ class ImageAndTitle extends StatelessWidget {
             child: Container(
               height: size.height * .4 - 35,
               decoration: BoxDecoration(
-                  image: DecorationImage(fit: BoxFit.cover, image: image)),
+                  image: DecorationImage(fit: BoxFit.cover, image: ImageUtils.getApartmentImage(imageUrl))),
             ),
           ),
           Align(

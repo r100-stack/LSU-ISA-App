@@ -5,6 +5,7 @@ import 'package:isa_app/constants.dart';
 import 'package:isa_app/models/apartment.dart';
 import 'package:isa_app/models/offer.dart';
 import 'package:isa_app/screens/offers_screen.dart';
+import 'package:isa_app/utils/image_utils.dart';
 import 'package:isa_app/widgets/bed_bath.dart';
 import 'package:isa_app/widgets/custom_image.dart';
 import 'package:isa_app/widgets/offers_screen/text_bubble.dart';
@@ -38,18 +39,14 @@ class ApartmentCard extends StatelessWidget {
                   tag: 'apartment_image${apartment.id}',
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(kDefaultBorderRadius),
-                      ),
-                      color: Color(0xFFFEF1BD),
-                      // color: Theme.of(context).accentColor,
-                    ),
-                    child: ClipRRect(
-                      child: CustomImage(apartment.imageUrl),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(kDefaultBorderRadius),
-                      ),
-                    ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(kDefaultBorderRadius),
+                        ),
+                        color: Color(0xFFFEF1BD),
+                        image: DecorationImage(
+                            image: ImageUtils.getApartmentImage(
+                                apartment.imageUrl),
+                            fit: BoxFit.cover)),
                   ),
                 ),
               ),
