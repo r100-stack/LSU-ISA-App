@@ -7,7 +7,7 @@ import 'package:isa_app/models/offer.dart';
 import 'package:isa_app/screens/offers_screen.dart';
 import 'package:isa_app/widgets/bed_bath.dart';
 import 'package:isa_app/widgets/custom_image.dart';
-import 'package:isa_app/widgets/text_bubble.dart';
+import 'package:isa_app/widgets/offers_screen/text_bubble.dart';
 
 class ApartmentCard extends StatelessWidget {
   final Apartment apartment;
