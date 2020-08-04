@@ -6,6 +6,7 @@ import 'package:isa_app/models/apartment.dart';
 import 'package:isa_app/models/offer.dart';
 import 'package:isa_app/screens/offers_screen.dart';
 import 'package:isa_app/widgets/bed_bath.dart';
+import 'package:isa_app/widgets/custom_image.dart';
 import 'package:isa_app/widgets/text_bubble.dart';
 
 class ApartmentCard extends StatelessWidget {
@@ -15,6 +16,8 @@ class ApartmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, OffersScreen.routeName,
@@ -30,25 +33,20 @@ class ApartmentCard extends StatelessWidget {
             color: Colors.white),
         child: Row(
           children: [
-            ClipRRect(
-              child: Image(
-                image: NetworkImage(apartment.imageUrl ?? ''),
-                width: 100,
-                fit: BoxFit.cover,
-              ),
-              borderRadius:
-                  BorderRadius.all(Radius.circular(kDefaultBorderRadius)),
-            ),
+            Expanded(
+                flex: 4,
+                child: CustomImage(apartment.imageUrl)),
             SizedBox(
               width: kDefaultMargin / 2,
             ),
             Expanded(
+              flex: 6,
               child: Column(
                 children: [
                   BedBathRow(
-                      numBeds: [apartment.minBeds, apartment.maxBeds],
-                      numBaths: [apartment.minBaths, apartment.maxBaths],
-                    ),
+                    numBeds: [apartment.minBeds, apartment.maxBeds],
+                    numBaths: [apartment.minBaths, apartment.maxBaths],
+                  ),
                   SizedBox(
                     height: kDefaultMargin,
                   ),
