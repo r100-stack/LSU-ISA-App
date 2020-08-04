@@ -6,6 +6,7 @@ class Apartment {
   String email;
   String phoneNumber;
   String website;
+  String address;
   String imageUrl;
 
   double minBeds;
@@ -22,5 +23,5 @@ class Apartment {
 
   List<Offer> offers = [];
 
-  Apartment({this.id, this.name, this.email, this.phoneNumber, this.website, this.imageUrl});
+  Apartment({this.id, this.name, this.email, this.phoneNumber, this.website, this.address, this.imageUrl});
 }

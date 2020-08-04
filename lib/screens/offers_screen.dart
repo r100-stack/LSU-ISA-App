@@ -6,6 +6,7 @@ import 'package:isa_app/widgets/bed_bath.dart';
 import 'package:isa_app/widgets/custom_image.dart';
 import 'package:isa_app/widgets/custom_progress_indicator.dart';
 import 'package:isa_app/utils/offer_utils.dart';
+import 'package:isa_app/widgets/offers_screen/apartments_contacts_card.dart';
 import 'package:isa_app/widgets/offers_screen/image_title.dart';
 import 'package:isa_app/widgets/offers_screen/offer_card.dart';
 import 'package:isa_app/widgets/offers_screen/offers_stream_builder.dart';
@@ -23,52 +24,83 @@ class OffersScreen extends StatelessWidget {
 
     return Scaffold(
       body: Stack(
-              children: [SingleChildScrollView(
-          child: Column(
-            children: [
-              ImageAndTitle(
-                size: size,
-                imageUrl: apartment.imageUrl,
-                title: apartment.name,
-                heroId: apartment.id,
-              ),
-              Hero(
-                tag: 'bed_bath_row${apartment.id}',
-                child: BedBathRow(
-                  numBeds: [apartment.minBeds, apartment.maxBeds],
-                  numBaths: [apartment.minBaths, apartment.maxBaths],
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                ImageAndTitle(
+                  size: size,
+                  imageUrl: apartment.imageUrl,
+                  title: apartment.name,
+                  heroId: apartment.id,
                 ),
-              ),
-              Hero(
-                tag: 'cost_range${apartment.id}',
-                child: Text(
-                  '\$${apartment.minCost} - \$${apartment.maxCost}',
-                  style: Theme.of(context).textTheme.subtitle1,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                Hero(
+                  tag: 'bed_bath_row${apartment.id}',
+                  child: BedBathRow(
+                    numBeds: [apartment.minBeds, apartment.maxBeds],
+                    numBaths: [apartment.minBaths, apartment.maxBaths],
+                  ),
                 ),
-              ),
-              Hero(
-                tag: 'sqft_range${apartment.id}',
-                child: Text(
-                  '${apartment.minSqft} sqft. - ${apartment.maxSqft} sqft.',
-                  style: Theme.of(context).textTheme.subtitle1,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                Hero(
+                  tag: 'cost_range${apartment.id}',
+                  child: Text(
+                    '\$${apartment.minCost} - \$${apartment.maxCost}',
+                    style: Theme.of(context).textTheme.subtitle1,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-              ),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return OfferCard(apartment.offers[index]);
-                },
-                itemCount: apartment.offers.length,
-              )
-            ],
+                Hero(
+                  tag: 'sqft_range${apartment.id}',
+                  child: Text(
+                    '${apartment.minSqft} sqft. - ${apartment.maxSqft} sqft.',
+                    style: Theme.of(context).textTheme.subtitle1,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Container(
+                  margin: kCardMargin,
+                  padding: kCardPadding,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(kDefaultBorderRadius),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      ApartmentContactsCard(
+                          leading: Icons.phone ?? '-',
+                          title: apartment.phoneNumber,
+                          url: Uri(scheme: 'tel', path: apartment.phoneNumber)
+                              .toString()),
+                      ApartmentContactsCard(
+                        leading: Icons.place,
+                        title: apartment.address ?? '-',
+                        url:
+                            'https://www.google.com/maps/search/${apartment.address}',
+                      ),
+                      ApartmentContactsCard(
+                        leading: Icons.public,
+                        title: apartment.website ?? '-',
+                        url: apartment.website,
+                      ),
+                    ],
+                  ),
+                ),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return OfferCard(apartment.offers[index]);
+                  },
+                  itemCount: apartment.offers.length,
+                )
+              ],
+            ),
           ),
-        ),
-        SafeArea(
+          SafeArea(
             child: Container(
                 decoration: BoxDecoration(boxShadow: [
                   BoxShadow(
@@ -77,7 +109,8 @@ class OffersScreen extends StatelessWidget {
                       blurRadius: 10)
                 ]),
                 child: BackButton(color: Theme.of(context).accentColor)),
-          )],
+          )
+        ],
       ),
     );
 

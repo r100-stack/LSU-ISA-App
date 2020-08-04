@@ -30,6 +30,7 @@ class Networking {
         name: apartmentFirebase['name'],
         email: apartmentFirebase['email'],
         phoneNumber: apartmentFirebase['phoneNumber'],
+        address: apartmentFirebase['address'],
         website: apartmentFirebase['website'],
         imageUrl: apartmentFirebase['imageUrl']
       );
