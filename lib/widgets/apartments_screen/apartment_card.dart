@@ -40,6 +40,7 @@ class ApartmentCard extends StatelessWidget {
                       Radius.circular(kDefaultBorderRadius),
                     ),
                     color: Color(0xFFFEF1BD),
+                    // color: Theme.of(context).accentColor,
                   ),
                   child: ClipRRect(
                     child: CustomImage(apartment.imageUrl),

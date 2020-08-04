@@ -140,22 +140,8 @@ class OfferUtils {
               : apartment.maxSqft;
     }
 
-    // double maxSqft = offer.sqft.sqftMax;
-    // if (maxSqft == null) {
-    //   maxSqft = offer.sqft.sqft;
-    // }
-    // apartment.maxBaths =
-    //     (apartment.maxBaths == null || (offer.sqft.sqftMax != null && offer.sqft.sqftMax > apartment.maxBaths))
-    //         ? offer.numBaths
-    //         : apartment.maxBaths;
-
     double minCost = offer.options[0].cost.cost;
     double maxCost = minCost;
-
-    if (apartment.id == '1NlNYt61bi1FBqXJQHBq') {
-      int a = 5;
-      print('!@#!@#:${apartment.offers.length}');
-    }
 
     if (offer.options.length > 0) {
       if (minCost >= 0) {

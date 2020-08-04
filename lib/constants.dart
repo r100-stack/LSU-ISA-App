@@ -14,9 +14,9 @@ final List<BoxShadow> kPrimaryBoxShadow = [
 
 final List<BoxShadow> kSecondaryBoxShadow = [
   BoxShadow(
-      offset: Offset(0, 0),
+      offset: Offset(0, 5),
       color: Color(0xFF3D3D3D).withOpacity(.5),
-      blurRadius: 0)
+      blurRadius: 10)
 ];
 
 const EdgeInsets kCardMargin = EdgeInsets.symmetric(
