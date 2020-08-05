@@ -9,12 +9,18 @@ class ApartmentContactsCard extends StatelessWidget {
 
   final Color textColor;
 
-  ApartmentContactsCard({this.title = '', this.leading, this.url = '', this.textColor});
+  ApartmentContactsCard(
+      {this.title = '', this.leading, this.url = '', this.textColor});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(title, maxLines: 3, overflow: TextOverflow.ellipsis, style: TextStyle(color: textColor),),
+      title: Text(
+        title,
+        maxLines: 3,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(color: textColor),
+      ),
       leading: Icon(
         leading,
         color: textColor ?? Colors.blueGrey,
