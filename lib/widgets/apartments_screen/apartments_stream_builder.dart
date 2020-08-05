@@ -14,12 +14,12 @@ class ApartmentsStreamBuilder extends StatelessWidget {
     List<Apartment> apartments = apartmentsMap.values.toList();
 
     double width = MediaQuery.of(context).size.width;
-    int crossAxisCount = (width / 500).floor();
+    int crossAxisCount = (width / 550).floor();
     crossAxisCount = crossAxisCount < 1 ? 1 : crossAxisCount;
 
     return GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: crossAxisCount, childAspectRatio: 10/4),
+            crossAxisCount: crossAxisCount, childAspectRatio: 12/4),
         itemBuilder: (context, index) {
           return Container(child: ApartmentCard(apartments[index]));
         }, itemCount: apartments.length,);
