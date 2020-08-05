@@ -44,7 +44,8 @@ class _CurrentPageScreenState extends State<CurrentPageScreen> {
           decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
               borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(kDefaultBorderRadius), bottomRight: Radius.circular(kDefaultBorderRadius))),
+                  bottomLeft: Radius.circular(kDefaultBorderRadius),
+                  bottomRight: Radius.circular(kDefaultBorderRadius))),
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: kDefaultMargin / 2),
             child: PageSelectorBar(

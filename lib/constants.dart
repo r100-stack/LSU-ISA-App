@@ -4,7 +4,7 @@ const double kDefaultMargin = 20;
 const double kDefaultBorderRadius = 20;
 
 const Color kAccentColorLight = Color(0xFFFEE891);
-const Color kPrimaryColorLight = Color(0xFFC7BBD7)
+const Color kPrimaryColorLight = Color(0xFFC7BBD7);
 
 final List<BoxShadow> kPrimaryBoxShadow = [
   BoxShadow(
