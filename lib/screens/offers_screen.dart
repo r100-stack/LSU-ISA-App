@@ -6,6 +6,7 @@ import 'package:isa_app/widgets/bed_bath.dart';
 import 'package:isa_app/widgets/custom_image.dart';
 import 'package:isa_app/widgets/custom_progress_indicator.dart';
 import 'package:isa_app/utils/offer_utils.dart';
+import 'package:isa_app/widgets/offers_screen/apartment_contacts_column.dart';
 import 'package:isa_app/widgets/offers_screen/apartments_contacts_card.dart';
 import 'package:isa_app/widgets/offers_screen/image_title.dart';
 import 'package:isa_app/widgets/offers_screen/offer_card.dart';
@@ -68,25 +69,10 @@ class OffersScreen extends StatelessWidget {
                       Radius.circular(kDefaultBorderRadius),
                     ),
                   ),
-                  child: Column(
-                    children: [
-                      ApartmentContactsCard(
-                          leading: Icons.phone ?? '-',
-                          title: apartment.phoneNumber,
-                          url: Uri(scheme: 'tel', path: apartment.phoneNumber)
-                              .toString()),
-                      ApartmentContactsCard(
-                        leading: Icons.place,
-                        title: apartment.address ?? '-',
-                        url:
-                            'https://www.google.com/maps/search/${apartment.address}',
-                      ),
-                      ApartmentContactsCard(
-                        leading: Icons.public,
-                        title: apartment.website ?? '-',
-                        url: apartment.website,
-                      ),
-                    ],
+                  child: ApartmentContactsColumn(
+                    phoneNumber: apartment.phoneNumber,
+                    address: apartment.address,
+                    website: apartment.website,
                   ),
                 ),
                 ListView.builder(

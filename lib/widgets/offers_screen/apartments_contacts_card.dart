@@ -7,20 +7,22 @@ class ApartmentContactsCard extends StatelessWidget {
   final IconData leading;
   final String url;
 
-  ApartmentContactsCard({this.title = '', this.leading, this.url = ''});
+  final Color textColor;
+
+  ApartmentContactsCard({this.title = '', this.leading, this.url = '', this.textColor});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(title),
+      title: Text(title, maxLines: 3, overflow: TextOverflow.ellipsis, style: TextStyle(color: textColor),),
       leading: Icon(
         leading,
-        color: Colors.blueGrey,
+        color: textColor ?? Colors.blueGrey,
       ),
       trailing: GestureDetector(
           child: Icon(
             Icons.open_in_new,
-            color: Colors.blueGrey,
+            color: textColor ?? Colors.blueGrey,
           ),
           onTap: () async {
             if (await canLaunch(url)) {

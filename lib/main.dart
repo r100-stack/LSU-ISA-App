@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:isa_app/blocs/apartment_bloc.dart';
 import 'package:isa_app/screens/apartments_screen.dart';
+import 'package:isa_app/screens/hotels_screen.dart';
 import 'package:isa_app/screens/offers_screen.dart';
 import 'package:isa_app/screens/users_screen.dart';
 import 'package:provider/provider.dart';
@@ -39,12 +40,14 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: (RouteSettings settings) {
           var routes = <String, WidgetBuilder>{
             ApartmentsScreen.routeName: (context) => ApartmentsScreen(),
-            OffersScreen.routeName: (context) => OffersScreen(settings.arguments)
+            OffersScreen.routeName: (context) => OffersScreen(settings.arguments),
+            HotelsScreen.routeName: (context) => HotelsScreen()
           };
 
           WidgetBuilder builder = routes[settings.name];
           return MaterialPageRoute(builder: (ctx) => builder(ctx));
         },
+        initialRoute: HotelsScreen.routeName,
       ),
     );
   }
