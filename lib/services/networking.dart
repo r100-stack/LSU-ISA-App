@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:isa_app/blocs/airbnb_bloc.dart';
 import 'package:isa_app/blocs/apartment_bloc.dart';
 import 'package:isa_app/blocs/hotels_bloc.dart';
+import 'package:isa_app/models/airbnb.dart';
 import 'package:isa_app/models/apartment.dart';
 import 'package:isa_app/models/hotel.dart';
 import 'package:isa_app/models/offer.dart';
@@ -62,7 +64,7 @@ class Networking {
     Provider.of<ApartmentBloc>(context, listen: false).swapOffers(offers);
   }
 
-  static void downloadHotelsOnce(BuildContext context) async {
+  static void downloadHotelsOnce(BuildContext context) {
     bool isDownloadedOnce = Provider.of<HotelBloc>(context).isDownloadedOnce;
 
     if (!isDownloadedOnce) {
@@ -72,7 +74,6 @@ class Networking {
   }
 
   static void _downloadHotels(BuildContext context) async {
-    print('here');
     QuerySnapshot snapshot =
         await _firestore.collection('hotels').getDocuments();
     List<Hotel> hotels = [];
@@ -86,7 +87,29 @@ class Networking {
           website: hotelFirebase['website']));
     }
 
-    print(hotels.length);
     Provider.of<HotelBloc>(context, listen: false).swapHotels(hotels);
+  }
+
+  static void downloadAirbnbsOnce(BuildContext context) {
+    bool isDownloadedOnce = Provider.of<AirbnbBloc>(context).isDownloadedOnce;
+
+    if (!isDownloadedOnce) {
+      Provider.of<AirbnbBloc>(context, listen: false).downloadedOnce();
+      _downloadAirbnbs(context);
+    }
+  }
+
+  static void _downloadAirbnbs(BuildContext context) async {
+    QuerySnapshot snapshot =
+        await _firestore.collection('airbnbs').getDocuments();
+    List<Airbnb> airbnbs = [];
+    for (var airbnbFirebase in snapshot.documents) {
+      airbnbs.add(Airbnb(
+          cost: double.parse(airbnbFirebase['cost'].toString()),
+          name: airbnbFirebase['name'],
+          website: airbnbFirebase['website']));
+    }
+
+    Provider.of<AirbnbBloc>(context, listen: false).swapAirbnbs(airbnbs);
   }
 }

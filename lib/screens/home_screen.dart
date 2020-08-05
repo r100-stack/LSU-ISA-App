@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:isa_app/constants.dart';
+import 'package:isa_app/screens/airbnbs_screen.dart';
 import 'package:isa_app/screens/apartments_screen.dart';
 import 'package:isa_app/screens/hotels_screen.dart';
 import 'package:isa_app/services/networking.dart';
@@ -33,11 +34,17 @@ class CurrentPageScreen extends StatefulWidget {
 }
 
 class _CurrentPageScreenState extends State<CurrentPageScreen> {
-  final List<String> pages = ['Housing', 'Users'];
+  final List<String> pages = ['Apartments', 'Hotels near LSU', 'Airbnbs'];
   int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    Map<int, Widget> pageWidgets = {
+      0: ApartmentsScreen(),
+      1: HotelsScreen(),
+      2: AirbnbsScreen()
+    };
+
     return Column(
       children: [
         Container(
@@ -60,7 +67,7 @@ class _CurrentPageScreenState extends State<CurrentPageScreen> {
           ),
         ),
         Expanded(
-          child: selectedIndex == 0 ? ApartmentsScreen() : HotelsScreen(),
+          child: pageWidgets[selectedIndex],
         )
       ],
     );
