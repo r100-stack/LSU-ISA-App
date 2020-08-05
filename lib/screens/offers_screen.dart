@@ -35,30 +35,21 @@ class OffersScreen extends StatelessWidget {
                   title: apartment.name,
                   heroId: apartment.id,
                 ),
-                Hero(
-                  tag: 'bed_bath_row${apartment.id}',
-                  child: BedBathRow(
-                    numBeds: [apartment.minBeds, apartment.maxBeds],
-                    numBaths: [apartment.minBaths, apartment.maxBaths],
-                  ),
+                BedBathRow(
+                  numBeds: [apartment.minBeds, apartment.maxBeds],
+                  numBaths: [apartment.minBaths, apartment.maxBaths],
                 ),
-                Hero(
-                  tag: 'cost_range${apartment.id}',
-                  child: Text(
-                    '\$${apartment.minCost} - \$${apartment.maxCost}',
-                    style: Theme.of(context).textTheme.subtitle1,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                Text(
+                  '\$${apartment.minCost} - \$${apartment.maxCost}',
+                  style: Theme.of(context).textTheme.subtitle1,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                Hero(
-                  tag: 'sqft_range${apartment.id}',
-                  child: Text(
-                    '${apartment.minSqft} sqft. - ${apartment.maxSqft} sqft.',
-                    style: Theme.of(context).textTheme.subtitle1,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                Text(
+                  '${apartment.minSqft} sqft. - ${apartment.maxSqft} sqft.',
+                  style: Theme.of(context).textTheme.subtitle1,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 Container(
                   margin: kCardMargin,
