@@ -19,16 +19,11 @@ class HotelsScreen extends StatelessWidget {
 
     List<Hotel> hotels = Provider.of<HotelBloc>(context).hotels;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Hotels'),
-      ),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          return HotelCard(hotels[index]);
-        },
-        itemCount: hotels.length,
-      ),
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return HotelCard(hotels[index]);
+      },
+      itemCount: hotels.length,
     );
   }
 }

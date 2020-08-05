@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:isa_app/blocs/apartment_bloc.dart';
 import 'package:isa_app/blocs/hotels_bloc.dart';
 import 'package:isa_app/screens/apartments_screen.dart';
+import 'package:isa_app/screens/home_screen.dart';
 import 'package:isa_app/screens/hotels_screen.dart';
 import 'package:isa_app/screens/offers_screen.dart';
 import 'package:isa_app/screens/users_screen.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'LSU ISA',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
             // This is the theme of your application.
             //
@@ -46,6 +48,7 @@ class MyApp extends StatelessWidget {
             accentColor: Color(0xFFFDD023)),
         onGenerateRoute: (RouteSettings settings) {
           var routes = <String, WidgetBuilder>{
+            HomeScreen.routeName: (context) => HomeScreen(),
             ApartmentsScreen.routeName: (context) => ApartmentsScreen(),
             OffersScreen.routeName: (context) =>
                 OffersScreen(settings.arguments),
@@ -55,7 +58,6 @@ class MyApp extends StatelessWidget {
           WidgetBuilder builder = routes[settings.name];
           return MaterialPageRoute(builder: (ctx) => builder(ctx));
         },
-        initialRoute: HotelsScreen.routeName,
       ),
     );
   }
