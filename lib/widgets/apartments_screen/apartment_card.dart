@@ -56,6 +56,7 @@ class ApartmentCard extends StatelessWidget {
               Expanded(
                 flex: 55,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     BedBathRow(
                       numBeds: [apartment.minBeds, apartment.maxBeds],

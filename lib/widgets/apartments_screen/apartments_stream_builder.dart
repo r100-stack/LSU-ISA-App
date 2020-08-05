@@ -13,12 +13,23 @@ class ApartmentsStreamBuilder extends StatelessWidget {
         Provider.of<ApartmentBloc>(context).apartmentsMap;
     List<Apartment> apartments = apartmentsMap.values.toList();
 
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return ApartmentCard(apartments[index]);
-      },
-      itemCount: apartments.length,
-    );
+    double width = MediaQuery.of(context).size.width;
+    int crossAxisCount = (width / 500).floor();
+    crossAxisCount = crossAxisCount < 1 ? 1 : crossAxisCount;
+
+    return GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount, childAspectRatio: 10/4),
+        itemBuilder: (context, index) {
+          return Container(child: ApartmentCard(apartments[index]));
+        }, itemCount: apartments.length,);
+
+    // return ListView.builder(
+    //   itemBuilder: (context, index) {
+    //     return ApartmentCard(apartments[index]);
+    //   },
+    //   itemCount: apartments.length,
+    // );
   }
 
 //  @override
