@@ -14,7 +14,7 @@ class PageSelectorBar extends StatelessWidget {
     return Container(
       height: 70,
       child: ListView.builder(
-        padding: EdgeInsets.symmetric(horizontal: kDefaultMargin/2),
+        padding: EdgeInsets.symmetric(horizontal: kDefaultMargin / 2),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return GestureDetector(
@@ -33,10 +33,10 @@ class PageSelectorBar extends StatelessWidget {
                 child: Center(
                     child: Text(
                   pages[index],
-                  style: Theme.of(context).textTheme.headline6.copyWith(
-                      color: selectedIndex == index
-                          ? Theme.of(context).primaryColor
-                          : Theme.of(context).primaryColor.withOpacity(1)),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      .copyWith(color: Theme.of(context).primaryColor),
                 ))),
           );
         },
