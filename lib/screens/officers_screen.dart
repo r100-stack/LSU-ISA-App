@@ -22,16 +22,31 @@ class OfficersScreen extends StatelessWidget {
     //   itemCount: officers.length,
     // );
 
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return Container(
-          // constraints: BoxConstraints(maxWidth: 300),
-          // width: 200,
-          height: 300,
-          child: OfficerCard(officers[index]),
-        );
-      },
-      itemCount: officers.length,
+    List<Widget> officerCards = [];
+    for (Officer officer in officers) {
+      officerCards.add(Container(
+        width: 350,
+        height: 400,
+        child: OfficerCard(officer),
+      ));
+    }
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.start,
+      children: officerCards,
+      direction: Axis.vertical,
     );
+
+    //   return ListView.builder(
+    //     itemBuilder: (context, index) {
+    //       return Container(
+    //         // constraints: BoxConstraints(maxWidth: 300),
+    //         // width: 200,
+    //         height: 300,
+    //         child: OfficerCard(officers[index]),
+    //       );
+    //     },
+    //     itemCount: officers.length,
+    //   );
+    // }
   }
 }

@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:isa_app/constants.dart';
 
 class CustomBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
     return SafeArea(
       child: Container(
           decoration: BoxDecoration(
-            // boxShadow: [
-            //   BoxShadow(
-            //       offset: Offset(0, 0),
-            //       color: Color(0xFF3D3D3D).withOpacity(.2),
-            //       blurRadius: 10)
-            // ],
+            boxShadow: width > kDefaultMaxWidth ? kBackButtonShadow : [],
           ),
           child: BackButton(color: Theme.of(context).accentColor)),
     );

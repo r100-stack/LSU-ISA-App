@@ -20,100 +20,113 @@ class OfficerDetailsScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+      backgroundColor: kAccentColorLight,
       body: Stack(
         children: [
           SingleChildScrollView(
-            child: Column(
-              children: [
-                TopImageStack(
-                  size: size,
-                  imageUrl: officer.bannerImageUrl,
-                  widget: Container(
-                    decoration: BoxDecoration(boxShadow: kPrimaryBoxShadow),
-                    child: Hero(
-                      tag: 'officer_profile_picture${officer.id}',
-                      child: CircleAvatar(
-                        radius: 70,
-                        backgroundImage: NetworkImage(officer.profileImageUrl),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(
-                    left: kDefaultMargin,
-                    right: kDefaultMargin,
-                    bottom: kDefaultMargin,
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        officer.name,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline4
-                            .copyWith(color: Colors.black87),
-                      ),
-                      SizedBox(height: kDefaultMargin / 8),
-                      Text(
-                        officer.position,
-                        style: Theme.of(context).textTheme.headline6.copyWith(
-                            color: Colors.black87, fontWeight: FontWeight.w400),
-                      ),
-                      SizedBox(height: kDefaultMargin / 2),
-                      Text(
-                        '"${officer.tagline}"',
-                        style: Theme.of(context)
-                            .textTheme
-                            .subtitle1
-                            .copyWith(color: Colors.grey),
-                      ),
-                      SizedBox(
-                        height: kDefaultMargin,
-                      ),
-                      Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: [
-                          SocialIcon(
-                            icon: FontAwesomeIcons.instagram,
-                            url: officer.instagramLink,
+            child: Align(
+              alignment: Alignment.center,
+              child: Container(
+                color: Colors.white,
+                constraints: BoxConstraints(maxWidth: kDefaultMaxWidth),
+                child: Column(
+                  children: [
+                    TopImageStack(
+                      size: size,
+                      imageUrl: officer.bannerImageUrl,
+                      widget: Container(
+                        decoration: BoxDecoration(boxShadow: kPrimaryBoxShadow),
+                        child: Hero(
+                          tag: 'officer_profile_picture${officer.id}',
+                          child: CircleAvatar(
+                            radius: 70,
+                            backgroundImage:
+                                NetworkImage(officer.profileImageUrl),
                           ),
-                          SocialIcon(
-                            icon: FontAwesomeIcons.facebook,
-                            url: officer.facebookLink,
-                          ),
-                          SocialIcon(
-                            icon: FontAwesomeIcons.twitter,
-                            url: officer.twitterLink,
-                          ),
-                          SocialIcon(
-                            icon: FontAwesomeIcons.linkedin,
-                            url: officer.linkedinLink,
-                          ),
-                          SocialIcon(
-                            icon: Icons.public,
-                            url: officer.websiteLink,
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: kDefaultMargin / 2),
-                        child: Container(
-                          width: 20,
-                          height: 5,
-                          color: Theme.of(context).accentColor,
                         ),
                       ),
-                      Text(officer.description ?? '',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText2
-                              .copyWith(letterSpacing: 1, height: 2)),
-                    ],
-                  ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(
+                        left: kDefaultMargin,
+                        right: kDefaultMargin,
+                        bottom: kDefaultMargin,
+                      ),
+                      child: Column(
+                        children: [
+                          Text(
+                            officer.name,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline4
+                                .copyWith(color: Colors.black87),
+                          ),
+                          SizedBox(height: kDefaultMargin / 8),
+                          Text(
+                            officer.position,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline6
+                                .copyWith(
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.w400),
+                          ),
+                          SizedBox(height: kDefaultMargin / 2),
+                          Text(
+                            '"${officer.tagline}"',
+                            style: Theme.of(context)
+                                .textTheme
+                                .subtitle1
+                                .copyWith(color: Colors.grey),
+                          ),
+                          SizedBox(
+                            height: kDefaultMargin,
+                          ),
+                          Wrap(
+                            alignment: WrapAlignment.center,
+                            children: [
+                              SocialIcon(
+                                icon: FontAwesomeIcons.instagram,
+                                url: officer.instagramLink,
+                              ),
+                              SocialIcon(
+                                icon: FontAwesomeIcons.facebook,
+                                url: officer.facebookLink,
+                              ),
+                              SocialIcon(
+                                icon: FontAwesomeIcons.twitter,
+                                url: officer.twitterLink,
+                              ),
+                              SocialIcon(
+                                icon: FontAwesomeIcons.linkedin,
+                                url: officer.linkedinLink,
+                              ),
+                              SocialIcon(
+                                icon: Icons.public,
+                                url: officer.websiteLink,
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: kDefaultMargin / 2),
+                            child: Container(
+                              width: 20,
+                              height: 5,
+                              color: Theme.of(context).accentColor,
+                            ),
+                          ),
+                          Text(officer.description ?? '',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText2
+                                  .copyWith(letterSpacing: 1, height: 2)),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
           CustomBackButton()

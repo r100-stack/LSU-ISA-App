@@ -35,7 +35,7 @@ class OffersScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Container(
                   color: Colors.white,
-                  constraints: BoxConstraints(maxWidth: 600),
+                  constraints: BoxConstraints(maxWidth: kDefaultMaxWidth),
                   child: Column(
                     children: [
                       ImageAndTitle(
