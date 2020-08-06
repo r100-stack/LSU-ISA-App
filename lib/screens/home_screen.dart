@@ -3,6 +3,7 @@ import 'package:isa_app/constants.dart';
 import 'package:isa_app/screens/airbnbs_screen.dart';
 import 'package:isa_app/screens/apartments_screen.dart';
 import 'package:isa_app/screens/hotels_screen.dart';
+import 'package:isa_app/screens/officers_screen.dart';
 import 'package:isa_app/services/networking.dart';
 import 'package:isa_app/widgets/apartments_screen/apartments_stream_builder.dart';
 import 'package:isa_app/widgets/home_screen/page_selector_bar.dart';
@@ -34,7 +35,7 @@ class CurrentPageScreen extends StatefulWidget {
 }
 
 class _CurrentPageScreenState extends State<CurrentPageScreen> {
-  final List<String> pages = ['Apartments', 'Hotels near LSU', 'Airbnbs'];
+  final List<String> pages = ['Apartments', 'Hotels near LSU', 'Airbnbs', 'Committee Members'];
   int selectedIndex = 0;
 
   @override
@@ -42,7 +43,8 @@ class _CurrentPageScreenState extends State<CurrentPageScreen> {
     Map<int, Widget> pageWidgets = {
       0: ApartmentsScreen(),
       1: HotelsScreen(),
-      2: AirbnbsScreen()
+      2: AirbnbsScreen(),
+      3: OfficersScreen()
     };
 
     return Column(

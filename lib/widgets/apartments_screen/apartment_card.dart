@@ -7,6 +7,7 @@ import 'package:isa_app/models/offer.dart';
 import 'package:isa_app/screens/offers_screen.dart';
 import 'package:isa_app/utils/image_utils.dart';
 import 'package:isa_app/widgets/bed_bath.dart';
+import 'package:isa_app/widgets/custom_divider.dart';
 import 'package:isa_app/widgets/custom_image.dart';
 import 'package:isa_app/widgets/offers_screen/text_bubble.dart';
 
@@ -72,15 +73,7 @@ class ApartmentCard extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: kDefaultMargin / 2),
-                      child: Container(
-                        width: 20,
-                        height: 5,
-                        color: Theme.of(context).accentColor,
-                      ),
-                    ),
+                    CustomDivider(),
                     Text(
                       '\$${apartment.minCost} - \$${apartment.maxCost}',
                       style: Theme.of(context).textTheme.subtitle1,

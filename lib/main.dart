@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:isa_app/blocs/airbnb_bloc.dart';
 import 'package:isa_app/blocs/apartment_bloc.dart';
 import 'package:isa_app/blocs/hotels_bloc.dart';
+import 'package:isa_app/blocs/officer_bloc.dart';
 import 'package:isa_app/screens/apartments_screen.dart';
 import 'package:isa_app/screens/home_screen.dart';
 import 'package:isa_app/screens/hotels_screen.dart';
 import 'package:isa_app/screens/offers_screen.dart';
+import 'package:isa_app/screens/officer_details_screen.dart';
+import 'package:isa_app/screens/officers_screen.dart';
 import 'package:isa_app/screens/users_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -28,6 +31,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: AirbnbBloc(),
+        ),
+        ChangeNotifierProvider.value(
+          value: OfficerBloc(),
         )
       ],
       child: MaterialApp(
@@ -56,6 +62,8 @@ class MyApp extends StatelessWidget {
             ApartmentsScreen.routeName: (context) => ApartmentsScreen(),
             OffersScreen.routeName: (context) =>
                 OffersScreen(settings.arguments),
+            OfficersScreen.routeName: (context) => OfficersScreen(),
+            OfficerDetailsScreen.routeName: (context) => OfficerDetailsScreen(settings.arguments),
             HotelsScreen.routeName: (context) => HotelsScreen()
           };
 

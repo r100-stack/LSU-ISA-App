@@ -3,10 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:isa_app/blocs/airbnb_bloc.dart';
 import 'package:isa_app/blocs/apartment_bloc.dart';
 import 'package:isa_app/blocs/hotels_bloc.dart';
+import 'package:isa_app/blocs/officer_bloc.dart';
 import 'package:isa_app/models/airbnb.dart';
 import 'package:isa_app/models/apartment.dart';
 import 'package:isa_app/models/hotel.dart';
 import 'package:isa_app/models/offer.dart';
+import 'package:isa_app/models/officer.dart';
 import 'package:isa_app/utils/offer_utils.dart';
 import 'package:provider/provider.dart';
 
@@ -111,5 +113,38 @@ class Networking {
     }
 
     Provider.of<AirbnbBloc>(context, listen: false).swapAirbnbs(airbnbs);
+  }
+
+  static void downloadOfficersOnce(BuildContext context) {
+    bool isDownloadedOnce = Provider.of<OfficerBloc>(context).isDownloadedOnce;
+
+    if (!isDownloadedOnce) {
+      Provider.of<OfficerBloc>(context, listen: false).downloadedOnce();
+      _downloadOfficers(context);
+    }
+  }
+
+  static void _downloadOfficers(BuildContext context) async {
+    QuerySnapshot snapshot =
+        await _firestore.collection('officers').getDocuments();
+    List<Officer> officers = [];
+    for (var officerFirebase in snapshot.documents) {
+      officers.add(Officer(
+          id: officerFirebase.documentID,
+          level: officerFirebase['level'],
+          name: officerFirebase['name'],
+          position: officerFirebase['position'],
+          tagline: officerFirebase['tagline'],
+          description: officerFirebase['description'],
+          profileImageUrl: officerFirebase['images']['profile'],
+          bannerImageUrl: officerFirebase['images']['banner'],
+          facebookLink: officerFirebase['links']['facebook'],
+          instagramLink: officerFirebase['links']['instagram'],
+          twitterLink: officerFirebase['links']['twitter'],
+          linkedinLink: officerFirebase['links']['linkedin'],
+          websiteLink: officerFirebase['links']['website']));
+    }
+
+    Provider.of<OfficerBloc>(context, listen: false).swapOfficers(officers);
   }
 }
