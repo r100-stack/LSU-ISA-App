@@ -11,6 +11,8 @@ import 'package:isa_app/models/offer.dart';
 import 'package:isa_app/models/officer.dart';
 import 'package:isa_app/utils/offer_utils.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Networking {
   static Firestore _firestore = Firestore.instance;
@@ -146,5 +148,14 @@ class Networking {
     }
 
     Provider.of<OfficerBloc>(context, listen: false).swapOfficers(officers);
+  }
+
+  static void launchUrl(BuildContext context, String url) async {
+    if (await canLaunch(url)) {
+      launch(url);
+    } else {
+      print('Error launching the url: $url');
+      Alert(context: context, title: 'Sorry, couldn\'t open that.').show();
+    }
   }
 }

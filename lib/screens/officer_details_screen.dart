@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:isa_app/constants.dart';
 import 'package:isa_app/models/officer.dart';
+import 'package:isa_app/utils/image_utils.dart';
 import 'package:isa_app/widgets/custom_back_button.dart';
 import 'package:isa_app/widgets/custom_card.dart';
 import 'package:isa_app/widgets/offers_screen/top_image_stack.dart';
@@ -33,19 +34,17 @@ class OfficerDetailsScreen extends StatelessWidget {
                   children: [
                     TopImageStack(
                       size: size,
-                      imageUrl: officer.bannerImageUrl,
+                      image: ImageUtils.getUserBackgroundImage(officer.bannerImageUrl),
                       widget: Container(
                         decoration: BoxDecoration(boxShadow: kPrimaryBoxShadow),
                         child: Hero(
                           tag: 'officer_profile_picture${officer.id}',
                           child: CircleAvatar(
                             radius: 70,
-                            backgroundImage:
-                                NetworkImage(officer.profileImageUrl),
+                            backgroundImage: ImageUtils.getUserProfilePicture(officer.profileImageUrl)),
                           ),
                         ),
                       ),
-                    ),
                     Container(
                       padding: EdgeInsets.only(
                         left: kDefaultMargin,
@@ -73,7 +72,7 @@ class OfficerDetailsScreen extends StatelessWidget {
                           ),
                           SizedBox(height: kDefaultMargin / 2),
                           Text(
-                            '"${officer.tagline}"',
+                            officer.tagline != null ? '"${officer.tagline}"' : '',
                             style: Theme.of(context)
                                 .textTheme
                                 .subtitle1

@@ -30,10 +30,10 @@ class OfficersScreen extends StatelessWidget {
         child: OfficerCard(officer),
       ));
     }
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.start,
-      children: officerCards,
-      direction: Axis.vertical,
+    return SingleChildScrollView(
+      child: Wrap(
+        children: officerCards,
+      ),
     );
 
     //   return ListView.builder(

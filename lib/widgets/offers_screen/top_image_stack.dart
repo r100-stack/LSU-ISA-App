@@ -4,13 +4,17 @@ import 'package:isa_app/utils/image_utils.dart';
 
 class TopImageStack extends StatelessWidget {
   final Size size;
-  final String imageUrl;
+  final ImageProvider image;
   final String title;
   final String heroId;
   final Widget widget;
 
   const TopImageStack(
-      {@required this.size, @required this.imageUrl, @required this.title, this.heroId = '', this.widget});
+      {@required this.size,
+      this.image,
+      @required this.title,
+      this.heroId = '',
+      this.widget});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,9 @@ class TopImageStack extends StatelessWidget {
             child: Container(
               height: size.height * .4 - 35,
               decoration: BoxDecoration(
-                  image: DecorationImage(fit: BoxFit.cover, image: ImageUtils.getApartmentImage(imageUrl))),
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: image)),
             ),
           ),
           Align(

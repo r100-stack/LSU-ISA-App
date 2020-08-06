@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:isa_app/constants.dart';
 import 'package:isa_app/models/officer.dart';
 import 'package:isa_app/screens/officer_details_screen.dart';
+import 'package:isa_app/utils/image_utils.dart';
 import 'package:isa_app/widgets/custom_card.dart';
 import 'package:isa_app/widgets/custom_divider.dart';
 
@@ -28,7 +29,8 @@ class OfficerCard extends StatelessWidget {
                       borderRadius: BorderRadius.all(
                           Radius.circular(kDefaultBorderRadius)),
                       image: DecorationImage(
-                          image: NetworkImage(officer.bannerImageUrl),
+                          image: ImageUtils.getUserBackgroundImage(
+                              officer.bannerImageUrl),
                           fit: BoxFit.cover),
                     ),
                   ),
@@ -54,10 +56,9 @@ class OfficerCard extends StatelessWidget {
                     child: Hero(
                       tag: 'officer_profile_picture${officer.id}',
                       child: CircleAvatar(
-                        radius: 50,
-                        backgroundImage:
-                            NetworkImage(officer.profileImageUrl ?? ''),
-                      ),
+                          radius: 50,
+                          backgroundImage: ImageUtils.getUserProfilePicture(
+                              officer.profileImageUrl)),
                     ),
                   ),
                 ],
@@ -68,7 +69,7 @@ class OfficerCard extends StatelessWidget {
             ),
             Text(
               officer.name,
-              maxLines: 2,
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.headline5,
             ),
@@ -80,7 +81,7 @@ class OfficerCard extends StatelessWidget {
             ),
             CustomDivider(),
             Text(
-              '"${officer.tagline}"',
+              officer.tagline != null ? '"${officer.tagline}"' : '',
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context)
