@@ -14,16 +14,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'ISA LSU',
-          style: Theme.of(context).textTheme.headline4.copyWith(
-              color: Theme.of(context).accentColor,
-              fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        elevation: 0,
-      ),
       body: CurrentPageScreen(),
     );
   }
@@ -35,7 +25,12 @@ class CurrentPageScreen extends StatefulWidget {
 }
 
 class _CurrentPageScreenState extends State<CurrentPageScreen> {
-  final List<String> pages = ['Apartments', 'Hotels near LSU', 'Airbnbs', 'Committee Members'];
+  final List<String> pages = [
+    'Apartments',
+    'Hotels near LSU',
+    'Airbnbs',
+    'Committee Members'
+  ];
   int selectedIndex = 0;
 
   @override
@@ -48,7 +43,26 @@ class _CurrentPageScreenState extends State<CurrentPageScreen> {
     };
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        Container(
+          width: MediaQuery.of(context).size.width,
+          color: Theme.of(context).primaryColor,
+          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: kDefaultMargin / 4, vertical: kDefaultMargin / 2),
+            child: Center(
+              child: Text(
+                'International Student Association at LSU',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headline4.copyWith(
+                    color: Theme.of(context).accentColor,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ),
         Container(
           decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
