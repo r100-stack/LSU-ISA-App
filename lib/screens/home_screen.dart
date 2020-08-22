@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:isa_app/constants.dart';
 import 'package:isa_app/screens/airbnbs_screen.dart';
 import 'package:isa_app/screens/apartments_screen.dart';
+import 'package:isa_app/screens/events_screen.dart';
 import 'package:isa_app/screens/hotels_screen.dart';
 import 'package:isa_app/screens/officers_screen.dart';
 import 'package:isa_app/services/networking.dart';
@@ -29,7 +30,8 @@ class _CurrentPageScreenState extends State<CurrentPageScreen> {
     'Apartments',
     'Hotels near LSU',
     'Airbnbs',
-    'Committee Members'
+    'Committee Members',
+    'Events'
   ];
   int selectedIndex = 0;
 
@@ -39,10 +41,9 @@ class _CurrentPageScreenState extends State<CurrentPageScreen> {
       0: ApartmentsScreen(),
       1: HotelsScreen(),
       2: AirbnbsScreen(),
-      3: OfficersScreen()
+      3: OfficersScreen(),
+      4: EventsScreen(),
     };
-
-    print('NEW');
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
