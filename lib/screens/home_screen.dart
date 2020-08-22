@@ -42,6 +42,8 @@ class _CurrentPageScreenState extends State<CurrentPageScreen> {
       3: OfficersScreen()
     };
 
+    print('NEW');
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
