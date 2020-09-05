@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:isa_app/blocs/airbnb_bloc.dart';
 import 'package:isa_app/blocs/apartment_bloc.dart';
+import 'package:isa_app/blocs/event_bloc.dart';
 import 'package:isa_app/blocs/hotels_bloc.dart';
 import 'package:isa_app/blocs/officer_bloc.dart';
 import 'package:isa_app/screens/apartments_screen.dart';
@@ -34,6 +35,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: OfficerBloc(),
+        ),
+        ChangeNotifierProvider.value(
+          value: EventBloc(),
         )
       ],
       child: MaterialApp(
@@ -63,7 +67,8 @@ class MyApp extends StatelessWidget {
             OffersScreen.routeName: (context) =>
                 OffersScreen(settings.arguments),
             OfficersScreen.routeName: (context) => OfficersScreen(),
-            OfficerDetailsScreen.routeName: (context) => OfficerDetailsScreen(settings.arguments),
+            OfficerDetailsScreen.routeName: (context) =>
+                OfficerDetailsScreen(settings.arguments),
             HotelsScreen.routeName: (context) => HotelsScreen()
           };
 

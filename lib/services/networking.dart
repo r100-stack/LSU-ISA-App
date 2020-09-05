@@ -2,10 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:isa_app/blocs/airbnb_bloc.dart';
 import 'package:isa_app/blocs/apartment_bloc.dart';
+import 'package:isa_app/blocs/event_bloc.dart';
 import 'package:isa_app/blocs/hotels_bloc.dart';
 import 'package:isa_app/blocs/officer_bloc.dart';
 import 'package:isa_app/models/airbnb.dart';
 import 'package:isa_app/models/apartment.dart';
+import 'package:isa_app/models/event.dart';
 import 'package:isa_app/models/hotel.dart';
 import 'package:isa_app/models/offer.dart';
 import 'package:isa_app/models/officer.dart';
@@ -148,6 +150,38 @@ class Networking {
     }
 
     Provider.of<OfficerBloc>(context, listen: false).swapOfficers(officers);
+  }
+
+  static void downloadEventsOnce(BuildContext context) {
+    bool isDownloadedOnce = Provider.of<EventBloc>(context).isDownloadedOnce;
+
+    if (!isDownloadedOnce) {
+      Provider.of<EventBloc>(context, listen: false).downloadedOnce();
+      _downloadEvents(context);
+    }
+  }
+
+  static void _downloadEvents(BuildContext context) async {
+    QuerySnapshot snapshot =
+        await _firestore.collection('events').getDocuments();
+    List<Event> events = [];
+    for (var eventFirebase in snapshot.documents) {
+      events.add(Event(
+          name: eventFirebase['name'],
+          startDate: DateTime.fromMicrosecondsSinceEpoch(
+              eventFirebase['startDate'].microsecondsSinceEpoch),
+          endDate: DateTime.fromMicrosecondsSinceEpoch(
+              eventFirebase['endDate'].microsecondsSinceEpoch),
+          description: eventFirebase['description'],
+          imageUrls: List.from(eventFirebase['imageUrls']),
+          location: {
+            'type': eventFirebase['location']['type'],
+            'link': eventFirebase['location']['link']
+          },
+          imageAlbumLink: eventFirebase['imageAlbumLink']));
+    }
+
+    Provider.of<EventBloc>(context, listen: false).swapEvents(events);
   }
 
   static void launchUrl(BuildContext context, String url) async {

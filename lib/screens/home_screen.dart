@@ -68,10 +68,12 @@ class _CurrentPageScreenState extends State<CurrentPageScreen> {
         ),
         Container(
           decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(kDefaultBorderRadius),
-                  bottomRight: Radius.circular(kDefaultBorderRadius))),
+            color: Theme.of(context).primaryColor,
+            // borderRadius: BorderRadius.only(
+            //   bottomLeft: Radius.circular(kDefaultBorderRadius),
+            //   bottomRight: Radius.circular(kDefaultBorderRadius),
+            // ),
+          ),
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: kDefaultMargin / 2),
             child: PageSelectorBar(
