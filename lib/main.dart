@@ -1,19 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:isa_app/blocs/airbnb_bloc.dart';
 import 'package:isa_app/blocs/apartment_bloc.dart';
 import 'package:isa_app/blocs/event_bloc.dart';
 import 'package:isa_app/blocs/hotels_bloc.dart';
 import 'package:isa_app/blocs/officer_bloc.dart';
-import 'package:isa_app/screens/apartments_screen.dart';
-import 'package:isa_app/screens/event_details.dart';
-import 'package:isa_app/screens/events_screen.dart';
-import 'package:isa_app/screens/home_screen.dart';
-import 'package:isa_app/screens/hotels_screen.dart';
-import 'package:isa_app/screens/offers_screen.dart';
-import 'package:isa_app/screens/officer_details_screen.dart';
-import 'package:isa_app/screens/officers_screen.dart';
-import 'package:isa_app/screens/users_screen.dart';
+import 'package:isa_app/screens/apartments_screen/apartments_screen.dart';
+import 'package:isa_app/screens/events_screen/events_screen.dart';
+import 'package:isa_app/screens/home_screen/home_screen.dart';
+import 'package:isa_app/screens/hotels_screen/hotels_screen.dart';
+import 'package:isa_app/screens/offers_screen/offers_screen.dart';
+import 'package:isa_app/screens/officer_details_screen/officer_details_screen.dart';
+import 'package:isa_app/screens/officers_screen/officers_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
