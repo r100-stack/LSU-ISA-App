@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 
 import 'package:isa_app/constants.dart';
 import 'package:isa_app/models/event.dart';
+import 'package:isa_app/screens/event_details.dart';
 import 'package:isa_app/widgets/custom_divider.dart';
 import 'package:isa_app/widgets/image_content_card.dart';
 
@@ -21,15 +22,18 @@ class EventCard extends StatelessWidget {
     DateFormat timeFormat = DateFormat('hh:mm a');
 
     return ImageContentCard(
-      image: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(kDefaultBorderRadius),
-          image: DecorationImage(
-              image: NetworkImage(event.imageUrls[0] ?? ''
-                  // 'https://commoncdn.entrata.com/images/thumbNailer.php?src=/media_library/3482/5e74fb235c4956.40374158757.jpg&w=960&h=540',
-                  // 'https://cdngeneral.rentcafe.com/dmslivecafe/3/847319/p0851766_11_1_PhotoGallery.jpg?&quality=85&',
-                  ),
-              fit: BoxFit.cover),
+      image: GestureDetector(
+        onTap: () => Navigator.pushNamed(context, EventDetailsScreen.routeName, arguments: event),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+            image: DecorationImage(
+                image: NetworkImage(event.imageUrls[0] ?? ''
+                    // 'https://commoncdn.entrata.com/images/thumbNailer.php?src=/media_library/3482/5e74fb235c4956.40374158757.jpg&w=960&h=540',
+                    // 'https://cdngeneral.rentcafe.com/dmslivecafe/3/847319/p0851766_11_1_PhotoGallery.jpg?&quality=85&',
+                    ),
+                fit: BoxFit.cover),
+          ),
         ),
       ),
       content: Column(

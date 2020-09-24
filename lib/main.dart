@@ -6,6 +6,8 @@ import 'package:isa_app/blocs/event_bloc.dart';
 import 'package:isa_app/blocs/hotels_bloc.dart';
 import 'package:isa_app/blocs/officer_bloc.dart';
 import 'package:isa_app/screens/apartments_screen.dart';
+import 'package:isa_app/screens/event_details.dart';
+import 'package:isa_app/screens/events_screen.dart';
 import 'package:isa_app/screens/home_screen.dart';
 import 'package:isa_app/screens/hotels_screen.dart';
 import 'package:isa_app/screens/offers_screen.dart';
@@ -69,11 +71,15 @@ class MyApp extends StatelessWidget {
             OfficersScreen.routeName: (context) => OfficersScreen(),
             OfficerDetailsScreen.routeName: (context) =>
                 OfficerDetailsScreen(settings.arguments),
-            HotelsScreen.routeName: (context) => HotelsScreen()
+            HotelsScreen.routeName: (context) => HotelsScreen(),
+            EventsScreen.routeName: (context) => EventsScreen(),
+            // EventDetailsScreen.routeName: (context) =>
+            //     EventDetailsScreen(settings.arguments)
           };
 
           WidgetBuilder builder = routes[settings.name];
-          return MaterialPageRoute(builder: (ctx) => builder(ctx));
+          return MaterialPageRoute(
+              builder: (ctx) => builder(ctx));
         },
       ),
     );
