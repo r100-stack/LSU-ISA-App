@@ -44,52 +44,64 @@ class _CurrentPageScreenState extends State<CurrentPageScreen> {
       4: EventsScreen(),
     };
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Container(
-          width: MediaQuery.of(context).size.width,
-          color: Theme.of(context).primaryColor,
-          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: kDefaultMargin / 4, vertical: kDefaultMargin / 2),
-            child: Center(
-              child: Text(
-                'International Student Association at LSU',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline4.copyWith(
-                    color: Theme.of(context).accentColor,
-                    fontWeight: FontWeight.bold),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        toolbarHeight: kToolbarHeight * 1.5,
+        title: Image(
+          image: AssetImage('assets/images/logo.png'),
+          height: kToolbarHeight * 1.5,
+          width: kToolbarHeight * 2 * 1.5,
+          fit: BoxFit.cover,
+        ),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // Container(
+          //   width: MediaQuery.of(context).size.width,
+          //   color: Theme.of(context).primaryColor,
+          //   padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+          //   child: Padding(
+          //     padding: EdgeInsets.symmetric(
+          //         horizontal: kDefaultMargin / 4, vertical: kDefaultMargin / 2),
+          //     child: Center(
+          //       child: Text(
+          //         'International Student Association at LSU',
+          //         textAlign: TextAlign.center,
+          //         style: Theme.of(context).textTheme.headline4.copyWith(
+          //             color: Theme.of(context).accentColor,
+          //             fontWeight: FontWeight.bold),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              // borderRadius: BorderRadius.only(
+              //   bottomLeft: Radius.circular(kDefaultBorderRadius),
+              //   bottomRight: Radius.circular(kDefaultBorderRadius),
+              // ),
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: kDefaultMargin / 2),
+              child: PageSelectorBar(
+                pages: pages,
+                onPageSelected: (index) {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                },
+                selectedIndex: selectedIndex,
               ),
             ),
           ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor,
-            // borderRadius: BorderRadius.only(
-            //   bottomLeft: Radius.circular(kDefaultBorderRadius),
-            //   bottomRight: Radius.circular(kDefaultBorderRadius),
-            // ),
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: kDefaultMargin / 2),
-            child: PageSelectorBar(
-              pages: pages,
-              onPageSelected: (index) {
-                setState(() {
-                  selectedIndex = index;
-                });
-              },
-              selectedIndex: selectedIndex,
-            ),
-          ),
-        ),
-        Expanded(
-          child: pageWidgets[selectedIndex],
-        )
-      ],
+          Expanded(
+            child: pageWidgets[selectedIndex],
+          )
+        ],
+      ),
     );
   }
 }
