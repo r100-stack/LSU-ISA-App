@@ -46,13 +46,34 @@ class _CurrentPageScreenState extends State<CurrentPageScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Theme.of(context).accentColor),
         centerTitle: true,
-        toolbarHeight: kToolbarHeight * 1.5,
+        toolbarHeight: kToolbarHeight * 1.5 + kDefaultMargin / 2,
         title: Image(
           image: AssetImage('assets/images/logo.png'),
           height: kToolbarHeight * 1.5,
           width: kToolbarHeight * 2 * 1.5,
           fit: BoxFit.cover,
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView.builder(
+          itemCount: pages.length + 1,
+          itemBuilder: (context, index) => index == 0
+              ? DrawerHeader(
+                  child: Text(
+                    'International Student Association Dashboard',
+                  ),
+                  decoration:
+                      BoxDecoration(color: Theme.of(context).accentColor),
+                )
+              : ListTile(
+                  title: Text(pages[index - 1]),
+                  onTap: () {
+                    setState(() => selectedIndex = index - 1);
+                    Navigator.pop(context);
+                  },
+                ),
         ),
       ),
       body: Column(
@@ -76,27 +97,27 @@ class _CurrentPageScreenState extends State<CurrentPageScreen> {
           //     ),
           //   ),
           // ),
-          Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-              // borderRadius: BorderRadius.only(
-              //   bottomLeft: Radius.circular(kDefaultBorderRadius),
-              //   bottomRight: Radius.circular(kDefaultBorderRadius),
-              // ),
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: kDefaultMargin / 2),
-              child: PageSelectorBar(
-                pages: pages,
-                onPageSelected: (index) {
-                  setState(() {
-                    selectedIndex = index;
-                  });
-                },
-                selectedIndex: selectedIndex,
-              ),
-            ),
-          ),
+          // Container(
+          //   decoration: BoxDecoration(
+          //     color: Theme.of(context).primaryColor,
+          //     // borderRadius: BorderRadius.only(
+          //     //   bottomLeft: Radius.circular(kDefaultBorderRadius),
+          //     //   bottomRight: Radius.circular(kDefaultBorderRadius),
+          //     // ),
+          //   ),
+          //   child: Padding(
+          //     padding: EdgeInsets.symmetric(vertical: kDefaultMargin / 2),
+          //     child: PageSelectorBar(
+          //       pages: pages,
+          //       onPageSelected: (index) {
+          //         setState(() {
+          //           selectedIndex = index;
+          //         });
+          //       },
+          //       selectedIndex: selectedIndex,
+          //     ),
+          //   ),
+          // ),
           Expanded(
             child: pageWidgets[selectedIndex],
           )
