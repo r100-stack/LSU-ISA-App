@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:isa_app/blocs/officer_bloc.dart';
+import 'package:isa_app/constants.dart';
 import 'package:isa_app/models/officer.dart';
 import 'package:isa_app/services/networking.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +34,10 @@ class OfficersScreen extends StatelessWidget {
     }
     return SingleChildScrollView(
       child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        alignment: WrapAlignment.center,
+        spacing: kDefaultMargin,
+        runSpacing: kDefaultMargin,
         children: officerCards,
       ),
     );
