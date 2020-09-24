@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:isa_app/constants.dart';
 import 'package:isa_app/models/officer.dart';
 import 'package:isa_app/screens/offers_screen/widgets/top_image_stack.dart';
+import 'package:isa_app/screens/officers_screen/widgets/profile_image.dart';
 import 'package:isa_app/utils/image_utils.dart';
 import 'package:isa_app/widgets/custom_back_button.dart';
 import 'package:isa_app/widgets/custom_card.dart';
@@ -34,17 +35,23 @@ class OfficerDetailsScreen extends StatelessWidget {
                   children: [
                     TopImageStack(
                       size: size,
-                      image: ImageUtils.getUserBackgroundImage(officer.bannerImageUrl),
+                      image: ImageUtils.getUserBackgroundImage(
+                          officer.bannerImageUrl),
                       widget: Container(
                         decoration: BoxDecoration(boxShadow: kPrimaryBoxShadow),
                         child: Hero(
                           tag: 'officer_profile_picture${officer.id}',
-                          child: CircleAvatar(
-                            radius: 70,
-                            backgroundImage: ImageUtils.getUserProfilePicture(officer.profileImageUrl)),
+                          child: ProfileImage(
+                            profileImageUrl: officer.profileImageUrl,
                           ),
+                          // child: CircleAvatar(
+                          //   radius: 70,
+                          //   backgroundImage: ImageUtils.getUserProfilePicture(
+                          //       officer.profileImageUrl),
+                          // ),
                         ),
                       ),
+                    ),
                     Container(
                       padding: EdgeInsets.only(
                         left: kDefaultMargin,
@@ -72,7 +79,9 @@ class OfficerDetailsScreen extends StatelessWidget {
                           ),
                           SizedBox(height: kDefaultMargin / 2),
                           Text(
-                            officer.tagline != null ? '"${officer.tagline}"' : '',
+                            officer.tagline != null
+                                ? '"${officer.tagline}"'
+                                : '',
                             style: Theme.of(context)
                                 .textTheme
                                 .subtitle1

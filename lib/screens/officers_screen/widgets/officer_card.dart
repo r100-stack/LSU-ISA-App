@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:isa_app/constants.dart';
 import 'package:isa_app/models/officer.dart';
 import 'package:isa_app/screens/officer_details_screen/officer_details_screen.dart';
+import 'package:isa_app/screens/officers_screen/widgets/profile_image.dart';
 import 'package:isa_app/utils/image_utils.dart';
 import 'package:isa_app/widgets/custom_card.dart';
 import 'package:isa_app/widgets/custom_divider.dart';
@@ -59,17 +60,15 @@ class OfficerCard extends StatelessWidget {
                       alignment: Alignment.center,
                       child: Hero(
                         tag: 'officer_profile_picture${officer.id}',
-                        child: CircleAvatar(
-                            radius: 50,
-                            backgroundImage: ImageUtils.getUserProfilePicture(
-                                officer.profileImageUrl)),
+                        child: ProfileImage(profileImageUrl: officer.profileImageUrl,),
                       ),
                     ),
                   ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: kDefaultMargin / 2, horizontal: kDefaultMargin),
+                padding: const EdgeInsets.symmetric(
+                    vertical: kDefaultMargin / 2, horizontal: kDefaultMargin),
                 child: Column(
                   children: [
                     Text(
