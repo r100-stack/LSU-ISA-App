@@ -10,7 +10,7 @@ class ActionButton extends StatelessWidget {
   final Function onTap;
 
   const ActionButton({
-    this.text,
+    @required this.text,
     this.icon,
     this.onTap,
   });
@@ -24,7 +24,7 @@ class ActionButton extends StatelessWidget {
         child: Row(
           children: [
             Icon(
-              Icons.image,
+              icon,
               color: Theme.of(context).accentColor,
             ),
             const SizedBox(

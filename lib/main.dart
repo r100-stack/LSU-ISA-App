@@ -14,6 +14,7 @@ import 'package:isa_app/screens/hotels_screen/hotels_screen.dart';
 import 'package:isa_app/screens/offers_screen/offers_screen.dart';
 import 'package:isa_app/screens/officer_details_screen/officer_details_screen.dart';
 import 'package:isa_app/screens/officers_screen/officers_screen.dart';
+import 'package:isa_app/screens/user_modify_details_screen/user_modify_details_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'blocs/auth_bloc.dart';
@@ -87,7 +88,9 @@ class MyApp extends StatelessWidget {
             ChatHome.routeName: (context) => ChatHome(),
             ChatScreen.routeName: (context) => ChatScreen(
                   chatChannel: settings.arguments,
-                )
+                ),
+            UserModifyDetailsScreen.routeName: (context) =>
+                UserModifyDetailsScreen()
           };
 
           WidgetBuilder builder = routes[settings.name];

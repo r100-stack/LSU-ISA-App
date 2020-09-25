@@ -6,6 +6,7 @@ import 'package:isa_app/screens/apartments_screen/apartments_screen.dart';
 import 'package:isa_app/screens/events_screen/events_screen.dart';
 import 'package:isa_app/screens/hotels_screen/hotels_screen.dart';
 import 'package:isa_app/screens/officers_screen/officers_screen.dart';
+import 'package:isa_app/screens/user_modify_details_screen/user_modify_details_screen.dart';
 import 'package:isa_app/widgets/custom_appbar.dart';
 import 'package:provider/provider.dart';
 
@@ -16,8 +17,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<AuthBloc>(context).signInAnomously(context);
-
     return Scaffold(
       body: CurrentPageScreen(),
     );
@@ -63,12 +62,17 @@ class _CurrentPageScreenState extends State<CurrentPageScreen> {
               //         BoxDecoration(color: Theme.of(context).accentColor),
               //   )
               ? UserAccountsDrawerHeader(
-                  onDetailsPressed: () => Navigator.pop(context),
+                  onDetailsPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(
+                        context, UserModifyDetailsScreen.routeName);
+                  },
                   currentAccountPicture: CircleAvatar(
                     backgroundImage: AssetImage(
                         'assets/images/placeholder_user_profile.png'),
                   ),
-                  accountName: Text('Anonymous'),
+                  accountName:
+                      Text(Provider.of<AuthBloc>(context).currentUser.name),
                   accountEmail: Text('Tap to change name'),
                 )
               : ListTile(
@@ -128,5 +132,10 @@ class _CurrentPageScreenState extends State<CurrentPageScreen> {
         ],
       ),
     );
+  }
+
+  String _getCurrentUserName(BuildContext context) {
+    String name = Provider.of<AuthBloc>(context).currentUser.name;
+    return name;
   }
 }
