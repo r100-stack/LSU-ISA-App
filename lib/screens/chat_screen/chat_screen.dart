@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:isa_app/models/chat_channel.dart';
+import 'package:isa_app/screens/chat_screen/widgets/chats_builder.dart';
 
 class ChatScreen extends StatelessWidget {
   static final String routeName = '/chat';
@@ -15,6 +16,8 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     print(chatChannelId);
 
-    return Scaffold();
+    return Scaffold(
+      body: ChatsBuilder(chatChannelId: chatChannelId,),
+    );
   }
 }
