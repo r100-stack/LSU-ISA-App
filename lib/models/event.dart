@@ -9,34 +9,42 @@ class Event {
   String imageAlbumLink;
   List<Location> location;
   Contact contact;
+  List<Link> links;
 
-  Event({
-    this.name,
-    this.startDate,
-    this.endDate,
-    this.description,
-    this.imageUrls,
-    this.imageAlbumLink,
-    this.location,
-    this.contact,
-  });
+  Event(
+      {this.name,
+      this.startDate,
+      this.endDate,
+      this.description,
+      this.imageUrls,
+      this.imageAlbumLink,
+      this.location,
+      this.contact,
+      this.links});
 
   factory Event.fromDocumentSnapshot(DocumentSnapshot snapshot) {
     Map<String, dynamic> eventFirebase = snapshot.data;
+
     return Event(
-      name: eventFirebase['name'],
-      startDate: DateTime.fromMicrosecondsSinceEpoch(
-          eventFirebase['startDate'].microsecondsSinceEpoch),
-      endDate: DateTime.fromMicrosecondsSinceEpoch(
-          eventFirebase['endDate'].microsecondsSinceEpoch),
-      description: eventFirebase['description'],
-      imageUrls: List.from(eventFirebase['imageUrls']),
-      contact: Contact.fromMap(eventFirebase['contact']),
-      imageAlbumLink: eventFirebase['imageAlbumLink'],
-      location: List.from(eventFirebase['location'])
-          .map((location) => Location.fromMap(location))
-          .toList(),
-    );
+        name: eventFirebase['name'],
+        startDate: DateTime.fromMicrosecondsSinceEpoch(
+            eventFirebase['startDate'].microsecondsSinceEpoch),
+        endDate: DateTime.fromMicrosecondsSinceEpoch(
+            eventFirebase['endDate'].microsecondsSinceEpoch),
+        description: eventFirebase['description'],
+        imageUrls: List.from(eventFirebase['imageUrls']),
+        contact: Contact.fromMap(eventFirebase['contact']),
+        imageAlbumLink: eventFirebase['imageAlbumLink'],
+        location: eventFirebase['location'] != null
+            ? List?.from(eventFirebase['location'])
+                ?.map((location) => Location.fromMap(location))
+                ?.toList()
+            : [],
+        links: eventFirebase['links'] != null
+            ? List?.from(eventFirebase['links'])
+                ?.map((link) => Link.fromMap(link))
+                ?.toList()
+            : []);
   }
 
   @override
@@ -53,11 +61,7 @@ class Location {
   String data;
   String title;
 
-  Location({
-    this.type,
-    this.data,
-    this.title
-  });
+  Location({this.type, this.data, this.title});
 
   factory Location.fromMap(Map<String, dynamic> locationFirebase) {
     LOCATION_TYPE type;
@@ -96,5 +100,21 @@ class Contact {
         name: contactFirebase['name'],
         phone: contactFirebase['phone'],
         email: contactFirebase['email']);
+  }
+}
+
+class Link {
+  String type;
+  String title;
+  String data;
+
+  Link({
+    this.type,
+    this.title,
+    this.data,
+  });
+
+  factory Link.fromMap(Map<String, dynamic> link) {
+    return Link(type: link['type'], title: link['title'], data: link['data']);
   }
 }

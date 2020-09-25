@@ -9,18 +9,18 @@ class ApartmentContactsCard extends StatelessWidget {
   final String title;
   final IconData leading;
   final String url;
-
   final Color textColor;
+  final int maxLines;
 
   ApartmentContactsCard(
-      {this.title, this.leading, this.url = '', this.textColor});
+      {this.title, this.leading, this.url = '', this.textColor, this.maxLines});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
         title ?? 'Not available',
-        maxLines: 3,
+        maxLines: maxLines ?? 3,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(color: textColor),
       ),

@@ -44,6 +44,7 @@ class EventDetailsScreen extends StatelessWidget {
             ),
           ),
           EventTimeColumn(event: event,),
+          const SizedBox(height: kDefaultMargin,),
           Text(
             event.description,
             style: Theme.of(context).textTheme.subtitle1,
