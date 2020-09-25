@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:isa_app/constants.dart';
 
@@ -10,7 +11,9 @@ class ChatScreen extends StatelessWidget {
 
   final ChatChannel chatChannel;
 
-  const ChatScreen({
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  ChatScreen({
     this.chatChannel,
   });
 
@@ -20,17 +23,31 @@ class ChatScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(chatChannel.name),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: kDefaultMargin / 2, vertical: kDefaultMargin / 2),
-        child: Column(
-          children: [
-            Expanded(
-              child: ChatsBuilder(
-                chatChannelId: chatChannel.id,
-              ),
+      body: Column(
+        children: [
+          Container(
+            color: kAccentColorLight,
+            height: 50.0,
+            child: ListTile(
+              leading: Icon(Icons.info_outline),
+              title: Text('Signed in as anonomous.'),
+              trailing:
+                  FlatButton(child: Text('Change'), onPressed: () => null),
             ),
-            Row(
+          ),
+          Expanded(
+            child: ChatsBuilder(
+              padding: const EdgeInsets.symmetric(
+                horizontal: kDefaultMargin / 2,
+                vertical: kDefaultMargin / 4,
+              ),
+              chatChannelId: chatChannel.id,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: kDefaultMargin / 2, vertical: kDefaultMargin / 2),
+            child: Row(
               children: [
                 Expanded(
                   child: TextField(
@@ -51,9 +68,9 @@ class ChatScreen extends StatelessWidget {
                   onPressed: () => null,
                 )
               ],
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

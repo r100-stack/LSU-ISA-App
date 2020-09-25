@@ -9,11 +9,13 @@ import 'chat_message_card.dart';
 
 class ChatsBuilder extends StatelessWidget {
   final String chatChannelId;
+  final EdgeInsets padding;
 
   final Firestore _firestore = Firestore.instance;
 
   ChatsBuilder({
     this.chatChannelId,
+    this.padding
   });
 
   @override
@@ -48,6 +50,7 @@ class ChatsBuilder extends StatelessWidget {
         List<ChatMessage> chatMessages = snapshot.data['chatMessages'];
 
         return ListView.builder(
+          padding: padding,
           itemBuilder: (context, index) => ChatMessageCard(
             chatMessage: chatMessages[index],
           ),
