@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:isa_app/screens/chat_home/chat_home.dart';
 
 import '../constants.dart';
 
@@ -17,6 +18,11 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         width: kAppBarHeight * 2,
         fit: BoxFit.cover,
       ),
+      actions: [
+        IconButton(
+            icon: Icon(Icons.chat),
+            onPressed: () => Navigator.pushNamed(context, ChatHome.routeName))
+      ],
     );
   }
 
