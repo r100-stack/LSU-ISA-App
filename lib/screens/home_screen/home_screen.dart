@@ -5,6 +5,7 @@ import 'package:isa_app/screens/apartments_screen/apartments_screen.dart';
 import 'package:isa_app/screens/events_screen/events_screen.dart';
 import 'package:isa_app/screens/hotels_screen/hotels_screen.dart';
 import 'package:isa_app/screens/officers_screen/officers_screen.dart';
+import 'package:isa_app/widgets/custom_appbar.dart';
 
 import 'widgets/page_selector_bar.dart';
 
@@ -45,17 +46,7 @@ class _CurrentPageScreenState extends State<CurrentPageScreen> {
     };
 
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Theme.of(context).accentColor),
-        centerTitle: true,
-        toolbarHeight: kToolbarHeight * 1.5 + kDefaultMargin / 2,
-        title: Image(
-          image: AssetImage('assets/images/logo.png'),
-          height: kToolbarHeight * 1.5,
-          width: kToolbarHeight * 2 * 1.5,
-          fit: BoxFit.cover,
-        ),
-      ),
+      appBar: CustomAppBar(),
       drawer: Drawer(
         child: ListView.builder(
           itemCount: pages.length + 1,

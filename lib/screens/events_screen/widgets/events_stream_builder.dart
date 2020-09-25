@@ -15,9 +15,9 @@ class EventsStreamBuilder extends StatelessWidget {
     if (width <= 1000) {
       return ListView.builder(
         itemBuilder: (context, index) {
-          return EventCard(events[0]);
+          return EventCard(events[index]);
         },
-        itemCount: 10,
+        itemCount: events.length,
       );
     } else {
       int crossAxisCount = (width / 700).floor() + 1;
@@ -26,9 +26,9 @@ class EventsStreamBuilder extends StatelessWidget {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: crossAxisCount, childAspectRatio: 10 / 4),
         itemBuilder: (context, index) {
-          return EventCard(events[0]);
+          return EventCard(events[index]);
         },
-        itemCount: 10,
+        itemCount: events.length,
       );
     }
   }

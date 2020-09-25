@@ -33,3 +33,5 @@ const EdgeInsets kCardMargin = EdgeInsets.symmetric(
 const EdgeInsets kCardPadding = EdgeInsets.all(kDefaultMargin / 2);
 
 const double kDefaultMaxWidth = 600;
+
+const double kAppBarHeight = kToolbarHeight * 1.5;

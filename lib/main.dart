@@ -13,6 +13,8 @@ import 'package:isa_app/screens/officer_details_screen/officer_details_screen.da
 import 'package:isa_app/screens/officers_screen/officers_screen.dart';
 import 'package:provider/provider.dart';
 
+import 'screens/event_details/event_details.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -70,8 +72,8 @@ class MyApp extends StatelessWidget {
                 OfficerDetailsScreen(settings.arguments),
             HotelsScreen.routeName: (context) => HotelsScreen(),
             EventsScreen.routeName: (context) => EventsScreen(),
-            // EventDetailsScreen.routeName: (context) =>
-            //     EventDetailsScreen(settings.arguments)
+            EventDetailsScreen.routeName: (context) =>
+                EventDetailsScreen(settings.arguments)
           };
 
           WidgetBuilder builder = routes[settings.name];

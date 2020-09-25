@@ -1,43 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:isa_app/constants.dart';
-import 'package:isa_app/utils/image_utils.dart';
 
-class TopImageStack extends StatelessWidget {
+import '../../../constants.dart';
+
+class TopWidgetStack extends StatelessWidget {
   final Size size;
-  final ImageProvider image;
-  final String title;
   final String heroId;
-  final Widget widget;
+  final Widget background;
+  final Widget title;
+  final double height;
 
-  const TopImageStack(
+  const TopWidgetStack(
       {@required this.size,
-      @required this.image,
-      @required this.title,
       this.heroId = '',
-      this.widget});
+      this.background,
+      this.title,
+      this.height});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: size.height * .4,
+      height: height ?? size.height * .4,
       child: Stack(
         overflow: Overflow.visible,
         children: [
           Hero(
             tag: heroId,
             child: Container(
-              height: size.height * .4 - 35,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: image)),
+              height: height != null ? height -35 : size.height * .4 - 35,
+              child: background,
             ),
+            // child: Text('dasd'),
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: EdgeInsets.all(kDefaultMargin),
-              child: widget,
+              child: title,
               // child: Container(
               //   decoration: BoxDecoration(
               //       color: Theme.of(context).accentColor,
