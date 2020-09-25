@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: EventBloc(),
-        )
+        ),
       ],
       child: MaterialApp(
         title: 'LSU ISA',
@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
                 EventDetailsScreen(settings.arguments),
             ChatHome.routeName: (context) => ChatHome(),
             ChatScreen.routeName: (context) => ChatScreen(
-                  chatChannelId: settings.arguments,
+                  chatChannel: settings.arguments,
                 )
           };
 
