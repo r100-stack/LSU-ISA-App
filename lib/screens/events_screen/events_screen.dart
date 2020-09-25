@@ -8,7 +8,7 @@ class EventsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Networking.downloadEventsOnce(context);
+    // Networking.downloadEventsOnce(context);
     
     return Column(
       children: [

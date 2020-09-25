@@ -174,10 +174,10 @@ class Networking {
               eventFirebase['endDate'].microsecondsSinceEpoch),
           description: eventFirebase['description'],
           imageUrls: List.from(eventFirebase['imageUrls']),
-          location: {
-            'type': eventFirebase['location']['type'],
-            'link': eventFirebase['location']['link']
-          },
+          // location: {
+          //   'type': eventFirebase['location']['type'],
+          //   'link': eventFirebase['location']['link']
+          // },
           imageAlbumLink: eventFirebase['imageAlbumLink']));
     }
 

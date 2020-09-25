@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:isa_app/constants.dart';
 
 import 'package:isa_app/models/event.dart';
+import 'package:isa_app/screens/event_details/widgets/event_time_column.dart';
 import 'package:isa_app/screens/event_details/widgets/top_widget_stack_title.dart';
+import 'package:isa_app/widgets/custom_card.dart';
 import 'widgets/top_widget_stack.dart';
 
 class EventDetailsScreen extends StatelessWidget {
@@ -27,16 +29,33 @@ class EventDetailsScreen extends StatelessWidget {
               color: kAccentColorLight,
               child: CarouselSlider(
                 options: CarouselOptions(
-                  autoPlay: true,
-                  pauseAutoPlayOnTouch: true,
-                  viewportFraction: 1
-                ),
+                    autoPlay: true,
+                    pauseAutoPlayOnTouch: true,
+                    viewportFraction: 1),
                 items: event.imageUrls
-                    .map((imageUrl) => Image(image: NetworkImage(imageUrl), height: double.infinity, width: double.infinity, fit: BoxFit.cover,))
+                    .map((imageUrl) => Image(
+                          image: NetworkImage(imageUrl),
+                          height: double.infinity,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ))
                     .toList(),
               ),
             ),
           ),
+          EventTimeColumn(event: event,),
+          Text(
+            event.description,
+            style: Theme.of(context).textTheme.subtitle1,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          // Text(
+          //   '${apartment.minSqft} sqft. - ${apartment.maxSqft} sqft.',
+          //   style: Theme.of(context).textTheme.subtitle1,
+          //   maxLines: 1,
+          //   overflow: TextOverflow.ellipsis,
+          // ),
         ],
       ),
     );
