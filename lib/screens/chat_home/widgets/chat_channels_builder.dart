@@ -11,6 +11,7 @@ class ChatChannelsBuilder extends StatelessWidget {
     return StreamBuilder(
       stream: _firestore.collection('chat_channels').snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+
         if (!snapshot.hasData) {
           return Center(
             child: CircularProgressIndicator(),

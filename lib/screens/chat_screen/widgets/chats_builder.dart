@@ -57,3 +57,5 @@ class ChatsBuilder extends StatelessWidget {
     );
   }
 }
+
+// TODO: Make the channel chat name on the chat_screen real time.
