@@ -44,6 +44,7 @@ class EventTimeColumn extends StatelessWidget {
                     ? event.data
                     : 'https://www.google.com/maps/search/${event.data}',
                 maxLines: 100,
+                copyIsUrl: true,
               ),
             ),
           )
@@ -52,6 +53,7 @@ class EventTimeColumn extends StatelessWidget {
                     leading: Icons.group_add,
                     title: link.title,
                     url: link.data,
+                    copy: link.data,
                   ))
               .toList()),
       ),
@@ -62,12 +64,23 @@ class EventTimeColumn extends StatelessWidget {
 class _PaddedApartmentContactsCard extends StatelessWidget {
   final String title;
   final IconData leading;
+  final String copy;
   final String url;
   final Color textColor;
   final int maxLines;
 
+  final bool copyIsUrl;
+  final bool copyIsTitle;
+
   _PaddedApartmentContactsCard(
-      {this.title, this.leading, this.url = '', this.textColor, this.maxLines});
+      {this.title,
+      this.leading,
+      this.copy,
+      this.url,
+      this.textColor,
+      this.maxLines,
+      this.copyIsUrl = false,
+      this.copyIsTitle = false});
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +92,9 @@ class _PaddedApartmentContactsCard extends StatelessWidget {
         url: url,
         maxLines: maxLines,
         textColor: textColor,
+        copy: copy,
+        copyIsUrl: copyIsUrl,
+        copyIsTitle: copyIsTitle,
       ),
     );
   }
