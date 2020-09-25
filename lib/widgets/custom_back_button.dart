@@ -9,7 +9,8 @@ class CustomBackButton extends StatelessWidget {
     return SafeArea(
       child: Container(
           decoration: BoxDecoration(
-            boxShadow: width > kDefaultMaxWidth ? kBackButtonShadow : [],
+            // boxShadow: width > kDefaultMaxWidth ? kBackButtonShadow : [],
+            boxShadow: kBackButtonShadow
           ),
           child: BackButton(color: Theme.of(context).accentColor)),
     );

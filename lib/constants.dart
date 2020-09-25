@@ -21,10 +21,14 @@ final List<BoxShadow> kSecondaryBoxShadow = [
 ];
 
 final List<BoxShadow> kBackButtonShadow = [
+  // BoxShadow(
+  //     offset: Offset(0, 0),
+  //     color: Color(0xFF3D3D3D).withOpacity(.2),
+  //     blurRadius: 10)
   BoxShadow(
-      offset: Offset(0, 0),
-      color: Color(0xFF3D3D3D).withOpacity(.2),
-      blurRadius: 10)
+      offset: Offset(0, 5),
+      color: Color(0xFF3D3D3D).withOpacity(1),
+      blurRadius: 50)
 ];
 
 const EdgeInsets kCardMargin = EdgeInsets.symmetric(
