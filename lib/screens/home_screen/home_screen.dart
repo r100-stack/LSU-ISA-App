@@ -17,6 +17,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<AuthBloc>(context, listen: false).signInAnomously();
+
     return Scaffold(
       body: CurrentPageScreen(),
     );
@@ -48,6 +50,9 @@ class _CurrentPageScreenState extends State<CurrentPageScreen> {
       4: EventsScreen(),
     };
 
+    String displayName = Provider.of<AuthBloc>(context)?.currentUser?.name;
+    displayName == null || displayName.length == 0? displayName = 'Generic LSU Tiger' : null;
+
     return Scaffold(
       appBar: CustomAppBar(),
       drawer: Drawer(
@@ -72,7 +77,7 @@ class _CurrentPageScreenState extends State<CurrentPageScreen> {
                         'assets/images/placeholder_user_profile.png'),
                   ),
                   accountName:
-                      Text(Provider.of<AuthBloc>(context).currentUser.name),
+                      Text(displayName),
                   accountEmail: Text('Tap to change name'),
                 )
               : ListTile(

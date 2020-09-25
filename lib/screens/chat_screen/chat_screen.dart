@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:isa_app/blocs/auth_bloc.dart';
 import 'package:isa_app/constants.dart';
 
 import 'package:isa_app/models/chat_channel.dart';
+import 'package:isa_app/models/user_1.dart';
 import 'package:isa_app/screens/chat_screen/widgets/chats_builder.dart';
 import 'package:isa_app/screens/user_modify_details_screen/user_modify_details_screen.dart';
 import 'package:provider/provider.dart';
@@ -13,13 +15,25 @@ class ChatScreen extends StatelessWidget {
 
   final ChatChannel chatChannel;
 
+  final Firestore _firestore = Firestore.instance;
+
   ChatScreen({
     this.chatChannel,
   });
 
+  //  void signInAnomously(BuildContext context) async {
+  //   FirebaseAuth _auth = FirebaseAuth.instance;
+  //   AuthResult authResult = await _auth.signInAnonymously();
+  //   FirebaseUser user = authResult.user;
+  //   User1 user1 = User1(uid: user.uid, isAnonymous: true);
+    
+  //   print(user1.uid);
+  // }
+
   @override
   Widget build(BuildContext context) {
-    String currentUserName = Provider.of<AuthBloc>(context).currentUser.name;
+    String currentUserName = Provider.of<AuthBloc>(context).currentUser?.name;
+    currentUserName == null || currentUserName.length == 0 ? currentUserName = 'Generic LSU Tiger' : null;
 
     return Scaffold(
       appBar: AppBar(
@@ -69,7 +83,9 @@ class ChatScreen extends StatelessWidget {
                     Icons.send,
                     color: Theme.of(context).primaryColor,
                   ),
-                  onPressed: () => null,
+                  onPressed: () => {
+                    _firestore.collection('')
+                  },
                 )
               ],
             ),
