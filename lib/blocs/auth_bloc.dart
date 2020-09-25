@@ -14,6 +14,7 @@ class AuthBloc extends ChangeNotifier {
 
   void modifyUserName(String name) {
     _currentUser.name = name;
+    notifyListeners();
   }
 
   void signInAnomously(BuildContext context) async {

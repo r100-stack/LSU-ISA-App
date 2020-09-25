@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:isa_app/blocs/auth_bloc.dart';
 import 'package:isa_app/constants.dart';
 
 import 'package:isa_app/models/chat_channel.dart';
 import 'package:isa_app/screens/chat_screen/widgets/chats_builder.dart';
+import 'package:isa_app/screens/user_modify_details_screen/user_modify_details_screen.dart';
 import 'package:provider/provider.dart';
 
 class ChatScreen extends StatelessWidget {
@@ -11,14 +13,14 @@ class ChatScreen extends StatelessWidget {
 
   final ChatChannel chatChannel;
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
   ChatScreen({
     this.chatChannel,
   });
 
   @override
   Widget build(BuildContext context) {
+    String currentUserName = Provider.of<AuthBloc>(context).currentUser.name;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(chatChannel.name),
@@ -30,9 +32,11 @@ class ChatScreen extends StatelessWidget {
             height: 50.0,
             child: ListTile(
               leading: Icon(Icons.info_outline),
-              title: Text('Signed in as anonomous.'),
-              trailing:
-                  FlatButton(child: Text('Change'), onPressed: () => null),
+              title: Text('Signed in as $currentUserName.'),
+              trailing: FlatButton(
+                  child: Text('Change'),
+                  onPressed: () => Navigator.pushNamed(
+                      context, UserModifyDetailsScreen.routeName)),
             ),
           ),
           Expanded(
