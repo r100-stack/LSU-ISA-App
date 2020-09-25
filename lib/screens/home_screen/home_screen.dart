@@ -51,12 +51,21 @@ class _CurrentPageScreenState extends State<CurrentPageScreen> {
         child: ListView.builder(
           itemCount: pages.length + 1,
           itemBuilder: (context, index) => index == 0
-              ? DrawerHeader(
-                  child: Text(
-                    'International Student Association Dashboard',
+              // ? DrawerHeader(
+              //     child: Text(
+              //       'International Student Association Dashboard',
+              //     ),
+              //     decoration:
+              //         BoxDecoration(color: Theme.of(context).accentColor),
+              //   )
+              ? UserAccountsDrawerHeader(
+                  onDetailsPressed: () => Navigator.pop(context),
+                  currentAccountPicture: CircleAvatar(
+                    backgroundImage: AssetImage(
+                        'assets/images/placeholder_user_profile.png'),
                   ),
-                  decoration:
-                      BoxDecoration(color: Theme.of(context).accentColor),
+                  accountName: Text('Anonymous'),
+                  accountEmail: Text('Tap to change name'),
                 )
               : ListTile(
                   title: Text(pages[index - 1]),
