@@ -24,8 +24,18 @@ class EventTimeColumn extends StatelessWidget {
           title: '${dayFormat.format(event.startDate)}\n'
               '${dateFormat.format(event.startDate)}\n'
               '${timeFormat.format(event.startDate)} - ${timeFormat.format(event.endDate)}',
+        )
+      ]..addAll(
+          event.location.map(
+            (event) => ApartmentContactsCard(
+              leading: event.type == LOCATION_TYPE.ONLINE ? Icons.public : Icons.location_on,
+              title: '${event.type == LOCATION_TYPE.ONLINE ? 'Online' : 'In-Person'}\n'
+              '${event.title != null ? event.title + '\n' : ''}'
+              '${event.data}',
+              url: event.type == LOCATION_TYPE.ONLINE ? event.data : 'https://www.google.com/maps/search/${event.data}',
+            ),
+          ),
         ),
-      ],
     );
   }
 }
