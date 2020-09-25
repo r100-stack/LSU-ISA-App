@@ -18,46 +18,54 @@ class EventDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          TopWidgetStack(
-            title: TopWidgetStackTitle(
-              title: event.name,
-            ),
-            size: MediaQuery.of(context).size,
-            background: Container(
-              color: kAccentColorLight,
-              child: CarouselSlider(
-                options: CarouselOptions(
-                    autoPlay: true,
-                    pauseAutoPlayOnTouch: true,
-                    viewportFraction: 1),
-                items: event.imageUrls
-                    .map((imageUrl) => Image(
-                          image: NetworkImage(imageUrl),
-                          height: double.infinity,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                        ))
-                    .toList(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            TopWidgetStack(
+              title: TopWidgetStackTitle(
+                title: event.name,
+              ),
+              size: MediaQuery.of(context).size,
+              background: Container(
+                color: kAccentColorLight,
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                      autoPlay: true,
+                      pauseAutoPlayOnTouch: true,
+                      viewportFraction: 1),
+                  items: event.imageUrls
+                      .map((imageUrl) => Image(
+                            image: NetworkImage(imageUrl),
+                            height: double.infinity,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ))
+                      .toList(),
+                ),
               ),
             ),
-          ),
-          EventTimeColumn(event: event,),
-          const SizedBox(height: kDefaultMargin,),
-          Text(
-            event.description,
-            style: Theme.of(context).textTheme.subtitle1,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          // Text(
-          //   '${apartment.minSqft} sqft. - ${apartment.maxSqft} sqft.',
-          //   style: Theme.of(context).textTheme.subtitle1,
-          //   maxLines: 1,
-          //   overflow: TextOverflow.ellipsis,
-          // ),
-        ],
+            const SizedBox(height: kDefaultMargin / 2),
+            Text(
+              event.description,
+              style: Theme.of(context).textTheme.subtitle1,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: kDefaultMargin),
+            EventTimeColumn(
+              event: event,
+            ),
+            const SizedBox(
+              height: kDefaultMargin,
+            ),
+            // Text(
+            //   '${apartment.minSqft} sqft. - ${apartment.maxSqft} sqft.',
+            //   style: Theme.of(context).textTheme.subtitle1,
+            //   maxLines: 1,
+            //   overflow: TextOverflow.ellipsis,
+            // ),
+          ],
+        ),
       ),
     );
   }
