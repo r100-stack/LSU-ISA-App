@@ -18,45 +18,42 @@ class EventTimeColumn extends StatelessWidget {
     DateFormat dateFormat = DateFormat('dd MMMM yyyy');
     DateFormat timeFormat = DateFormat('hh:mm a');
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kDefaultMargin / 2),
-      child: Column(
-        children: [
-          _PaddedApartmentContactsCard(
-            leading: Icons.access_time,
-            title: '${dayFormat.format(event.startDate)}\n'
-                '${dateFormat.format(event.startDate)}\n'
-                '${timeFormat.format(event.startDate)} - ${timeFormat.format(event.endDate)}',
-            maxLines: 100,
-          )
-        ]
-          ..addAll(
-            event.location.map(
-              (event) => _PaddedApartmentContactsCard(
-                leading: event.type == LOCATION_TYPE.ONLINE
-                    ? Icons.public
-                    : Icons.location_on,
-                title:
-                    '${event.type == LOCATION_TYPE.ONLINE ? 'Online' : 'In-Person'}\n'
-                    '${event.title != null ? event.title + '\n' : ''}'
-                    '${event.data}',
-                url: event.type == LOCATION_TYPE.ONLINE
-                    ? event.data
-                    : 'https://www.google.com/maps/search/${event.data}',
-                maxLines: 100,
-                copyIsUrl: true,
-              ),
+    return Column(
+      children: [
+        _PaddedApartmentContactsCard(
+          leading: Icons.access_time,
+          title: '${dayFormat.format(event.startDate)}\n'
+              '${dateFormat.format(event.startDate)}\n'
+              '${timeFormat.format(event.startDate)} - ${timeFormat.format(event.endDate)}',
+          maxLines: 100,
+        )
+      ]
+        ..addAll(
+          event.location.map(
+            (event) => _PaddedApartmentContactsCard(
+              leading: event.type == LOCATION_TYPE.ONLINE
+                  ? Icons.public
+                  : Icons.location_on,
+              title:
+                  '${event.type == LOCATION_TYPE.ONLINE ? 'Online' : 'In-Person'}\n'
+                  '${event.title != null ? event.title + '\n' : ''}'
+                  '${event.data}',
+              url: event.type == LOCATION_TYPE.ONLINE
+                  ? event.data
+                  : 'https://www.google.com/maps/search/${event.data}',
+              maxLines: 100,
+              copyIsUrl: true,
             ),
-          )
-          ..addAll(event.links
-              .map((link) => _PaddedApartmentContactsCard(
-                    leading: Icons.group_add,
-                    title: link.title,
-                    url: link.data,
-                    copy: link.data,
-                  ))
-              .toList()),
-      ),
+          ),
+        )
+        ..addAll(event.links
+            .map((link) => _PaddedApartmentContactsCard(
+                  leading: Icons.group_add,
+                  title: link.title,
+                  url: link.data,
+                  copy: link.data,
+                ))
+            .toList()),
     );
   }
 }

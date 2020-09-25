@@ -45,18 +45,70 @@ class EventDetailsScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: kDefaultMargin / 2),
-            Text(
-              event.description,
-              style: Theme.of(context).textTheme.subtitle1,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            const SizedBox(height: kDefaultMargin),
-            EventTimeColumn(
-              event: event,
-            ),
-            const SizedBox(
-              height: kDefaultMargin,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: kDefaultMargin / 2),
+              child: Column(
+                children: [
+                  Text(
+                    event.description,
+                    style: Theme.of(context).textTheme.subtitle1,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: kDefaultMargin),
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    spacing: kDefaultMargin,
+                    runSpacing: kDefaultMargin,
+                    children: [
+                      FittedBox(
+                        child: CustomCard(
+                          margin: const EdgeInsets.all(0.0),
+                          child: Row(
+                            children: [
+                              Icon(Icons.chat, color: Theme.of(context).accentColor,),
+                              const SizedBox(width: kDefaultMargin/2,),
+                              Text('Have questions? Chat with us!'),
+                            ],
+                          ),
+                        ),
+                      ),
+                      FittedBox(
+                        child: CustomCard(
+                          margin: const EdgeInsets.all(0.0),
+                          child: Row(
+                            children: [
+                              Icon(Icons.image, color: Theme.of(context).accentColor,),
+                              const SizedBox(width: kDefaultMargin/2,),
+                              Text('Image Album'),
+                            ],
+                          ),
+                        ),
+                      ),
+                      // Container(
+                      //   padding: const EdgeInsets.symmetric(
+                      //       horizontal: kDefaultMargin, vertical: kDefaultMargin / 2),
+                      //   color: Colors.red,
+                      //   child: FittedBox(
+                      //     child: Row(
+                      //       children: [
+                      //         Text('Image Album'),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                    ],
+                  ),
+                  const SizedBox(height: kDefaultMargin),
+                  EventTimeColumn(
+                    event: event,
+                  ),
+                  const SizedBox(
+                    height: kDefaultMargin,
+                  ),
+                ],
+              ),
             ),
             // Text(
             //   '${apartment.minSqft} sqft. - ${apartment.maxSqft} sqft.',
