@@ -6,6 +6,7 @@ import 'package:isa_app/blocs/hotels_bloc.dart';
 import 'package:isa_app/blocs/officer_bloc.dart';
 import 'package:isa_app/screens/apartments_screen/apartments_screen.dart';
 import 'package:isa_app/screens/chat_home/chat_home.dart';
+import 'package:isa_app/screens/chat_screen/chat_screen.dart';
 import 'package:isa_app/screens/events_screen/events_screen.dart';
 import 'package:isa_app/screens/home_screen/home_screen.dart';
 import 'package:isa_app/screens/hotels_screen/hotels_screen.dart';
@@ -75,7 +76,10 @@ class MyApp extends StatelessWidget {
             EventsScreen.routeName: (context) => EventsScreen(),
             EventDetailsScreen.routeName: (context) =>
                 EventDetailsScreen(settings.arguments),
-            ChatHome.routeName: (context) => ChatHome()
+            ChatHome.routeName: (context) => ChatHome(),
+            ChatScreen.routeName: (context) => ChatScreen(
+                  chatChannelId: settings.arguments,
+                )
           };
 
           WidgetBuilder builder = routes[settings.name];
