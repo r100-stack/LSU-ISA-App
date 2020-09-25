@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:isa_app/constants.dart';
 
 import 'package:isa_app/models/event.dart';
+import 'package:isa_app/screens/chat_home/chat_home.dart';
 import 'package:isa_app/screens/event_details/widgets/event_time_column.dart';
 import 'package:isa_app/screens/event_details/widgets/top_widget_stack_title.dart';
 import 'package:isa_app/widgets/custom_back_button.dart';
@@ -50,8 +51,8 @@ class EventDetailsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: kDefaultMargin / 2),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: kDefaultMargin / 2),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: kDefaultMargin / 2),
                   child: Column(
                     children: [
                       Text(
@@ -70,7 +71,8 @@ class EventDetailsScreen extends StatelessWidget {
                           ActionButton(
                             text: 'Have questions? Chat with us!',
                             icon: Icons.chat,
-                            onTap: () => null,
+                            onTap: () => Navigator.pushNamed(
+                                context, ChatHome.routeName),
                           )
                         ],
                       ),
