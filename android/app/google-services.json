@@ -8,6 +8,38 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:668965378499:android:efc5150341af343000c576",
+        "android_client_info": {
+          "package_name": "com.example.csc_3102_si_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "668965378499-hrmc10s3fdmvd86jb8rn1e0igle713cs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF8hVFVRSuvz8So-h-R5fI-JVD0b885ic"
+        },
+        {
+          "current_key": "AIzaSyBFyd7xSMyBTjfOR2hBKFndxjZEbus4eyo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "668965378499-hrmc10s3fdmvd86jb8rn1e0igle713cs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:668965378499:android:57619d87227b608c00c576",
         "android_client_info": {
           "package_name": "com.rohankadkol.chat_app"
@@ -20,6 +52,41 @@
         }
       ],
       "api_key": [
+        {
+          "current_key": "AIzaSyCF8hVFVRSuvz8So-h-R5fI-JVD0b885ic"
+        },
+        {
+          "current_key": "AIzaSyBFyd7xSMyBTjfOR2hBKFndxjZEbus4eyo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "668965378499-hrmc10s3fdmvd86jb8rn1e0igle713cs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668965378499:android:93693dd8d668900300c576",
+        "android_client_info": {
+          "package_name": "com.rohankadkol.csc_3102_si_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "668965378499-hrmc10s3fdmvd86jb8rn1e0igle713cs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF8hVFVRSuvz8So-h-R5fI-JVD0b885ic"
+        },
         {
           "current_key": "AIzaSyBFyd7xSMyBTjfOR2hBKFndxjZEbus4eyo"
         }
@@ -44,11 +111,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "668965378499-86dirbmg6bfeuqqc7uop8h852gmac2au.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rohankadkol.isa_app",
+            "certificate_hash": "ca9b9e34f814c7683eb0f6eac1668c38cd11c688"
+          }
+        },
+        {
           "client_id": "668965378499-hrmc10s3fdmvd86jb8rn1e0igle713cs.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
+        {
+          "current_key": "AIzaSyCF8hVFVRSuvz8So-h-R5fI-JVD0b885ic"
+        },
         {
           "current_key": "AIzaSyBFyd7xSMyBTjfOR2hBKFndxjZEbus4eyo"
         }
@@ -73,11 +151,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "668965378499-501nq2n9ja893bfqn3ged4s58vn3hvr9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rohankadkol.notes_app",
+            "certificate_hash": "ca9b9e34f814c7683eb0f6eac1668c38cd11c688"
+          }
+        },
+        {
           "client_id": "668965378499-hrmc10s3fdmvd86jb8rn1e0igle713cs.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
+        {
+          "current_key": "AIzaSyCF8hVFVRSuvz8So-h-R5fI-JVD0b885ic"
+        },
         {
           "current_key": "AIzaSyBFyd7xSMyBTjfOR2hBKFndxjZEbus4eyo"
         }
@@ -107,6 +196,9 @@
         }
       ],
       "api_key": [
+        {
+          "current_key": "AIzaSyCF8hVFVRSuvz8So-h-R5fI-JVD0b885ic"
+        },
         {
           "current_key": "AIzaSyBFyd7xSMyBTjfOR2hBKFndxjZEbus4eyo"
         }

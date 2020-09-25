@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:isa_app/blocs/airbnb_bloc.dart';
 import 'package:isa_app/blocs/apartment_bloc.dart';
@@ -15,11 +16,15 @@ import 'package:isa_app/screens/officer_details_screen/officer_details_screen.da
 import 'package:isa_app/screens/officers_screen/officers_screen.dart';
 import 'package:provider/provider.dart';
 
+import 'blocs/auth_bloc.dart';
+import 'models/user_1.dart';
 import 'screens/event_details/event_details.dart';
 
 void main() {
   runApp(MyApp());
 }
+
+FirebaseAuth _auth = FirebaseAuth.instance;
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -42,6 +47,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: EventBloc(),
         ),
+        ChangeNotifierProvider.value(
+          value: AuthBloc(),
+        )
       ],
       child: MaterialApp(
         title: 'LSU ISA',

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:isa_app/blocs/auth_bloc.dart';
 import 'package:isa_app/constants.dart';
 import 'package:isa_app/screens/airbnbs_screen/airbnbs_screen.dart';
 import 'package:isa_app/screens/apartments_screen/apartments_screen.dart';
@@ -6,6 +7,7 @@ import 'package:isa_app/screens/events_screen/events_screen.dart';
 import 'package:isa_app/screens/hotels_screen/hotels_screen.dart';
 import 'package:isa_app/screens/officers_screen/officers_screen.dart';
 import 'package:isa_app/widgets/custom_appbar.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/page_selector_bar.dart';
 
@@ -14,6 +16,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<AuthBloc>(context).signInAnomously(context);
+
     return Scaffold(
       body: CurrentPageScreen(),
     );
