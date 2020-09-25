@@ -6,9 +6,10 @@ class ChatChannel {
   String id;
   String name;
   String description;
+  String imageUrl;
   CHAT_CHANNEL_TYPE type;
 
-  ChatChannel({this.id, this.name, this.description, this.type});
+  ChatChannel({this.id, this.name, this.description, this.imageUrl, this.type});
 
   factory ChatChannel.fromDocumentSnapshot(
       DocumentSnapshot chatChannelFirebase) {
@@ -30,6 +31,7 @@ class ChatChannel {
       id: chatChannelFirebase.documentID,
       name: chatChannelFirebase.data['name'],
       description: chatChannelFirebase.data['description'],
+      imageUrl: chatChannelFirebase.data['imageUrl'],
       type: type,
     );
   }

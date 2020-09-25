@@ -13,7 +13,14 @@ class ChatChannelCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
-      child: Text(chatChannel.name),
+      onTap: () => {},
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundImage: NetworkImage(chatChannel.imageUrl),
+        ),
+        title: Text(chatChannel.name),
+        subtitle: Text(chatChannel.description),
+      ),
     );
   }
 }

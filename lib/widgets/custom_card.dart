@@ -7,22 +7,32 @@ class CustomCard extends StatelessWidget {
   final EdgeInsets margin;
   final EdgeInsets padding;
   final List<BoxShadow> shadow;
+  final Function onTap;
 
-  CustomCard({this.child, this.color, this.margin, this.padding, this.shadow});
+  CustomCard({this.child, this.color, this.margin, this.padding, this.shadow, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: padding ?? kCardPadding,
       margin: margin ?? kCardMargin,
       decoration: BoxDecoration(
-        color: color ?? Colors.white,
-        borderRadius: BorderRadius.all(
-          Radius.circular(kDefaultBorderRadius),
-        ),
-        boxShadow: shadow ?? kPrimaryBoxShadow
+        boxShadow: shadow ?? kPrimaryBoxShadow,
       ),
-      child: child,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+        child: Material(
+          color: color ?? Colors.white,
+          child: Container(
+            child: InkWell(
+              onTap: onTap,
+              child: Container(
+                padding: padding ?? kCardPadding,
+                child: child,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
