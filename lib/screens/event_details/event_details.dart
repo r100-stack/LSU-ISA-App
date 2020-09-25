@@ -6,6 +6,7 @@ import 'package:isa_app/models/event.dart';
 import 'package:isa_app/screens/event_details/widgets/event_time_column.dart';
 import 'package:isa_app/screens/event_details/widgets/top_widget_stack_title.dart';
 import 'package:isa_app/widgets/custom_card.dart';
+import 'widgets/action_button.dart';
 import 'widgets/top_widget_stack.dart';
 
 class EventDetailsScreen extends StatelessWidget {
@@ -46,7 +47,8 @@ class EventDetailsScreen extends StatelessWidget {
             ),
             const SizedBox(height: kDefaultMargin / 2),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: kDefaultMargin / 2),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: kDefaultMargin / 2),
               child: Column(
                 children: [
                   Text(
@@ -62,42 +64,11 @@ class EventDetailsScreen extends StatelessWidget {
                     spacing: kDefaultMargin,
                     runSpacing: kDefaultMargin,
                     children: [
-                      FittedBox(
-                        child: CustomCard(
-                          margin: const EdgeInsets.all(0.0),
-                          child: Row(
-                            children: [
-                              Icon(Icons.chat, color: Theme.of(context).accentColor,),
-                              const SizedBox(width: kDefaultMargin/2,),
-                              Text('Have questions? Chat with us!'),
-                            ],
-                          ),
-                        ),
-                      ),
-                      FittedBox(
-                        child: CustomCard(
-                          margin: const EdgeInsets.all(0.0),
-                          child: Row(
-                            children: [
-                              Icon(Icons.image, color: Theme.of(context).accentColor,),
-                              const SizedBox(width: kDefaultMargin/2,),
-                              Text('Image Album'),
-                            ],
-                          ),
-                        ),
-                      ),
-                      // Container(
-                      //   padding: const EdgeInsets.symmetric(
-                      //       horizontal: kDefaultMargin, vertical: kDefaultMargin / 2),
-                      //   color: Colors.red,
-                      //   child: FittedBox(
-                      //     child: Row(
-                      //       children: [
-                      //         Text('Image Album'),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
+                      ActionButton(
+                        text: 'Have questions? Chat with us!',
+                        icon: Icons.chat,
+                        onTap: () => null,
+                      )
                     ],
                   ),
                   const SizedBox(height: kDefaultMargin),

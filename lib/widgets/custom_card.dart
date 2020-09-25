@@ -6,8 +6,9 @@ class CustomCard extends StatelessWidget {
   final Color color;
   final EdgeInsets margin;
   final EdgeInsets padding;
+  final List<BoxShadow> shadow;
 
-  CustomCard({this.child, this.color, this.margin, this.padding});
+  CustomCard({this.child, this.color, this.margin, this.padding, this.shadow});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class CustomCard extends StatelessWidget {
         borderRadius: BorderRadius.all(
           Radius.circular(kDefaultBorderRadius),
         ),
-        boxShadow: kPrimaryBoxShadow
+        boxShadow: shadow ?? kPrimaryBoxShadow
       ),
       child: child,
     );
