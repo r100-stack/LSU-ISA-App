@@ -18,36 +18,20 @@ class ActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FittedBox(
-      child: Container(
-        decoration: BoxDecoration(
-          boxShadow: kPrimaryBoxShadow,
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(kDefaultBorderRadius),
-          child: Material(
-            borderRadius: BorderRadius.circular(kDefaultBorderRadius),
-            color: Colors.white,
-            child: InkWell(
-              onTap: onTap,
-              child: CustomCard(
-                color: Colors.transparent,
-                shadow: [],
-                margin: const EdgeInsets.all(0.0),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.image,
-                      color: Theme.of(context).accentColor,
-                    ),
-                    const SizedBox(
-                      width: kDefaultMargin / 2,
-                    ),
-                    Text(text),
-                  ],
-                ),
-              ),
+      child: CustomCard(
+        onTap: onTap,
+        margin: const EdgeInsets.all(0.0),
+        child: Row(
+          children: [
+            Icon(
+              Icons.image,
+              color: Theme.of(context).accentColor,
             ),
-          ),
+            const SizedBox(
+              width: kDefaultMargin / 2,
+            ),
+            Text(text),
+          ],
         ),
       ),
     );
