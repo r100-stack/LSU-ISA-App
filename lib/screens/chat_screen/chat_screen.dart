@@ -133,7 +133,8 @@ class _BottomChatBarState extends State<BottomChatBar> {
                     'uid': currentUser.uid,
                     'timestamp': Timestamp.fromMillisecondsSinceEpoch(
                         DateTime.now().millisecondsSinceEpoch),
-                    'message': widget.controller.text
+                    'message': widget.controller.text,
+                    'name': currentUser.name
                   });
 
                   widget.controller.clear();
