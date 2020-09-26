@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'package:isa_app/models/chat_message.dart';
 import 'package:isa_app/models/user_1.dart';
-import 'package:isa_app/widgets/custom_card.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../constants.dart';
 
@@ -32,9 +33,50 @@ class ChatMessageCard extends StatelessWidget {
             color: isMe ? kAccentColorLight : Colors.white,
             borderRadius: BorderRadius.circular(kDefaultBorderRadius),
           ),
-          child: Text(chatMessage.message),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                chatMessage.message,
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+              const SizedBox(
+                height: kDefaultMargin / 2,
+              ),
+              Text(
+                _getDisplayTime(chatMessage.timestamp),
+                // '${dateFormat.format(chatMessage.timestamp)}',
+                textAlign: TextAlign.end,
+              )
+            ],
+          ),
         ),
       ],
     );
+  }
+
+  String _getDisplayTime(DateTime timestamp) {
+    final DateFormat timeFormat = DateFormat('hh:mm aa');
+    final DateFormat dateFormat = DateFormat('MMM dd, yyyy');
+    String time = '${timeFormat.format(chatMessage.timestamp)}';
+
+    DateTime now = DateTime.now();
+    // Between 1 minute and 1 hour
+    if (timestamp.day == now.day &&
+        now.difference(timestamp) >= Duration(minutes: 1) &&
+        now.difference(timestamp) < Duration(hours: 1)) {
+      return timeago.format(timestamp);
+    }
+    // Difference in 1 day
+    if (timestamp.day != now.day &&
+        now.difference(timestamp) <= Duration(days: 1)) {
+      return 'Yesterday $time';
+    }
+    // Same day
+    if (timestamp.day == now.day &&
+        now.difference(timestamp) <= Duration(days: 1)) {
+      return 'Today $time';
+    }
+    return '${dateFormat.format(timestamp)} $time';
   }
 }
