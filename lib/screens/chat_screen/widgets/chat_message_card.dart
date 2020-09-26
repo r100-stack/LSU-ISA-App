@@ -45,6 +45,10 @@ class ChatMessageCard extends StatelessWidget {
               const SizedBox(
                 height: kDefaultMargin / 2,
               ),
+              Text(chatMessage.name != null && chatMessage.name.length != 0
+                  ? chatMessage.name
+                  : 'Generic LSU Tiger',
+                  textAlign: TextAlign.end,),
               Text(
                 _getDisplayText(chatMessage.timestamp),
                 // '${dateFormat.format(chatMessage.timestamp)}',
@@ -56,7 +60,7 @@ class ChatMessageCard extends StatelessWidget {
       ],
     );
   }
-  
+
   String _getDisplayText(DateTime timestamp) {
     final DateFormat timeFormat = DateFormat('hh:mm aa');
     final DateFormat dateFormat = DateFormat('MMM dd, yyyy');
