@@ -15,8 +15,6 @@ class ChatScreen extends StatelessWidget {
 
   final ChatChannel chatChannel;
 
-  final Firestore _firestore = Firestore.instance;
-
   ChatScreen({
     this.chatChannel,
   });
@@ -26,14 +24,16 @@ class ChatScreen extends StatelessWidget {
   //   AuthResult authResult = await _auth.signInAnonymously();
   //   FirebaseUser user = authResult.user;
   //   User1 user1 = User1(uid: user.uid, isAnonymous: true);
-    
+
   //   print(user1.uid);
   // }
 
   @override
   Widget build(BuildContext context) {
     String currentUserName = Provider.of<AuthBloc>(context).currentUser?.name;
-    currentUserName == null || currentUserName.length == 0 ? currentUserName = 'Generic LSU Tiger' : null;
+    currentUserName == null || currentUserName.length == 0
+        ? currentUserName = 'Generic LSU Tiger'
+        : null;
 
     return Scaffold(
       appBar: AppBar(
@@ -65,33 +65,82 @@ class ChatScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(
                 horizontal: kDefaultMargin / 2, vertical: kDefaultMargin / 2),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    cursorColor: Theme.of(context).primaryColor,
-                    decoration: new InputDecoration(
-                      hintText: 'Your message...',
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: kDefaultMargin / 2),
-                    ),
-                    controller: TextEditingController(),
-                  ),
-                ),
-                IconButton(
-                  icon: Icon(
-                    Icons.send,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  onPressed: () => {
-                    _firestore.collection('')
-                  },
-                )
-              ],
-            ),
+            child: BottomChatBar(chatChannel: chatChannel),
           )
         ],
       ),
+    );
+  }
+}
+
+class BottomChatBar extends StatefulWidget {
+  BottomChatBar({
+    Key key,
+    @required this.chatChannel,
+  }) : super(key: key);
+
+  final TextEditingController controller = TextEditingController();
+
+  final Firestore _firestore = Firestore.instance;
+  final ChatChannel chatChannel;
+
+  @override
+  _BottomChatBarState createState() => _BottomChatBarState();
+}
+
+class _BottomChatBarState extends State<BottomChatBar> {
+  String text = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: TextField(
+            cursorColor: Theme.of(context).primaryColor,
+            decoration: new InputDecoration(
+              hintText: 'Your message...',
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: kDefaultMargin / 2),
+            ),
+            controller: widget.controller,
+            onChanged: (String newText) {
+              text = newText;
+              setState(() {});
+            },
+          ),
+        ),
+        IconButton(
+          icon: Icon(
+            Icons.send,
+            color: Theme.of(context).primaryColor,
+          ),
+          onPressed: text != null && text.length != 0
+              ? () {
+                  User1 currentUser =
+                      Provider.of<AuthBloc>(context, listen: false).currentUser;
+                  if (currentUser == null) {
+                    Scaffold.of(context).showSnackBar(
+                        SnackBar(content: Text('Error sending message')));
+                    return;
+                  }
+
+                  CollectionReference ref = widget._firestore
+                      .collection('chat_channels')
+                      .document(widget.chatChannel.id)
+                      .collection('chat_messages');
+                  ref.add({
+                    'uid': currentUser.uid,
+                    'timestamp': Timestamp.fromMillisecondsSinceEpoch(
+                        DateTime.now().millisecondsSinceEpoch),
+                    'message': widget.controller.text
+                  });
+
+                  widget.controller.clear();
+                }
+              : null,
+        )
+      ],
     );
   }
 }

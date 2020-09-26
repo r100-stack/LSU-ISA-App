@@ -2,26 +2,32 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatMessage {
   String id;
+  String uid;
   String chatChannelId;
   String message;
   String name;
-  String email;
+  DateTime timestamp;
 
   ChatMessage({
     this.id,
+    this.uid,
     this.chatChannelId,
     this.message,
     this.name,
-    this.email,
+    this.timestamp
   });
 
   factory ChatMessage.fromDocumentSnapshop(DocumentSnapshot chatMessageFirebase) {
+    Timestamp t = chatMessageFirebase.data['timestamp'];
+    DateTime timestamp = DateTime.fromMillisecondsSinceEpoch(t.millisecondsSinceEpoch);
+
     return ChatMessage(
       id: chatMessageFirebase.documentID,
+      uid: chatMessageFirebase.data['uid'],
       chatChannelId: chatMessageFirebase.data['chatChannelId'],
       message: chatMessageFirebase.data['message'],
       name: chatMessageFirebase.data['name'],
-      email: chatMessageFirebase.data['email']
+      timestamp: timestamp
     );
   }
 }

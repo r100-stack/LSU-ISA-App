@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:isa_app/blocs/auth_bloc.dart';
 import 'package:isa_app/models/chat_channel.dart';
 import 'package:isa_app/models/chat_message.dart';
+import 'package:isa_app/models/user_1.dart';
 import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -13,10 +15,7 @@ class ChatsBuilder extends StatelessWidget {
 
   final Firestore _firestore = Firestore.instance;
 
-  ChatsBuilder({
-    this.chatChannelId,
-    this.padding
-  });
+  ChatsBuilder({this.chatChannelId, this.padding});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +29,7 @@ class ChatsBuilder extends StatelessWidget {
               .collection('chat_channels')
               .document(chatChannelId)
               .collection('chat_messages')
+              .orderBy('timestamp', descending: true)
               .snapshots(),
           (DocumentSnapshot chatChannelFirebase,
               QuerySnapshot chatMessagesFirebase) {
@@ -50,9 +50,11 @@ class ChatsBuilder extends StatelessWidget {
         List<ChatMessage> chatMessages = snapshot.data['chatMessages'];
 
         return ListView.builder(
+          reverse: true,
           padding: padding,
           itemBuilder: (context, index) => ChatMessageCard(
             chatMessage: chatMessages[index],
+            currentUser: Provider.of<AuthBloc>(context).currentUser,
           ),
           itemCount: chatMessages.length,
         );
