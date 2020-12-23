@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import 'package:isa_app/models/chat_message.dart';
 import 'package:isa_app/models/user_1.dart';
+import 'package:isa_app/screens/chat_screen/widgets/heart_button.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../constants.dart';
@@ -45,14 +46,24 @@ class ChatMessageCard extends StatelessWidget {
               const SizedBox(
                 height: kDefaultMargin / 2,
               ),
-              Text(chatMessage.name != null && chatMessage.name.length != 0
-                  ? chatMessage.name
-                  : 'Generic LSU Tiger',
-                  textAlign: TextAlign.end,),
-              Text(
-                _getDisplayText(chatMessage.timestamp),
-                // '${dateFormat.format(chatMessage.timestamp)}',
-                textAlign: TextAlign.end,
+              Row(
+                children: [
+                  HeartButton(),
+                  Spacer(),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(chatMessage.name != null &&
+                              chatMessage.name.length != 0
+                          ? chatMessage.name
+                          : 'Generic LSU Tiger'),
+                      Text(
+                        _getDisplayText(chatMessage.timestamp),
+                        // '${dateFormat.format(chatMessage.timestamp)}',
+                      ),
+                    ],
+                  ),
+                ],
               )
             ],
           ),
