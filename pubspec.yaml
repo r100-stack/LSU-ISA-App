@@ -20,6 +20,7 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.7.0 <3.0.0"
 
+# TODO: Update the Firebase/Firestore packages to use the newer way of accessing fields.
 dependencies:
   flutter:
     sdk: flutter

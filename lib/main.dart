@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:isa_app/blocs/airbnb_bloc.dart';
 import 'package:isa_app/blocs/apartment_bloc.dart';
+import 'package:isa_app/blocs/correct_screen_bloc.dart';
 import 'package:isa_app/blocs/event_bloc.dart';
 import 'package:isa_app/blocs/hotels_bloc.dart';
 import 'package:isa_app/blocs/officer_bloc.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<ApartmentBloc>.value(
+        ChangeNotifierProvider.value(
           value: ApartmentBloc(),
         ),
         ChangeNotifierProvider.value(
@@ -50,7 +51,10 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: AuthBloc(),
-        )
+        ),
+        ChangeNotifierProvider.value(
+          value: CorrectScreenBloc(),
+        ),
       ],
       child: MaterialApp(
         title: 'LSU ISA',
@@ -73,6 +77,7 @@ class MyApp extends StatelessWidget {
             primaryColor: Color(0xFF461D7C),
             accentColor: Color(0xFFFDD023)),
         onGenerateRoute: (RouteSettings settings) {
+          // TODO: May want to cleanup the routes?
           var routes = <String, WidgetBuilder>{
             HomeScreen.routeName: (context) => HomeScreen(),
             ApartmentsScreen.routeName: (context) => ApartmentsScreen(),
