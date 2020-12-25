@@ -34,26 +34,26 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(
-          value: ApartmentBloc(),
+        ChangeNotifierProvider(
+          create: (_) => ApartmentBloc(),
         ),
-        ChangeNotifierProvider.value(
-          value: HotelBloc(),
+        ChangeNotifierProvider(
+          create: (_) => HotelBloc(),
         ),
-        ChangeNotifierProvider.value(
-          value: AirbnbBloc(),
+        ChangeNotifierProvider(
+          create: (_) => AirbnbBloc(),
         ),
-        ChangeNotifierProvider.value(
-          value: OfficerBloc(),
+        ChangeNotifierProvider(
+          create: (_) => OfficerBloc(),
         ),
-        ChangeNotifierProvider.value(
-          value: EventBloc(),
+        ChangeNotifierProvider(
+          create: (_) => EventBloc(),
         ),
-        ChangeNotifierProvider.value(
-          value: AuthBloc(),
+        ChangeNotifierProvider(
+          create: (_) => AuthBloc(),
         ),
-        ChangeNotifierProvider.value(
-          value: CorrectScreenBloc(),
+        ChangeNotifierProvider(
+          create: (_) => CorrectScreenBloc(),
         ),
       ],
       child: MaterialApp(
