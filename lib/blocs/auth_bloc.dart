@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:isa_app/models/user_1.dart';
 import 'package:isa_app/utils/alert_utils.dart';
@@ -9,15 +9,15 @@ class AuthBloc extends ChangeNotifier {
 
   User1 get currentUser => _currentUser;
 
-  FirebaseAuth _auth = FirebaseAuth.instance;
-  Firestore _firestore = Firestore.instance;
+  auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   void signInWithEmailPassword(
       BuildContext context, String email, String password) async {
     try {
-      AuthResult authResult = await _auth.signInWithEmailAndPassword(
+      auth.UserCredential credential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      FirebaseUser user = authResult.user;
+      auth.User user = credential.user;
 
       _currentUser =
           User1(uid: user.uid, isAnonymous: false, email: user.email);
@@ -48,21 +48,21 @@ class AuthBloc extends ChangeNotifier {
       return;
     }
 
-    AuthResult authResult = await _auth.signInAnonymously();
-    FirebaseUser user = authResult.user;
+    auth.UserCredential credential = await _auth.signInAnonymously();
+    auth.User user = credential.user;
 
     User1 user1 = User1(uid: user.uid, isAnonymous: true);
     _currentUser = user1;
 
     DocumentSnapshot d =
-        await _firestore.collection('users_isa_1').document(user.uid).get();
-    if (d.data != null) {
-      _currentUser = User1(uid: d.documentID, name: d['name']);
+        await _firestore.collection('users_isa_1').doc(user.uid).get();
+    if (d.data() != null) {
+      _currentUser = User1(uid: d.id, name: d.data()['name']);
     } else {
       _firestore
           .collection('users_isa_1')
-          .document(user.uid)
-          .setData({'name': _currentUser?.name});
+          .doc(user.uid)
+          .set({'name': _currentUser?.name});
     }
 
     notifyListeners();
@@ -73,18 +73,18 @@ class AuthBloc extends ChangeNotifier {
 
     DocumentSnapshot d = await _firestore
         .collection('users_isa_1')
-        .document(_currentUser.uid)
+        .doc(_currentUser.uid)
         .get();
     if (d != null) {
       _firestore
           .collection('users_isa_1')
-          .document(_currentUser.uid)
-          .updateData({'name': _currentUser?.name});
+          .doc(_currentUser.uid)
+          .update({'name': _currentUser?.name});
     } else {
       _firestore
           .collection('users_isa_1')
-          .document(_currentUser.uid)
-          .setData({'name': _currentUser?.name});
+          .doc(_currentUser.uid)
+          .set({'name': _currentUser?.name});
     }
 
     notifyListeners();

@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'event_card.dart';
 
 class EventsStreamBuilder extends StatelessWidget {
-  final Firestore _firestore = Firestore.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {

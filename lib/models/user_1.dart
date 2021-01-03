@@ -10,8 +10,8 @@ class User1 {
 
   factory User1.fromDocumentSnapshot(DocumentSnapshot user1Firebase) {
     return User1(
-      uid: user1Firebase.data['uid'],
-      name: user1Firebase.data['name'],
+      uid: user1Firebase.data()['uid'],
+      name: user1Firebase.data()['name'],
     );
   }
 }

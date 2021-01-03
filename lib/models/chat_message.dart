@@ -18,15 +18,15 @@ class ChatMessage {
   });
 
   factory ChatMessage.fromDocumentSnapshop(DocumentSnapshot chatMessageFirebase) {
-    Timestamp t = chatMessageFirebase.data['timestamp'];
+    Timestamp t = chatMessageFirebase.data()['timestamp'];
     DateTime timestamp = DateTime.fromMillisecondsSinceEpoch(t.millisecondsSinceEpoch);
 
     return ChatMessage(
-      id: chatMessageFirebase.documentID,
-      uid: chatMessageFirebase.data['uid'],
-      chatChannelId: chatMessageFirebase.data['chatChannelId'],
-      message: chatMessageFirebase.data['message'],
-      name: chatMessageFirebase.data['name'],
+      id: chatMessageFirebase.id,
+      uid: chatMessageFirebase.data()['uid'],
+      chatChannelId: chatMessageFirebase.data()['chatChannelId'],
+      message: chatMessageFirebase.data()['message'],
+      name: chatMessageFirebase.data()['name'],
       timestamp: timestamp
     );
   }

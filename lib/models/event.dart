@@ -23,7 +23,7 @@ class Event {
       this.links});
 
   factory Event.fromDocumentSnapshot(DocumentSnapshot snapshot) {
-    Map<String, dynamic> eventFirebase = snapshot.data;
+    Map<String, dynamic> eventFirebase = snapshot.data();
 
     return Event(
         name: eventFirebase['name'],

@@ -81,7 +81,7 @@ class BottomChatBar extends StatefulWidget {
 
   final TextEditingController controller = TextEditingController();
 
-  final Firestore _firestore = Firestore.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final ChatChannel chatChannel;
 
   @override
@@ -127,7 +127,7 @@ class _BottomChatBarState extends State<BottomChatBar> {
 
                   CollectionReference ref = widget._firestore
                       .collection('chat_channels')
-                      .document(widget.chatChannel.id)
+                      .doc(widget.chatChannel.id)
                       .collection('chat_messages');
                   ref.add({
                     'uid': currentUser.uid,

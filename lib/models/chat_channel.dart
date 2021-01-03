@@ -28,10 +28,10 @@ class ChatChannel {
     }
 
     return ChatChannel(
-      id: chatChannelFirebase.documentID,
-      name: chatChannelFirebase.data['name'],
-      description: chatChannelFirebase.data['description'],
-      imageUrl: chatChannelFirebase.data['imageUrl'],
+      id: chatChannelFirebase.id,
+      name: chatChannelFirebase.data()['name'],
+      description: chatChannelFirebase.data()['description'],
+      imageUrl: chatChannelFirebase.data()['imageUrl'],
       type: type,
     );
   }

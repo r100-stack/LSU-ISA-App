@@ -17,7 +17,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Networking {
-  static Firestore _firestore = Firestore.instance;
+  static FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   static void downloadApartmentsAndOffersOnce(BuildContext context) async {
     bool isDownloadedOnce =
@@ -32,18 +32,18 @@ class Networking {
 
   static Future<void> downloadApartments(BuildContext context) async {
     QuerySnapshot snapshot =
-        await _firestore.collection('apartments').getDocuments();
+        await _firestore.collection('apartments').get();
 
     Map<String, Apartment> apartmentsMap = {};
-    for (var apartmentFirebase in snapshot.documents) {
-      apartmentsMap[apartmentFirebase.documentID] = Apartment(
-          id: apartmentFirebase.documentID,
-          name: apartmentFirebase['name'],
-          email: apartmentFirebase['email'],
-          phoneNumber: apartmentFirebase['phoneNumber'],
-          address: apartmentFirebase['address'],
-          website: apartmentFirebase['website'],
-          imageUrl: apartmentFirebase['imageUrl']);
+    for (var apartmentFirebase in snapshot.docs) {
+      apartmentsMap[apartmentFirebase.id] = Apartment(
+          id: apartmentFirebase.id,
+          name: apartmentFirebase.data()['name'],
+          email: apartmentFirebase.data()['email'],
+          phoneNumber: apartmentFirebase.data()['phoneNumber'],
+          address: apartmentFirebase.data()['address'],
+          website: apartmentFirebase.data()['website'],
+          imageUrl: apartmentFirebase.data()['imageUrl']);
     }
 
     Provider.of<ApartmentBloc>(context, listen: false)
@@ -52,8 +52,8 @@ class Networking {
 
   static Future<void> _downloadOffers(BuildContext context) async {
     QuerySnapshot snapshot =
-        await _firestore.collection('offers').getDocuments();
-    List<Offer> offers = OfferUtils.getOffers(snapshot.documents);
+        await _firestore.collection('offers').get();
+    List<Offer> offers = OfferUtils.getOffers(snapshot.docs);
 
     Map<String, Apartment> apartmentsMap =
         Provider.of<ApartmentBloc>(context, listen: false).apartmentsMap;
@@ -81,9 +81,9 @@ class Networking {
 
   static void _downloadHotels(BuildContext context) async {
     QuerySnapshot snapshot =
-        await _firestore.collection('hotels').getDocuments();
+        await _firestore.collection('hotels').get();
     List<Hotel> hotels = [];
-    for (var hotelFirebase in snapshot.documents) {
+    for (var hotelFirebase in snapshot.docs) {
       hotels.add(Hotel(
           address: hotelFirebase['address'],
           cost: double.parse(hotelFirebase['cost'].toString()),
@@ -107,9 +107,9 @@ class Networking {
 
   static void _downloadAirbnbs(BuildContext context) async {
     QuerySnapshot snapshot =
-        await _firestore.collection('airbnbs').getDocuments();
+        await _firestore.collection('airbnbs').get();
     List<Airbnb> airbnbs = [];
-    for (var airbnbFirebase in snapshot.documents) {
+    for (var airbnbFirebase in snapshot.docs) {
       airbnbs.add(Airbnb(
           cost: double.parse(airbnbFirebase['cost'].toString()),
           name: airbnbFirebase['name'],
@@ -130,11 +130,11 @@ class Networking {
 
   static void _downloadOfficers(BuildContext context) async {
     QuerySnapshot snapshot =
-        await _firestore.collection('officers').getDocuments();
+        await _firestore.collection('officers').get();
     List<Officer> officers = [];
-    for (var officerFirebase in snapshot.documents) {
+    for (var officerFirebase in snapshot.docs) {
       officers.add(Officer(
-          id: officerFirebase.documentID,
+          id: officerFirebase.id,
           level: officerFirebase['level'],
           name: officerFirebase['name'],
           position: officerFirebase['position'],
@@ -163,9 +163,9 @@ class Networking {
 
   static void _downloadEvents(BuildContext context) async {
     QuerySnapshot snapshot =
-        await _firestore.collection('events').getDocuments();
+        await _firestore.collection('events').get();
     List<Event> events = [];
-    for (var eventFirebase in snapshot.documents) {
+    for (var eventFirebase in snapshot.docs) {
       events.add(Event(
           name: eventFirebase['name'],
           startDate: DateTime.fromMicrosecondsSinceEpoch(

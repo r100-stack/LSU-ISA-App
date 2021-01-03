@@ -13,7 +13,7 @@ class ChatsBuilder extends StatelessWidget {
   final String chatChannelId;
   final EdgeInsets padding;
 
-  final Firestore _firestore = Firestore.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   ChatsBuilder({this.chatChannelId, this.padding});
 
@@ -23,11 +23,11 @@ class ChatsBuilder extends StatelessWidget {
       stream: Rx.combineLatest2(
           _firestore
               .collection('chat_channels')
-              .document(chatChannelId)
+              .doc(chatChannelId)
               .snapshots(),
           _firestore
               .collection('chat_channels')
-              .document(chatChannelId)
+              .doc(chatChannelId)
               .collection('chat_messages')
               .orderBy('timestamp', descending: true)
               .snapshots(),
@@ -35,7 +35,7 @@ class ChatsBuilder extends StatelessWidget {
               QuerySnapshot chatMessagesFirebase) {
         ChatChannel chatChannel =
             ChatChannel.fromDocumentSnapshot(chatChannelFirebase);
-        List<ChatMessage> chatMessages = chatMessagesFirebase.documents
+        List<ChatMessage> chatMessages = chatMessagesFirebase.docs
             .map((chatMessageFirebase) =>
                 ChatMessage.fromDocumentSnapshop(chatMessageFirebase))
             .toList();

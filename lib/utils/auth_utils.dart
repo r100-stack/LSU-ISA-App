@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:isa_app/models/user_1.dart';
-import 'package:isa_app/screens/sign_in_screen/sign_in_screen.dart';
+// import 'package:isa_app/screens/sign_in_screen/sign_in_screen.dart';
 import 'package:isa_app/utils/alert_utils.dart';
 
 // TODO: May need to add another state called LOGGIN_IN or LOGGING_OUT (ie. in progress)
@@ -56,7 +56,7 @@ class AuthUtils {
         onPressed: () {
           // TODO: Make this more modular? As all three buttons call .pop()
           Navigator.pop(context);
-          Navigator.pushNamed(context, SignInScreen.routeName);
+          // Navigator.pushNamed(context, SignInSc);
         },
       ),
       TextButton(

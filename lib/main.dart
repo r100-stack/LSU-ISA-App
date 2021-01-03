@@ -15,12 +15,10 @@ import 'package:isa_app/screens/hotels_screen/hotels_screen.dart';
 import 'package:isa_app/screens/offers_screen/offers_screen.dart';
 import 'package:isa_app/screens/officer_details_screen/officer_details_screen.dart';
 import 'package:isa_app/screens/officers_screen/officers_screen.dart';
-import 'package:isa_app/screens/sign_in_screen/sign_in_screen.dart';
 import 'package:isa_app/screens/user_modify_details_screen/user_modify_details_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'blocs/auth_bloc.dart';
-import 'models/user_1.dart';
 import 'screens/event_details/event_details.dart';
 
 void main() {
@@ -99,7 +97,7 @@ class MyApp extends StatelessWidget {
                 ),
             UserModifyDetailsScreen.routeName: (context) =>
                 UserModifyDetailsScreen(),
-            SignInScreen.routeName: (context) => SignInScreen()
+            // SignInScreen.routeName: (context) => SignInScreen()
           };
 
           WidgetBuilder builder = routes[settings.name];

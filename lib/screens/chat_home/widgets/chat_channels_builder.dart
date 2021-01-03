@@ -4,7 +4,7 @@ import 'package:isa_app/models/chat_channel.dart';
 import 'package:isa_app/screens/chat_home/widgets/chat_channel_card.dart';
 
 class ChatChannelsBuilder extends StatelessWidget {
-  final Firestore _firestore = Firestore.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class ChatChannelsBuilder extends StatelessWidget {
         }
 
         final List<DocumentSnapshot> chatChannelsFirebase =
-            snapshot.data.documents;
+            snapshot.data.docs;
         List<ChatChannel> chatChannels = chatChannelsFirebase
             .map((chatChannelFirebase) =>
                 ChatChannel.fromDocumentSnapshot(chatChannelFirebase))

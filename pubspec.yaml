@@ -24,8 +24,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_core: ^0.4.5
-  cloud_firestore: ^0.13.7
+  firebase_core: ^0.5.3
+  cloud_firestore: ^0.14.4
   cached_network_image: ^2.2.0+1
   provider: ^4.3.1
   transparent_image: ^1.0.0
@@ -37,8 +37,11 @@ dependencies:
   timeago: ^2.0.27
   carousel_slider: ^2.2.1
   rxdart: ^0.24.1
-  firebase_auth: ^0.16.0
+  firebase_auth: ^0.18.4+1
   google_fonts: ^1.1.1
+  # roipil_authentication:
+  #   git:
+  #     url: git://github.com/rohan-kadkol/roipil_authentication.git
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
