@@ -6,6 +6,8 @@ const double kDefaultBorderRadius = 20;
 const Color kAccentColorLight = Color(0xFFFEE891);
 const Color kPrimaryColorLight = Color(0xFFC7BBD7);
 
+const Color kRoipilPrimaryColor = Color(0xFFFFCD05);
+
 final List<BoxShadow> kPrimaryBoxShadow = [
   BoxShadow(
       offset: Offset(0, 10),

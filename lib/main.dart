@@ -15,6 +15,7 @@ import 'package:isa_app/screens/hotels_screen/hotels_screen.dart';
 import 'package:isa_app/screens/offers_screen/offers_screen.dart';
 import 'package:isa_app/screens/officer_details_screen/officer_details_screen.dart';
 import 'package:isa_app/screens/officers_screen/officers_screen.dart';
+import 'package:isa_app/screens/sign_in_screen/sign_in_screen.dart';
 import 'package:isa_app/screens/user_modify_details_screen/user_modify_details_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -78,6 +79,8 @@ class MyApp extends StatelessWidget {
             accentColor: Color(0xFFFDD023)),
         onGenerateRoute: (RouteSettings settings) {
           // TODO: May want to cleanup the routes?
+          // TODO: Do we even need routeNames?
+          // TODO: If using routeNames, then make sure it appears in the browser. Something to do with builder or settings.name near line 103?
           var routes = <String, WidgetBuilder>{
             HomeScreen.routeName: (context) => HomeScreen(),
             ApartmentsScreen.routeName: (context) => ApartmentsScreen(),
@@ -95,7 +98,8 @@ class MyApp extends StatelessWidget {
                   chatChannel: settings.arguments,
                 ),
             UserModifyDetailsScreen.routeName: (context) =>
-                UserModifyDetailsScreen()
+                UserModifyDetailsScreen(),
+            SignInScreen.routeName: (context) => SignInScreen()
           };
 
           WidgetBuilder builder = routes[settings.name];
