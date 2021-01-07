@@ -21,7 +21,7 @@ class ChatMessageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isMe = chatMessage.uid == currentUser?.uid;
+    bool isMe = chatMessage.uid == currentUser?.firebaseUser?.uid;
 
     return Row(
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,

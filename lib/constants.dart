@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+export 'package:isa_app/constants/firebase_constants.dart';
+
+// TODO: Split constants into separate files
+
 const double kDefaultMargin = 20;
 const double kDefaultBorderRadius = 20;
 

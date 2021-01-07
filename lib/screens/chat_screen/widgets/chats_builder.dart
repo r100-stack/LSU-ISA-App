@@ -5,6 +5,7 @@ import 'package:isa_app/models/chat_channel.dart';
 import 'package:isa_app/models/chat_message.dart';
 import 'package:isa_app/models/user_1.dart';
 import 'package:provider/provider.dart';
+import 'package:roipil_authentication/blocs/roipil_auth_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'chat_message_card.dart';
@@ -54,7 +55,7 @@ class ChatsBuilder extends StatelessWidget {
           padding: padding,
           itemBuilder: (context, index) => ChatMessageCard(
             chatMessage: chatMessages[index],
-            currentUser: Provider.of<AuthBloc>(context).currentUser,
+            currentUser: Provider.of<RoipilAuthBloc>(context)?.user,
           ),
           itemCount: chatMessages.length,
         );

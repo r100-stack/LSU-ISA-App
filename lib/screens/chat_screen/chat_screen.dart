@@ -9,6 +9,7 @@ import 'package:isa_app/models/user_1.dart';
 import 'package:isa_app/screens/chat_screen/widgets/chats_builder.dart';
 import 'package:isa_app/screens/user_modify_details_screen/user_modify_details_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:roipil_authentication/blocs/roipil_auth_bloc.dart';
 
 class ChatScreen extends StatelessWidget {
   static final String routeName = '/chat';
@@ -30,7 +31,7 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String currentUserName = Provider.of<AuthBloc>(context).currentUser?.name;
+    String currentUserName = Provider.of<RoipilAuthBloc>(context)?.user?.name;
     currentUserName == null || currentUserName.length == 0
         ? currentUserName = 'Generic LSU Tiger'
         : null;
@@ -118,7 +119,7 @@ class _BottomChatBarState extends State<BottomChatBar> {
           onPressed: text != null && text.length != 0
               ? () {
                   User1 currentUser =
-                      Provider.of<AuthBloc>(context, listen: false).currentUser;
+                      Provider.of<RoipilAuthBloc>(context, listen: false)?.user;
                   if (currentUser == null) {
                     Scaffold.of(context).showSnackBar(
                         SnackBar(content: Text('Error sending message')));
@@ -130,7 +131,7 @@ class _BottomChatBarState extends State<BottomChatBar> {
                       .doc(widget.chatChannel.id)
                       .collection('chat_messages');
                   ref.add({
-                    'uid': currentUser.uid,
+                    'uid': currentUser.firebaseUser.uid,
                     'timestamp': Timestamp.fromMillisecondsSinceEpoch(
                         DateTime.now().millisecondsSinceEpoch),
                     'message': widget.controller.text,

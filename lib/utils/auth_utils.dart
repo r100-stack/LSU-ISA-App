@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:isa_app/models/user_1.dart';
 // import 'package:isa_app/screens/sign_in_screen/sign_in_screen.dart';
 import 'package:isa_app/utils/alert_utils.dart';
+import 'package:roipil_authentication/screens/sign_in_screen.dart';
 
 // TODO: May need to add another state called LOGGIN_IN or LOGGING_OUT (ie. in progress)
 enum AUTH_STATUS { NOT_LOGGED_IN, LOGGED_IN_ANONYMOUS, LOGGED_IN_EMAIL }
@@ -11,7 +12,7 @@ class AuthUtils {
   static AUTH_STATUS getAuthStatus(User1 user) {
     if (user == null) {
       return AUTH_STATUS.NOT_LOGGED_IN;
-    } else if (user.isAnonymous) {
+    } else if (user.firebaseUser.isAnonymous) {
       return AUTH_STATUS.LOGGED_IN_ANONYMOUS;
     } else {
       return AUTH_STATUS.LOGGED_IN_EMAIL; // Assuming Name can never be empty.
@@ -40,7 +41,7 @@ class AuthUtils {
       case AUTH_STATUS.LOGGED_IN_ANONYMOUS:
         return '';
       case AUTH_STATUS.LOGGED_IN_EMAIL:
-        return user.email; // Assuming Name can never be empty.
+        return user.firebaseUser.email; // Assuming Name can never be empty.
       default:
         return '';
     }
@@ -56,7 +57,9 @@ class AuthUtils {
         onPressed: () {
           // TODO: Make this more modular? As all three buttons call .pop()
           Navigator.pop(context);
-          // Navigator.pushNamed(context, SignInSc);
+          Navigator.pushNamed(context, SignInScreen.routeName, arguments: () {
+            Navigator.pop(context);
+          });
         },
       ),
       TextButton(
