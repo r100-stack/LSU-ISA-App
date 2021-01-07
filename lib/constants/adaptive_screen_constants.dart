@@ -1,0 +1,1 @@
+const double kDefaultMaxWidth = 600;
