@@ -35,4 +35,20 @@ class ChatChannel {
       type: type,
     );
   }
+
+  String getTypeText() {
+    switch (type) {
+      case CHAT_CHANNEL_TYPE.SIGN_IN:
+        return 'Sign in';
+        break;
+      case CHAT_CHANNEL_TYPE.ANONYMOUS:
+        return 'Anonymous';
+        break;
+      case CHAT_CHANNEL_TYPE.SIGN_IN_OR_ANONYMOUS:
+        return 'Sign in | Anonymous';
+        break;
+      default:
+        return '';
+    }
+  }
 }

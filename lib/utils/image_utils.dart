@@ -27,4 +27,6 @@ class ImageUtils {
         ? NetworkImage(imageUrl)
         : AssetImage('assets/images/placeholder_chat_channel.png');
   }
+
+  // TODO: Need to also think about placeholder when image load gives an error/exception
 }

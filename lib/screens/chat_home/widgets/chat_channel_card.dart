@@ -24,6 +24,7 @@ class ChatChannelCard extends StatelessWidget {
         ),
         title: Text(chatChannel.name),
         subtitle: Text(chatChannel.description),
+        trailing: Text(chatChannel.getTypeText()),
       ),
     );
   }
