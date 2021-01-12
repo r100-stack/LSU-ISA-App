@@ -9,7 +9,7 @@ class ChatChannelsBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: _firestore.collection('chat_channels').snapshots(),
+      stream: _firestore.collection('chat_channels').snapshots(), // TODO: Keep this in firebase_constants.dart
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
 
         if (!snapshot.hasData) {

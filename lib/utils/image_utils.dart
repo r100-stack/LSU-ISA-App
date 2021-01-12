@@ -21,4 +21,10 @@ class ImageUtils {
         ? AssetImage(imageUrl)
         : AssetImage('assets/images/placeholder_user_background.png');
   }
+
+  static ImageProvider getChatChannelImage(String imageUrl) {
+    return imageUrl != null
+        ? NetworkImage(imageUrl)
+        : AssetImage('assets/images/placeholder_chat_channel.png');
+  }
 }
