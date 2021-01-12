@@ -1,20 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 
 class ChatMessage {
   String id;
   String uid;
   String chatChannelId;
   String message;
+  @Deprecated('Use the dynamic name using uid')
   String name;
   DateTime timestamp;
 
   ChatMessage({
     this.id,
-    this.uid,
-    this.chatChannelId,
-    this.message,
-    this.name,
-    this.timestamp
+    @required this.uid,
+    @required this.chatChannelId,
+    @required this.message,
+    // this.name, TODO: Delete this field altogether
+    @required this.timestamp
   });
 
   factory ChatMessage.fromDocumentSnapshop(DocumentSnapshot chatMessageFirebase) {
@@ -26,8 +28,17 @@ class ChatMessage {
       uid: chatMessageFirebase.data()['uid'],
       chatChannelId: chatMessageFirebase.data()['chatChannelId'],
       message: chatMessageFirebase.data()['message'],
-      name: chatMessageFirebase.data()['name'],
+      // name: chatMessageFirebase.data()['name'],
       timestamp: timestamp
     );
+  }
+
+  Map<String, dynamic> getMapFromMessage() {
+    return {
+      'uid': uid,
+      'chatChannelId': chatChannelId,
+      'message': message,
+      'timestamp': Timestamp.fromDate(timestamp)
+    };
   }
 }

@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:isa_app/constants/firebase_constants.dart';
+import 'package:isa_app/models/chat_message.dart';
 
 enum CHAT_CHANNEL_TYPE { SIGN_IN, ANONYMOUS, SIGN_IN_OR_ANONYMOUS }
 
@@ -50,5 +52,16 @@ class ChatChannel {
       default:
         return '';
     }
+  }
+
+  /// Make sure all @required fields in ChatMessage are filled before sending a message
+  Future<bool> sendMessage(ChatMessage chatMessage) async {
+    // TODO: May need try catch?
+    DocumentReference ref = await kChatChannelsRef
+        .doc(id)
+        .collection('chat_messages')
+        .add(chatMessage.getMapFromMessage());
+        
+    return ref != null;
   }
 }

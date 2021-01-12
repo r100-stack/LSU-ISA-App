@@ -17,7 +17,7 @@ class ChatChannelCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomCard(
       onTap: () => Navigator.pushNamed(context, ChatScreen.routeName,
-          arguments: chatChannel),
+          arguments: chatChannel.id),
       child: ListTile(
         leading: CircleAvatar(
           backgroundImage: ImageUtils.getChatChannelImage(chatChannel.imageUrl),

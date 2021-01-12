@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:isa_app/blocs/auth_bloc.dart';
+import 'package:isa_app/constants/firebase_constants.dart';
 import 'package:isa_app/models/chat_channel.dart';
 import 'package:isa_app/models/chat_message.dart';
 import 'package:isa_app/models/user_1.dart';
@@ -10,11 +11,9 @@ import 'package:rxdart/rxdart.dart';
 
 import 'chat_message_card.dart';
 
-class ChatsBuilder extends StatelessWidget {
+class ChatsBuilder extends StatelessWidget { // TODO: Deprecate it? Or use this as the modularized versio  of ChatScreen?
   final String chatChannelId;
   final EdgeInsets padding;
-
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   ChatsBuilder({this.chatChannelId, this.padding});
 
@@ -22,18 +21,15 @@ class ChatsBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: Rx.combineLatest2(
-          _firestore
-              .collection('chat_channels')
-              .doc(chatChannelId)
-              .snapshots(),
-          _firestore
-              .collection('chat_channels')
+          kChatChannelsRef.doc(chatChannelId).snapshots(),
+          kChatChannelsRef
               .doc(chatChannelId)
               .collection('chat_messages')
               .orderBy('timestamp', descending: true)
               .snapshots(),
           (DocumentSnapshot chatChannelFirebase,
               QuerySnapshot chatMessagesFirebase) {
+
         ChatChannel chatChannel =
             ChatChannel.fromDocumentSnapshot(chatChannelFirebase);
         List<ChatMessage> chatMessages = chatMessagesFirebase.docs

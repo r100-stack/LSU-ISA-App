@@ -5,142 +5,109 @@ import 'package:isa_app/blocs/auth_bloc.dart';
 import 'package:isa_app/constants.dart';
 
 import 'package:isa_app/models/chat_channel.dart';
+import 'package:isa_app/models/chat_message.dart';
 import 'package:isa_app/models/user_1.dart';
+import 'package:isa_app/screens/chat_screen/widgets/bottom_chat_bar.dart';
+import 'package:isa_app/screens/chat_screen/widgets/chat_message_card.dart';
 import 'package:isa_app/screens/chat_screen/widgets/chats_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:roipil_authentication/blocs/roipil_auth_bloc.dart';
+import 'package:rxdart/rxdart.dart';
 
 class ChatScreen extends StatelessWidget {
   static final String routeName = '/chat';
 
-  final ChatChannel chatChannel;
+  final String chatChannelId;
 
   ChatScreen({
-    this.chatChannel,
+    this.chatChannelId,
   });
 
-  //  void signInAnomously(BuildContext context) async {
-  //   FirebaseAuth _auth = FirebaseAuth.instance;
-  //   AuthResult authResult = await _auth.signInAnonymously();
-  //   FirebaseUser user = authResult.user;
-  //   User1 user1 = User1(uid: user.uid, isAnonymous: true);
-
-  //   print(user1.uid);
-  // }
-
   @override
   Widget build(BuildContext context) {
-    String currentUserName = Provider.of<RoipilAuthBloc>(context)?.user?.name;
-    currentUserName == null || currentUserName.length == 0
-        ? currentUserName = 'LSU Tiger'
-        : null;
+    return StreamBuilder( // TODO: Modulatize the StreamBuilder
+      stream: Rx.combineLatest2(
+          kChatChannelsRef.doc(chatChannelId).snapshots(),
+          kChatChannelsRef
+              .doc(chatChannelId)
+              .collection('chat_messages')
+              .orderBy('timestamp', descending: true)
+              .snapshots(),
+          (DocumentSnapshot chatChannelFirebase,
+              QuerySnapshot chatMessagesFirebase) {
+        ChatChannel chatChannel =
+            ChatChannel.fromDocumentSnapshot(chatChannelFirebase);
+        List<ChatMessage> chatMessages = chatMessagesFirebase.docs
+            .map((chatMessageFirebase) =>
+                ChatMessage.fromDocumentSnapshop(chatMessageFirebase))
+            .toList();
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(chatChannel.name),
-      ),
-      body: Column(
-        children: [
-          Container(
-            color: kAccentColorLight,
-            height: 50.0,
-            child: ListTile(
-              leading: Icon(Icons.info_outline),
-              title: Text('Signed in as $currentUserName.'),
-            ),
+        return {'chatChannel': chatChannel, 'chatMessages': chatMessages};
+      }),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.data == null) {
+          return Center(child: CircularProgressIndicator()); // TODO: Returns an appBar with the backbutton in case the screen takes too long to load.
+        }
+
+        ChatChannel chatChannel = snapshot.data['chatChannel'];
+        List<ChatMessage> chatMessages = snapshot.data['chatMessages'];
+
+        String currentUserName =
+            Provider.of<RoipilAuthBloc>(context)?.user?.name;
+        currentUserName == null || currentUserName.length == 0
+            ? currentUserName = 'LSU Tiger'
+            : null; // TODO: null -> Not signed in
+
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(chatChannel.name),
           ),
-          Expanded(
-            child: ChatsBuilder(
-              padding: const EdgeInsets.symmetric(
-                horizontal: kDefaultMargin / 2,
-                vertical: kDefaultMargin / 4,
+          body: Column(
+            children: [
+              Container(
+                color: kAccentColorLight,
+                height: 50.0,
+                child: ListTile(
+                  leading: Icon(Icons.info_outline),
+                  title: Text('Signed in as $currentUserName.'),
+                ),
               ),
-              chatChannelId: chatChannel.id,
-            ),
+              Expanded(
+                // child: ChatsBuilder(
+                // padding: const EdgeInsets.symmetric(
+                //   horizontal: kDefaultMargin / 2,
+                //   vertical: kDefaultMargin / 4,
+                // ),
+                //   chatChannelId: chatChannel.id,
+                // ),
+                child: ListView.builder(
+                  reverse: true,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: kDefaultMargin / 2,
+                    vertical: kDefaultMargin / 4,
+                  ),
+                  itemBuilder: (context, index) => ChatMessageCard(
+                    chatMessage: chatMessages[index],
+                    currentUser: Provider.of<RoipilAuthBloc>(context)?.user,
+                  ),
+                  itemCount: chatMessages.length,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: kDefaultMargin / 2,
+                    vertical: kDefaultMargin / 2),
+                child: BottomChatBar(chatChannel: chatChannel,),
+              )
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: kDefaultMargin / 2, vertical: kDefaultMargin / 2),
-            child: BottomChatBar(chatChannel: chatChannel),
-          )
-        ],
-      ),
+        );
+      },
     );
   }
 }
 
-class BottomChatBar extends StatefulWidget {
-  BottomChatBar({
-    Key key,
-    @required this.chatChannel,
-  }) : super(key: key);
 
-  final TextEditingController controller = TextEditingController();
-
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final ChatChannel chatChannel;
-
-  @override
-  _BottomChatBarState createState() => _BottomChatBarState();
-}
-
-class _BottomChatBarState extends State<BottomChatBar> {
-  String text = '';
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: TextField(
-            cursorColor: Theme.of(context).primaryColor,
-            decoration: new InputDecoration(
-              hintText: 'Your message...',
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: kDefaultMargin / 2),
-            ),
-            controller: widget.controller,
-            onChanged: (String newText) {
-              text = newText;
-              setState(() {});
-            },
-          ),
-        ),
-        IconButton(
-          icon: Icon(
-            Icons.send,
-            color: Theme.of(context).primaryColor,
-          ),
-          onPressed: text != null && text.length != 0
-              ? () {
-                  User1 currentUser =
-                      Provider.of<RoipilAuthBloc>(context, listen: false)?.user;
-                  if (currentUser == null) {
-                    Scaffold.of(context).showSnackBar(
-                        SnackBar(content: Text('Error sending message')));
-                    return;
-                  }
-
-                  CollectionReference ref = widget._firestore
-                      .collection('chat_channels')
-                      .doc(widget.chatChannel.id)
-                      .collection('chat_messages');
-                  ref.add({
-                    'uid': currentUser.firebaseUser.uid,
-                    'timestamp': Timestamp.fromMillisecondsSinceEpoch(
-                        DateTime.now().millisecondsSinceEpoch),
-                    'message': widget.controller.text,
-                    'name': currentUser.name
-                  });
-
-                  widget.controller.clear();
-                }
-              : null,
-        )
-      ],
-    );
-  }
-}
 
 class _RealTimeChatChannelNameTextWidget extends StatelessWidget {
   const _RealTimeChatChannelNameTextWidget({
