@@ -5,6 +5,7 @@ import 'package:isa_app/screens/event_details/widgets/action_button.dart';
 import 'package:provider/provider.dart';
 
 // TODO: This may need to be deprecated. Commented out references to old AuthBloc
+@Deprecated('Should not use this. Anonymous users should not be able to change their names')
 class UserModifyDetailsScreen extends StatelessWidget {
   static final String routeName = '/user_modify_details';
 

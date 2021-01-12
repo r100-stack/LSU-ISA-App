@@ -7,7 +7,6 @@ import 'package:isa_app/constants.dart';
 import 'package:isa_app/models/chat_channel.dart';
 import 'package:isa_app/models/user_1.dart';
 import 'package:isa_app/screens/chat_screen/widgets/chats_builder.dart';
-import 'package:isa_app/screens/user_modify_details_screen/user_modify_details_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:roipil_authentication/blocs/roipil_auth_bloc.dart';
 
@@ -33,7 +32,7 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     String currentUserName = Provider.of<RoipilAuthBloc>(context)?.user?.name;
     currentUserName == null || currentUserName.length == 0
-        ? currentUserName = 'Generic LSU Tiger'
+        ? currentUserName = 'LSU Tiger'
         : null;
 
     return Scaffold(
@@ -48,10 +47,6 @@ class ChatScreen extends StatelessWidget {
             child: ListTile(
               leading: Icon(Icons.info_outline),
               title: Text('Signed in as $currentUserName.'),
-              trailing: FlatButton(
-                  child: Text('Change'),
-                  onPressed: () => Navigator.pushNamed(
-                      context, UserModifyDetailsScreen.routeName)),
             ),
           ),
           Expanded(
