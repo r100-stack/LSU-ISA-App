@@ -50,7 +50,7 @@ class ChatScreen extends StatelessWidget {
               horizontal: kDefaultMargin / 2,
               vertical: kDefaultMargin / 4,
             ),
-              chatChannelId: chatChannel.id,
+              chatChannel: chatChannel,
             ),
           ),
           Padding(
