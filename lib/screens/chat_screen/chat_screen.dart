@@ -17,97 +17,135 @@ import 'package:rxdart/rxdart.dart';
 class ChatScreen extends StatelessWidget {
   static final String routeName = '/chat';
 
-  final String chatChannelId;
+  final ChatChannel chatChannel;
 
   ChatScreen({
-    this.chatChannelId,
+    this.chatChannel,
   });
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder( // TODO: Modulatize the StreamBuilder
-      stream: Rx.combineLatest2(
-          kChatChannelsRef.doc(chatChannelId).snapshots(),
-          kChatChannelsRef
-              .doc(chatChannelId)
-              .collection('chat_messages')
-              .orderBy('timestamp', descending: true)
-              .snapshots(),
-          (DocumentSnapshot chatChannelFirebase,
-              QuerySnapshot chatMessagesFirebase) {
-        ChatChannel chatChannel =
-            ChatChannel.fromDocumentSnapshot(chatChannelFirebase);
-        List<ChatMessage> chatMessages = chatMessagesFirebase.docs
-            .map((chatMessageFirebase) =>
-                ChatMessage.fromDocumentSnapshop(chatMessageFirebase))
-            .toList();
+    String currentUserName = Provider.of<RoipilAuthBloc>(context)?.user?.name; // TODO: Make a modular function to get currentUserName
+    currentUserName == null || currentUserName.length == 0
+        ? currentUserName = 'LSU Tiger'
+        : null; // TODO: null -> Not signed in
 
-        return {'chatChannel': chatChannel, 'chatMessages': chatMessages};
-      }),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.data == null) {
-          return Center(child: CircularProgressIndicator()); // TODO: Returns an appBar with the backbutton in case the screen takes too long to load.
-        }
-
-        ChatChannel chatChannel = snapshot.data['chatChannel'];
-        List<ChatMessage> chatMessages = snapshot.data['chatMessages'];
-
-        String currentUserName =
-            Provider.of<RoipilAuthBloc>(context)?.user?.name;
-        currentUserName == null || currentUserName.length == 0
-            ? currentUserName = 'LSU Tiger'
-            : null; // TODO: null -> Not signed in
-
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(chatChannel.name),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(chatChannel.name),
+      ),
+      body: Column(
+        children: [
+          Container(
+            color: kAccentColorLight,
+            height: 50.0,
+            child: ListTile(
+              leading: Icon(Icons.info_outline),
+              title: Text('Signed in as $currentUserName.'),
+            ),
           ),
-          body: Column(
-            children: [
-              Container(
-                color: kAccentColorLight,
-                height: 50.0,
-                child: ListTile(
-                  leading: Icon(Icons.info_outline),
-                  title: Text('Signed in as $currentUserName.'),
-                ),
-              ),
-              Expanded(
-                // child: ChatsBuilder(
-                // padding: const EdgeInsets.symmetric(
-                //   horizontal: kDefaultMargin / 2,
-                //   vertical: kDefaultMargin / 4,
-                // ),
-                //   chatChannelId: chatChannel.id,
-                // ),
-                child: ListView.builder(
-                  reverse: true,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: kDefaultMargin / 2,
-                    vertical: kDefaultMargin / 4,
-                  ),
-                  itemBuilder: (context, index) => ChatMessageCard(
-                    chatMessage: chatMessages[index],
-                    currentUser: Provider.of<RoipilAuthBloc>(context)?.user,
-                  ),
-                  itemCount: chatMessages.length,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: kDefaultMargin / 2,
-                    vertical: kDefaultMargin / 2),
-                child: BottomChatBar(chatChannel: chatChannel,),
-              )
-            ],
+          Expanded(
+            child: ChatsBuilder(
+            padding: const EdgeInsets.symmetric(
+              horizontal: kDefaultMargin / 2,
+              vertical: kDefaultMargin / 4,
+            ),
+              chatChannelId: chatChannel.id,
+            ),
           ),
-        );
-      },
+          Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: kDefaultMargin / 2, vertical: kDefaultMargin / 2),
+            child: BottomChatBar(
+              chatChannel: chatChannel,
+            ),
+          )
+        ],
+      ),
     );
+
+    // TODO: Remove this commented out old version
+    // return StreamBuilder( // TODO: Modulatize the StreamBuilder
+    //   stream: Rx.combineLatest2(
+    //       kChatChannelsRef.doc(chatChannel.id).snapshots(),
+    //       kChatChannelsRef
+    //           .doc(chatChannel.id)
+    //           .collection('chat_messages')
+    //           .orderBy('timestamp', descending: true)
+    //           .snapshots(),
+    //       (DocumentSnapshot chatChannelFirebase,
+    //           QuerySnapshot chatMessagesFirebase) {
+    //     ChatChannel chatChannel =
+    //         ChatChannel.fromDocumentSnapshot(chatChannelFirebase);
+    //     List<ChatMessage> chatMessages = chatMessagesFirebase.docs
+    //         .map((chatMessageFirebase) =>
+    //             ChatMessage.fromDocumentSnapshop(chatMessageFirebase))
+    //         .toList();
+
+    //     return {'chatChannel': chatChannel, 'chatMessages': chatMessages};
+    //   }),
+    //   builder: (BuildContext context, AsyncSnapshot snapshot) {
+    //     if (snapshot.data == null) {
+    //       return Center(child: CircularProgressIndicator()); // TODO: Returns an appBar with the backbutton in case the screen takes too long to load.
+    //     }
+
+    //     ChatChannel chatChannel = snapshot.data['chatChannel'];
+    //     List<ChatMessage> chatMessages = snapshot.data['chatMessages'];
+
+    //     String currentUserName =
+    //         Provider.of<RoipilAuthBloc>(context)?.user?.name;
+    //     currentUserName == null || currentUserName.length == 0
+    //         ? currentUserName = 'LSU Tiger'
+    //         : null; // TODO: null -> Not signed in
+
+    //     return Scaffold(
+    //       appBar: AppBar(
+    //         title: Text(chatChannel.name),
+    //       ),
+    //       body: Column(
+    //         children: [
+    //           Container(
+    //             color: kAccentColorLight,
+    //             height: 50.0,
+    //             child: ListTile(
+    //               leading: Icon(Icons.info_outline),
+    //               title: Text('Signed in as $currentUserName.'),
+    //             ),
+    //           ),
+    //           Expanded(
+    //             // child: ChatsBuilder(
+    //             // padding: const EdgeInsets.symmetric(
+    //             //   horizontal: kDefaultMargin / 2,
+    //             //   vertical: kDefaultMargin / 4,
+    //             // ),
+    //             //   chatChannelId: chatChannel.id,
+    //             // ),
+    //             child: ListView.builder(
+    //               reverse: true,
+    //               padding: const EdgeInsets.symmetric(
+    //                 horizontal: kDefaultMargin / 2,
+    //                 vertical: kDefaultMargin / 4,
+    //               ),
+    //               itemBuilder: (context, index) => ChatMessageCard(
+    //                 chatMessage: chatMessages[index],
+    //                 currentUser: Provider.of<RoipilAuthBloc>(context)?.user,
+    //               ),
+    //               itemCount: chatMessages.length,
+    //             ),
+    //           ),
+    //           Padding(
+    //             padding: const EdgeInsets.symmetric(
+    //                 horizontal: kDefaultMargin / 2,
+    //                 vertical: kDefaultMargin / 2),
+    //             child: BottomChatBar(chatChannel: chatChannel,),
+    //           )
+    //         ],
+    //       ),
+    //     );
+    //   },
+    // );
   }
 }
-
-
 
 class _RealTimeChatChannelNameTextWidget extends StatelessWidget {
   const _RealTimeChatChannelNameTextWidget({

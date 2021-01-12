@@ -95,7 +95,7 @@ class _MyAppState extends State<MyApp> with AfterLayoutMixin<MyApp> {
               EventDetailsScreen(settings.arguments),
           ChatHome.routeName: (context) => ChatHome(),
           ChatScreen.routeName: (context) => ChatScreen(
-                chatChannelId: settings.arguments,
+                chatChannel: settings.arguments,
               ),
           SignInScreen.routeName: (context) => SignInScreen(
                 onSignIn: settings.arguments,
