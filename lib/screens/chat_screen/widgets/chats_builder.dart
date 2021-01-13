@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:isa_app/cache/uid_name_cache.dart';
+import 'package:isa_app/blocs/uid_name_cache.dart';
 import 'package:isa_app/constants/firebase_constants.dart';
 import 'package:isa_app/models/chat_channel.dart';
 import 'package:isa_app/models/chat_message.dart';

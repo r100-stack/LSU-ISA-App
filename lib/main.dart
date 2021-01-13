@@ -6,7 +6,7 @@ import 'package:isa_app/blocs/correct_screen_bloc.dart';
 import 'package:isa_app/blocs/event_bloc.dart';
 import 'package:isa_app/blocs/hotels_bloc.dart';
 import 'package:isa_app/blocs/officer_bloc.dart';
-import 'package:isa_app/cache/uid_name_cache.dart';
+import 'package:isa_app/blocs/uid_name_cache.dart';
 import 'package:isa_app/constants/firebase_constants.dart';
 import 'package:isa_app/models/user_1.dart';
 import 'package:isa_app/screens/apartments_screen/apartments_screen.dart';
