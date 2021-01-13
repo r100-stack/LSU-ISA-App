@@ -53,10 +53,11 @@ class ChatMessageCard extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(chatMessage.name != null &&
-                              chatMessage.name.length != 0
-                          ? chatMessage.name
-                          : 'Generic LSU Tiger'),
+                      Text(chatMessage.name ?? ''),
+                      // Text(chatMessage.name != null &&
+                      //         chatMessage.name.length != 0
+                      //     ? chatMessage.name
+                      //     : 'Generic LSU Tiger'),
                       Text(
                         _getDisplayText(chatMessage.timestamp),
                         // '${dateFormat.format(chatMessage.timestamp)}',

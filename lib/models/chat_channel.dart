@@ -60,7 +60,7 @@ class ChatChannel {
     DocumentReference ref = await kChatChannelsRef
         .doc(id)
         .collection('chat_messages')
-        .add(chatMessage.getMapFromMessage());
+        .add(chatMessage.getFirebaseMap());
         
     return ref != null;
   }

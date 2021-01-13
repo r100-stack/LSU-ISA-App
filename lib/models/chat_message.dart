@@ -6,7 +6,7 @@ class ChatMessage {
   String uid;
   String chatChannelId;
   String message;
-  @Deprecated('Use the dynamic name using uid')
+  // @Deprecated('Use the dynamic name using uid')
   String name;
   DateTime timestamp;
 
@@ -15,7 +15,7 @@ class ChatMessage {
     @required this.uid,
     @required this.chatChannelId,
     @required this.message,
-    // this.name, TODO: Delete this field altogether
+    this.name,
     @required this.timestamp
   });
 
@@ -33,7 +33,7 @@ class ChatMessage {
     );
   }
 
-  Map<String, dynamic> getMapFromMessage() {
+  Map<String, dynamic> getFirebaseMap() {
     return {
       'uid': uid,
       'chatChannelId': chatChannelId,
