@@ -4,6 +4,7 @@ import 'package:isa_app/models/user_1.dart';
 // import 'package:isa_app/screens/sign_in_screen/sign_in_screen.dart';
 import 'package:isa_app/utils/alert_utils.dart';
 import 'package:roipil_authentication/screens/sign_in_screen.dart';
+import 'package:roipil_authentication/services/roipil_auth_service.dart';
 
 // TODO: May need to add another state called LOGGIN_IN or LOGGING_OUT (ie. in progress)
 enum AUTH_STATUS { NOT_LOGGED_IN, LOGGED_IN_ANONYMOUS, LOGGED_IN_EMAIL }
@@ -47,7 +48,7 @@ class AuthUtils {
     }
   }
 
-  static void showSignInAlert(BuildContext context) {
+  static void _showSignInAlert(BuildContext context) {
     String title = 'Authentication';
     String message =
         'You can register, sign in, or sign in anonymously (limited access)';
@@ -72,5 +73,35 @@ class AuthUtils {
       ),
     ]);
     // TODO: Each button should take to the correct screen. Screens yet to be implemented.
+  }
+
+  static void _showSignOutAlert(BuildContext context, User1 user) {
+    String title = 'Sign out?';
+    String message =
+        'Signed in as ${user.name}'; // TODO: Handle when user.name == null because anonymous
+
+    AlertUtils.showAlert(context, title, message, [
+      TextButton(
+        onPressed: () async {
+          await RoipilAuthService.logout();
+          Navigator.pop(context);
+        },
+        child: Text('Yes'),
+      ),
+      TextButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text('No'),
+      ),
+    ]);
+  }
+
+  static void showCorrectAuthenticationAlert(BuildContext context, User1 user) {
+    if (user == null) {
+      AuthUtils._showSignInAlert(context);
+    } else {
+      AuthUtils._showSignOutAlert(context, user);
+    }
   }
 }

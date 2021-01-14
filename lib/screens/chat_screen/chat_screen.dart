@@ -5,8 +5,10 @@ import 'package:isa_app/models/chat_channel.dart';
 import 'package:isa_app/models/user_1.dart';
 import 'package:isa_app/screens/chat_screen/widgets/bottom_chat_bar.dart';
 import 'package:isa_app/screens/chat_screen/widgets/chats_builder.dart';
+import 'package:isa_app/utils/auth_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:roipil_authentication/blocs/roipil_auth_bloc.dart';
+import 'package:roipil_authentication/services/roipil_auth_service.dart';
 
 class ChatScreen extends StatelessWidget {
   static final String routeName = '/chat';
@@ -21,7 +23,7 @@ class ChatScreen extends StatelessWidget {
     if (user == null) {
       return 'Not signed in';
     } else {
-      return 'Signed in as ${user.name}';
+      return 'Signed in as ${user.name}'; // TODO: Handle when user.name == null because anonymous
     }
   }
 
@@ -41,6 +43,16 @@ class ChatScreen extends StatelessWidget {
             child: ListTile(
               leading: Icon(Icons.info_outline),
               title: Text(_getSignedInAsText(user)),
+              trailing: FlatButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+                ),
+                child: Text('Change'),
+                onPressed: () {
+                  User1 user = Provider.of<RoipilAuthBloc>(context, listen: false).user;
+                  AuthUtils.showCorrectAuthenticationAlert(context, user);
+                },
+              ),
             ),
           ),
           Expanded(

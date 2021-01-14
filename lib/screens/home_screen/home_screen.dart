@@ -31,7 +31,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             accountName: Text(displayName),
             accountEmail: Text(displayEmail),
-            onDetailsPressed: () => AuthUtils.showSignInAlert(context),
+            onDetailsPressed: () {
+              User1 user = Provider.of<RoipilAuthBloc>(context, listen: false).user;
+              AuthUtils.showCorrectAuthenticationAlert(context, user);
+            },
           ),
         ]..addAll(pages.asMap().entries.map((entry) {
             PageDef pageDef = entry.value;
