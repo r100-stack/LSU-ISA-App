@@ -21,9 +21,24 @@ class BottomChatBar extends StatefulWidget {
 class _BottomChatBarState extends State<BottomChatBar> {
   String text = '';
 
+  void _sendMessage(User1 currentUser) async {
+    bool sent = await widget.chatChannel.sendMessage(
+      ChatMessage(
+        uid: currentUser.firebaseUser.uid,
+        chatChannelId: widget.chatChannel.id,
+        message: text,
+        timestamp: DateTime.now(),
+      ),
+    );
+    if (sent) {
+      widget.controller.clear();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    User1 user = Provider.of<RoipilAuthBloc>(context).user; // TODO: Should not be able to send messages if not signed in
+    User1 currentUser = Provider.of<RoipilAuthBloc>(context)
+        .user; // TODO: Should not be able to send messages if not signed in
 
     return Row(
       children: [
@@ -40,6 +55,7 @@ class _BottomChatBarState extends State<BottomChatBar> {
               text = newText;
               setState(() {});
             },
+            onSubmitted: (String text) => _sendMessage(currentUser),
           ),
         ),
         IconButton(
@@ -49,6 +65,8 @@ class _BottomChatBarState extends State<BottomChatBar> {
           ),
           onPressed: text != null && text.length != 0
               ? () async {
+                  _sendMessage(currentUser);
+
                   // User1 currentUser =
                   //     Provider.of<RoipilAuthBloc>(context, listen: false)?.user;
                   // if (currentUser == null) {
@@ -70,18 +88,6 @@ class _BottomChatBarState extends State<BottomChatBar> {
                   // });
 
                   // widget.controller.clear();
-
-                  bool sent = await widget.chatChannel.sendMessage(
-                    ChatMessage(
-                      uid: user.firebaseUser.uid,
-                      chatChannelId: widget.chatChannel.id,
-                      message: text,
-                      timestamp: DateTime.now(),
-                    ),
-                  );
-                  if (sent) {
-                    widget.controller.clear();
-                  }
                 }
               : null,
         )
