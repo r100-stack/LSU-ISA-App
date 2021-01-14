@@ -29,6 +29,7 @@ class _ChatsBuilderState extends State<ChatsBuilder> {
     kChatChannelsRef
         .doc(widget.chatChannel.id)
         .collection('chat_messages')
+        .orderBy('timestamp', descending: true)
         .snapshots()
         .listen((QuerySnapshot snapshot) async {
       List<ChatMessage> newChatMessages = [];
