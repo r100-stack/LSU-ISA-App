@@ -1,4 +1,5 @@
 import 'package:after_layout/after_layout.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:isa_app/blocs/airbnb_bloc.dart';
 import 'package:isa_app/blocs/apartment_bloc.dart';
@@ -76,6 +77,8 @@ class _MyAppState extends State<MyApp> with AfterLayoutMixin<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'LSU ISA',
+      builder: BotToastInit(), //1. call BotToastInit
+      navigatorObservers: [BotToastNavigatorObserver()],
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This makes the visual density adapt to the platform that you run

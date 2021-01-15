@@ -8,6 +8,7 @@ class ChatMessage {
   String message;
   // @Deprecated('Use the dynamic name using uid')
   String name;
+  List<String> likes;
   DateTime timestamp;
 
   ChatMessage({
@@ -16,6 +17,7 @@ class ChatMessage {
     @required this.chatChannelId,
     @required this.message,
     this.name,
+    this.likes,
     @required this.timestamp
   });
 
@@ -29,10 +31,12 @@ class ChatMessage {
       chatChannelId: chatMessageFirebase.data()['chatChannelId'],
       message: chatMessageFirebase.data()['message'],
       // name: chatMessageFirebase.data()['name'],
+      likes: List.from(chatMessageFirebase.data()['likes'] ?? []),
       timestamp: timestamp
     );
   }
 
+  // TODO: Noticed that chatChannelId is being saved along with the message. This is redundant.
   Map<String, dynamic> getFirebaseMap() {
     return {
       'uid': uid,

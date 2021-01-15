@@ -48,7 +48,10 @@ class ChatMessageCard extends StatelessWidget {
               ),
               Row(
                 children: [
-                  HeartButton(),
+                  HeartButton(
+                    chatMessage: chatMessage,
+                    currentUser: currentUser,
+                  ),
                   Spacer(),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,

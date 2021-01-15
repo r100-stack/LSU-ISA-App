@@ -16,7 +16,7 @@ class ChatScreen extends StatelessWidget {
   final ChatChannel chatChannel;
 
   ChatScreen({
-    this.chatChannel,
+    this.chatChannel, // TODO: Handle case when on Refresh, chatChannel = null
   });
 
   String _getSignedInAsText(User1 user) {
