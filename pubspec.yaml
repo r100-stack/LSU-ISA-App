@@ -42,6 +42,7 @@ dependencies:
   logger: ^0.9.4
   after_layout: ^1.0.7+2
   bot_toast: ^3.0.5
+  flutter_slidable: ^0.5.7
   roipil_authentication:
     git:
       url: git://github.com/rohan-kadkol/roipil_authentication.git

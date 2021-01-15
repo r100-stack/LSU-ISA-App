@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 
 import 'package:isa_app/models/chat_message.dart';
@@ -19,6 +20,73 @@ class ChatMessageCard extends StatelessWidget {
     @required this.currentUser,
   });
 
+  // TODO: Delete it
+  _showSnackBar(String a) {}
+
+  Widget _buildChatMessageCard(BuildContext context, bool isMe) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: kDefaultMargin / 4),
+      child: Material(
+        color: isMe ? kAccentColorLight : Colors.white,
+        borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+          onLongPress: () {
+            Slidable.of(context).open(actionType: SlideActionType.secondary);
+          },
+          child: Container(
+            width: MediaQuery.of(context).size.width * .6,
+            padding: const EdgeInsets.symmetric(
+              horizontal: kDefaultMargin,
+              vertical: kDefaultMargin / 2,
+            ),
+            // margin: const EdgeInsets.symmetric(vertical: kDefaultMargin / 4),
+            decoration: BoxDecoration(
+              border: Border.all(color: Theme.of(context).primaryColor),
+              // color: isMe ? kAccentColorLight : Colors.white,
+              borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  chatMessage.message,
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                const SizedBox(
+                  height: kDefaultMargin / 2,
+                ),
+                Row(
+                  children: [
+                    HeartButton(
+                      chatMessage: chatMessage,
+                      currentUser: currentUser,
+                    ),
+                    Spacer(),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(chatMessage.name ?? ''),
+                        // Text(chatMessage.name != null &&
+                        //         chatMessage.name.length != 0
+                        //     ? chatMessage.name
+                        //     : 'Generic LSU Tiger'),
+                        Text(
+                          _getDisplayText(chatMessage.timestamp),
+                          // '${dateFormat.format(chatMessage.timestamp)}',
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     bool isMe = chatMessage.uid == currentUser?.firebaseUser?.uid;
@@ -26,50 +94,19 @@ class ChatMessageCard extends StatelessWidget {
     return Row(
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
-        Container(
-          width: MediaQuery.of(context).size.width * .6,
-          padding: const EdgeInsets.symmetric(
-              horizontal: kDefaultMargin, vertical: kDefaultMargin / 2),
-          margin: const EdgeInsets.symmetric(vertical: kDefaultMargin / 4),
-          decoration: BoxDecoration(
-            border: Border.all(color: Theme.of(context).primaryColor),
-            color: isMe ? kAccentColorLight : Colors.white,
-            borderRadius: BorderRadius.circular(kDefaultBorderRadius),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                chatMessage.message,
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
-              const SizedBox(
-                height: kDefaultMargin / 2,
-              ),
-              Row(
-                children: [
-                  HeartButton(
-                    chatMessage: chatMessage,
-                    currentUser: currentUser,
-                  ),
-                  Spacer(),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(chatMessage.name ?? ''),
-                      // Text(chatMessage.name != null &&
-                      //         chatMessage.name.length != 0
-                      //     ? chatMessage.name
-                      //     : 'Generic LSU Tiger'),
-                      Text(
-                        _getDisplayText(chatMessage.timestamp),
-                        // '${dateFormat.format(chatMessage.timestamp)}',
-                      ),
-                    ],
-                  ),
-                ],
-              )
-            ],
+        Slidable(
+          actionPane: SlidableDrawerActionPane(),
+          secondaryActions: <Widget>[
+            IconSlideAction(
+              caption: 'Delete',
+              color: Colors.red,
+              icon: Icons.delete,
+              onTap: () => _showSnackBar('Delete'),
+            ),
+          ],
+          child: Builder(
+            builder: (BuildContext context) =>
+                _buildChatMessageCard(context, isMe),
           ),
         ),
       ],
