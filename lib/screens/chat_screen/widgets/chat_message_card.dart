@@ -20,10 +20,11 @@ class ChatMessageCard extends StatelessWidget {
     @required this.currentUser,
   });
 
-  // TODO: Delete it
-  _showSnackBar(String a) {}
-
-  Widget _buildChatMessageCard(BuildContext context, bool isMe) {
+  Widget _buildChatMessageCard(
+      {@required BuildContext context,
+      @required bool isMe,
+      List<Widget> children,
+      Function onLongPress}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: kDefaultMargin / 4),
       child: Material(
@@ -31,9 +32,7 @@ class ChatMessageCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(kDefaultBorderRadius),
         child: InkWell(
           borderRadius: BorderRadius.circular(kDefaultBorderRadius),
-          onLongPress: () {
-            Slidable.of(context).open(actionType: SlideActionType.secondary);
-          },
+          onLongPress: onLongPress,
           child: Container(
             width: MediaQuery.of(context).size.width * .6,
             padding: const EdgeInsets.symmetric(
@@ -48,41 +47,74 @@ class ChatMessageCard extends StatelessWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  chatMessage.message,
-                  style: Theme.of(context).textTheme.bodyText2,
-                ),
-                const SizedBox(
-                  height: kDefaultMargin / 2,
-                ),
-                Row(
-                  children: [
-                    HeartButton(
-                      chatMessage: chatMessage,
-                      currentUser: currentUser,
-                    ),
-                    Spacer(),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(chatMessage.name ?? ''),
-                        // Text(chatMessage.name != null &&
-                        //         chatMessage.name.length != 0
-                        //     ? chatMessage.name
-                        //     : 'Generic LSU Tiger'),
-                        Text(
-                          _getDisplayText(chatMessage.timestamp),
-                          // '${dateFormat.format(chatMessage.timestamp)}',
-                        ),
-                      ],
-                    ),
-                  ],
-                )
-              ],
+              children: children ?? [],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildVisibleMessage(bool isMe) {
+    return Slidable(
+      actionPane: SlidableDrawerActionPane(),
+      secondaryActions: <Widget>[
+        IconSlideAction(
+          caption: 'Delete',
+          color: Colors.red,
+          icon: Icons.delete,
+          onTap: () => chatMessage.delete(currentUser),
+        ),
+      ],
+      child: Builder(
+        builder: (BuildContext context) => _buildChatMessageCard(
+          context: context,
+          isMe: isMe,
+          onLongPress: () {
+            Slidable.of(context).open(actionType: SlideActionType.secondary);
+          },
+          children: [
+            Text(
+              chatMessage.message,
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
+            const SizedBox(
+              height: kDefaultMargin / 2,
+            ),
+            Row(
+              children: [
+                HeartButton(
+                  chatMessage: chatMessage,
+                  currentUser: currentUser,
+                ),
+                Spacer(),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(chatMessage.name ?? ''),
+                    Text(
+                      _getDisplayText(chatMessage.timestamp),
+                      // '${dateFormat.format(chatMessage.timestamp)}',
+                    ),
+                  ],
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDeletedMessage(bool isMe) {
+    return Builder(
+      builder: (BuildContext context) => _buildChatMessageCard(
+        context: context,
+        isMe: isMe,
+        children: [
+          Text('Deleted by sender'),
+
+        ],
       ),
     );
   }
@@ -94,21 +126,9 @@ class ChatMessageCard extends StatelessWidget {
     return Row(
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
-        Slidable(
-          actionPane: SlidableDrawerActionPane(),
-          secondaryActions: <Widget>[
-            IconSlideAction(
-              caption: 'Delete',
-              color: Colors.red,
-              icon: Icons.delete,
-              onTap: () => _showSnackBar('Delete'),
-            ),
-          ],
-          child: Builder(
-            builder: (BuildContext context) =>
-                _buildChatMessageCard(context, isMe),
-          ),
-        ),
+        chatMessage.deleted == null
+            ? _buildVisibleMessage(isMe)
+            : _buildDeletedMessage(isMe)
       ],
     );
   }
